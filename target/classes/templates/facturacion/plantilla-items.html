@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+	<table th:fragment="itemsFactura" class="d-none">
+
+		<tbody id="plantillaItemsFactura">
+			<tr style="vertical-align: middle;" id="row_{ID}" data-id="{ID}">
+				<td class="d-none">
+					<input type="hidden" value="{ID}" name="item_id[]" />
+					<input type="hidden" value="{MONEDA}" id="moneda_{ID}" />
+				</td>
+				<td id="codigo-{ID}">
+					{CODIGO}
+					<input type="hidden" name="codigoProducto[]" value="{CODIGO}" />
+ 				</td>
+				<td style="position:relative">
+				
+					<div class="row" style="padding: 0;margin: 0;">
+                     		<div class="col-sm-5 col-md-5" style="padding: 0;margin: 0;">
+                     			<span style="font-size:0.75em;font-weight: 600;" class="productoGenerico">{NOMBRE_PRODUCTO} <i>{UNIDAD_DE_MEDIDA}</i></span>
+                     		</div>
+                     		<div class="col-sm-6 col-md-6" style="padding: 0;margin: 0;">
+                     			<input style="font-size:0.8em;" type="text" class="form-control" maxlength="160" name="detalleProducto[]" placeholder="Detalle el producto" />
+                     		</div>
+                     		<div class="col-sm-1 col-md-1" style="padding: 0;margin: 0;">
+                     			<a href="#" data-toggle="modal" data-target="#modalPartidaArancelaria{ID}" class="btn btn-secondary btn-xs btn-lineas-facturas btn-partida-arancelaria" data-id="{ID}">
+									<i title="Partida arancelaria" class="fas fa-edit"></i>
+								</a>
+									
+								<div class="modal fade" id="modalPartidaArancelaria{ID}">
+									  <div class="modal-dialog" role="document">
+									    <div class="modal-content ">
+									      <div class="modal-header">
+									        <h5 class="modal-title" th:text="#{txt.partida.arancelaria}"></h5>
+									        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									          <span aria-hidden="true">&times;</span>
+									        </button>
+									      </div>
+									      <div class="modal-body">
+									      	<div class="row">
+										      	<div class="col-sm-12 col-md-12">
+				                                    <div class="form-group">
+				                                       <label class="control-label" th:text="#{txt.indique.partida.arancelaria}"></label>
+				                                       <input type="text" maxlength="12" class="form-control" id="_partidaArancelaria{ID}" name="partidaArancelaria[]" data-um="{UNIDAD_DE_MEDIDA}">
+				                                    </div>
+				                                 </div>
+			                                 </div>
+									      </div>
+									      <div class="modal-footer">
+									        <button type="button" class="btn btn-inverse" data-dismiss="modal"><i class="fas fa-window-close"></i> Cerrar</button>
+									      </div>
+									    </div>
+									  </div>
+								</div>
+                     		</div>                    		
+							
+                    </div>          		
+
+					<input type="hidden" name="codigoProducto1[]" value="{CODIGO_PRODUCTO1}" />
+					<input type="hidden" name="codigoProducto2[]" value="{CODIGO_PRODUCTO2}" />
+					<input type="hidden" name="nombreProducto[]" value="{NOMBRE_PRODUCTO}" />
+					<input type="hidden" id="unidadDeMedida{ID}" name="unidadDeMedida[]" value="{UNIDAD_DE_MEDIDA}" />
+					
+					<input type="hidden"id="_condicionProducto{ID}" value="{CONDICION_PRODUCTO}" />
+					<input type="hidden"id="_precio{ID}" value="{PRECIO}" />
+					<input type="hidden"id="_impuesto{ID}" value="{IMPUESTO}" />
+					<input type="hidden"id="_unidadDeMedida{ID}" value="{UNIDAD_DE_MEDIDA}" />					
+				</td>
+				<td><input type="text" value="1" onclick="return this.select();" onkeypress="return validateFloatKeyPress(this,event);" name="cantidad[]" id="cantidad_{ID}" class="form-control select-all align-right" oninput="itemsHelper.calcularImporte({ID}, document.getElementById('precio_'+{ID}).value, document.getElementById('impuesto_'+{ID}).value, document.getElementById('_condicionProducto'+{ID}).value, this.value, document.getElementById('descuento_'+{ID}).value, '{UNIDAD_DE_MEDIDA}');"/></td>
+				<td>
+					<input th:if="${#strings.equals(MODIFICA_PRECIO_FACTURACION,'true')}" onclick="return this.select();"  oninput="itemsHelper.calcularImporte({ID}, this.value, document.getElementById('impuesto_'+{ID}).value, document.getElementById('_condicionProducto'+{ID}).value, document.getElementById('cantidad_'+{ID}).value, document.getElementById('descuento_'+{ID}).value, '{UNIDAD_DE_MEDIDA}');" type="text" id="precio_{ID}" name="precioUnitarioConIva[]" onkeypress="return validateFloatKeyPress(this,event);" value="{PRECIO}" class="form-control align-right"  />
+					<input th:if="${#strings.equals(MODIFICA_PRECIO_FACTURACION,'false')}" readonly="readonly" onclick="return this.select();" type="text" id="precio_{ID}" name="precioUnitarioConIva[]" onkeypress="return validateFloatKeyPress(this,event);" value="{PRECIO}" class="form-control align-right"  />
+					
+					<input type="hidden" id="precioUnitario_{ID}" name="precioUnitario[]" value="0" class="form-control number-format" readonly="readonly" />
+					<input type="hidden" id="montoTotal_{ID}" name="montoTotal[]" value="0" class="form-control align-right number-format" readonly="readonly" />
+				</td>
+				<td style="display: none;">
+					<input style="width: 40%; display: inline-block;" name="descuento[]" type="text" onclick="return this.select();"  onkeypress="return validateFloatKeyPress(this,event);" value="0" id="descuento_{ID}" class="align-right form-control" oninput="itemsHelper.calcularImporte({ID}, document.getElementById('precio_'+{ID}).value, document.getElementById('impuesto_'+{ID}).value, document.getElementById('_condicionProducto'+{ID}).value, document.getElementById('cantidad_'+{ID}).value, this.value, '{UNIDAD_DE_MEDIDA}');"/>
+					<input style="width: 55%; display: inline-block;" name="descuentoTotal[]" readonly="readonly" type="text" value="0" class="align-right form-control number-format" id="monto_descuento_{ID}" />
+				</td>
+				<td style="display: none;">
+					<input type="text" id="subtotal_{ID}" name="subtotal[]" value="0" class="form-control align-right number-format" readonly="readonly" />
+				</td>
+				<td style="position:relative;">
+				
+					<input type="hidden" id="totalLineasImpuesto{ID}" name="totalLineasImpuesto[]" />
+					
+					<input style="width: 20%; display: none;" readonly="readonly" name="impuesto[]" type="text" value="{IMPUESTO}" class="form-control align-right" id="impuesto_{ID}" />
+					<input style="width: 60%; display: none;" readonly="readonly" name="impuestoTotal[]" type="text" value="0" class="form-control align-right number-format" id="impuesto_total_{ID}" />
+					<input style="width: 20%; display: none;" readonly="readonly" name="impuestoNeto[]" type="hidden" value="0" class="form-control align-right number-format" id="impuesto_neto_{ID}" />
+					<a href="#" data-toggle="modal" data-target="#modalImpuestos{ID}" class="btn btn-secondary btn-xs btn-lineas-facturas btn-exonera" data-id="{ID}">
+						<i class="fas fa-edit"></i>
+					</a>
+					
+					<div class="modal fade" id="modalImpuestos{ID}">
+						  <div class="modal-dialog modal-xl" role="document">
+						    <div class="modal-content ">
+						      <div class="modal-header">
+						        <h5 class="modal-title">Impuestos</h5>
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						          <span aria-hidden="true">&times;</span>
+						        </button>
+						      </div>
+						      <div class="modal-body">
+						      	<div class="table-responsive">
+							        
+							        <table class="table color-bordered-table muted-bordered-table">
+								     <thead>
+								        <tr>
+								           
+								           <th style="width: 25%;">Impuesto</th>
+								           <th style="width: 5%;" class="align-right">%</th>
+								           <th style="width: 8%;" class="align-right">Monto</th>
+								           <th style="width: 2%;">Exonerar</th>
+								           <th style="width: 5%;" class="align-right">% Porcentaje</th>
+								           <th style="width: 10%;" class="align-right">Monto</th>
+								           <th style="width: 10%;" class="align-center">Acciones</th>
+								        </tr>
+								     </thead>
+								     <tbody id="gridImpuestos{ID}"></tbody>
+								 </table>
+								 
+								 <input id="modalLinea{ID}" type="hidden"  />
+								 <input id="modalCantidad{ID}" type="hidden"  />
+								 <input id="modalDescuento{ID}" type="hidden"  />
+								 <input id="modalUnidadDeMedida{ID}" type="hidden"  />
+							        
+	                            </div>
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-inverse" data-dismiss="modal"><i class="fas fa-window-close"></i> Cerrar</button>
+						      </div>
+						    </div>
+						  </div>
+					</div>
+
+					<input type="hidden" value="0" id="totalServiciosGravados_{ID}" />
+					<input type="hidden" value="0" id="totalServiciosExentos_{ID}" />					
+					<input type="hidden" value="0" id="totalServExonerado_{ID}" />					
+					<input type="hidden" value="0" id="totalMercanciaGravadas_{ID}" />
+					<input type="hidden" value="0" id="totalMercanciasExentas_{ID}" />
+					<input type="hidden" value="0" id="totalMercExonerada_{ID}" />
+					<input type="hidden" value="0" id="totalGravados_{ID}" />
+					<input type="hidden" value="0" id="totalExentos_{ID}" />
+					<input type="hidden" value="0" id="totalExonerado_{ID}" />
+					<input type="hidden" value="0" id="totalVenta_{ID}" />
+					<input type="hidden" value="0" id="totalVentaNeta_{ID}" />
+					<input type="hidden" value="0" id="totalFactura_{ID}" />					
+				</td>
+				<td class="align-right">
+					<input type="text" id="total_importe_{ID}" name="totalLinea[]" value="0" class="form-control align-right number-format" readonly="readonly" />
+				</td>
+				<td style="position:relative;">
+					<a href="#" class="btn btn-secondary btn-delete-row btn-xs btn-lineas-facturas" onclick="event.preventDefault(); itemsHelper.eliminarLineaFactura({ID});">
+						<i class="fas fa-trash"></i>
+					</a>
+				</td>
+			</tr>
+
+		</tbody>
+		
+	</table>
+
+</body>
+</html>

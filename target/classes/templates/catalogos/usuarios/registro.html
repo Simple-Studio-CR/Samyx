@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body class="fix-header card-no-border logo-center">
+
+<div id="main-wrapper">
+
+<!-- ============================================================== -->
+<!-- Page wrapper  -->
+<!-- ============================================================== -->
+<div class="page-wrapper">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <div class="row justify-content-md-center">
+            <div class="col-md-8">
+                <div class="card">
+               
+                
+                    <div class="card-body">
+                   
+					
+					<div th:if="${response} == 2" class="alert alert-warning alert-dismissible fade show" role="alert">
+					  <i class="fas fa-exclamation-triangle"></i> <span th:text="#{txt.error.usuario.ya.existe}"></span>
+					  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					    <span aria-hidden="true">&times;</span>
+					  </button>
+					</div>
+					                    
+                    
+                    	<form id="formRegisterUser" autocomplete="off" th:action="@{/nuevo-registro}" th:object="${usuario}" method="post">
+                           <div class="form-body">
+                           	
+                           	  <img style="width: 220px" th:src="@{/images/sinmata.png}" />
+                           
+                           	  <hr>
+	                          <h4 class="card-title m-t-10" th:text="#{txt.datos.del.usuario.a.registrar}"></h4>
+	                          
+	                          <div class="row">
+	                             <div class="col-md-4">
+	                                <div class="form-group">
+	                                    <label class="control-label" th:text="#{txt.usuario.nombre}"></label>
+	                                    <input maxlength="255" type="text" class="form-control" placeholder="Digite su nombre" th:field="*{nombre}" required="required">
+	                              	</div>
+	                             </div>	
+	                             <div class="col-md-4">
+	                                <div class="form-group">
+	                                    <label class="control-label" th:text="#{txt.usuario.apellido1}"></label>
+	                                    <input type="text" maxlength="255" class="form-control" placeholder="Digite su primier apellido" th:field="*{apellidoP}" required="required">
+	                              	</div>
+	                             </div>
+	                             <div class="col-md-4">
+	                                <div class="form-group">
+	                                    <label class="control-label" th:text="#{txt.usuario.apellido2}"></label>
+	                                    <input type="text" maxlength="255" class="form-control" placeholder="Digite su segundo apellido" th:field="*{apellidoM}" required="required">
+	                              	</div>
+	                             </div>	                             
+	                             <div class="col-md-4">
+	                                <div class="form-group">
+	                                    <label class="control-label" th:text="#{txt.usuario.telefono}"></label>
+	                                    <input type="text" maxlength="8" class="form-control" placeholder="Digite su número de teléfono" th:field="*{telefono}" required="required">
+	                              	</div>
+	                             </div>
+	                             <div class="col-md-4">
+	                                <div class="form-group">
+	                                    <label class="control-label" th:text="#{txt.correo.electronico}"></label>
+	                                    <input type="text" maxlength="100" placeholder="corre@correo.com" class="form-control" th:field="*{email}" required="required">
+	                              	</div>
+	                             </div>
+	                             <div class="col-md-4">
+	                                <div class="form-group">
+	                                    <label class="control-label" th:text="#{txt.usuario.username}"></label>
+	                                    <input type="text" maxlength="30" placeholder="Digite su usuario" class="form-control" th:field="*{username}" required="required">
+	                              	</div>
+	                             </div>
+	                             <div class="col-md-4">
+	                                <div class="form-group">
+	                                    <label class="control-label" th:text="#{txt.usuario.password}"></label>
+	                                    <input type="password" maxlength="60" class="form-control" placeholder="Digite su contraseña" th:field="*{password}" required="required">
+	                              	</div>
+	                             </div>
+	                             <div class="col-md-4">
+	                                <div class="form-group">
+	                                    <label class="control-label" th:text="#{txt.usuario.password2}"></label>
+	                                    <input type="password" maxlength="60" name="password2" placeholder="Confirme la contraseña" class="form-control" id="password2" required="required">
+	                              	</div>
+	                             </div>
+	                             <div class="col-md-12">
+	                                <div class="form-group">
+	                                    <label class="control-label" th:text="#{txt.usuario.direccion}"></label>
+	                                    <input type="text" maxlength="255" class="form-control" th:field="*{direccion}">
+	                              	</div>
+	                             </div>
+	                             
+                             </div>
+                             
+	                             <div  class="form-actions align-center">
+	                             	 <input type="hidden" th:field="*{id}" />
+	                                 <button type="submit" class="btn btn-success"> 
+	                                 	<i class="fas fa-save"></i>&nbsp;<span th:text="#{btn.completar.registro}"></span>
+	                                 </button>
+	                                 <a th:href="@{/catalogos/usuarios}" class="btn btn-inverse" style="color:#FFF !important">
+	                                 	<i class="fas fa-chevron-left"></i>&nbsp; <span th:text="#{txt.btn-regresar}"></span>
+	                                 </a>
+	                             </div>
+                             </div>
+                              </div>
+                         </form>  
+                         
+                         <br>
+                         
+                   
+                </div>
+            </div>
+            
+            
+            
+        </div>
+        <!-- ============================================================== -->
+        <!-- End PAge Content -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Container fluid  -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- footer -->
+    <!-- ============================================================== -->
+    <footer th:replace="layout/layout :: footer"></footer>
+    <!-- ============================================================== -->
+    <!-- End footer -->
+    <!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- End Page wrapper  -->
+<!-- ============================================================== -->
+
+</div>
+<input id="csrfToken" type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+<div th:replace="layout/layout :: scripts"></div>
+
+
+<script>
+var token = $('#csrfToken').val();
+
+$(document).ready(function(){
+	$("#formRegisterUser").submit(function( event ) {
+		
+		var p1 = $("#password").val();
+		var p2 = $("#password2").val();
+		
+		if(p1 != p2){
+			swal("","¡Las contraseñas no son iguales, verifíquelas!","warning");
+			return false;
+		}
+
+	});
+
+	$(document).on("change","#provincia", function(e){
+			
+		  e.preventDefault();
+
+		  $.ajax({
+		      type: "POST",
+		      cache: false,
+		      beforeSend: function () {},
+		      url: "[(@{/ubicacion/cantones})]",
+		      data: {id:$(this).val(), _csrf:token},
+		      success: function (data)
+		      {
+		      	$("#canton").html(data);       
+		      	
+		      	$('#canton').select2('open');
+		      	
+		      }, complete: function () {
+		          //loading_hide();
+		      }, error: function (x, t, m) {
+		          if (t === "timeout") {
+		              
+		          } else {
+		              
+		          }
+		      }
+		  });
+		  
+	});
+
+	$(document).on("change","#canton", function(e){
+		
+		  e.preventDefault();
+
+		  $.ajax({
+		      type: "POST",
+		      cache: false,
+		      beforeSend: function () {},
+		      url: "[(@{/ubicacion/distritos})]",
+		      data: {id:$(this).val(), _csrf:token},
+		      success: function (data)
+		      {
+		      	$("#distrito").html(data);    
+		      	$('#distrito').select2('open');
+		      }, complete: function () {
+		          //loading_hide();
+		      }, error: function (x, t, m) {
+		          if (t === "timeout") {
+		              
+		          } else {
+		              
+		          }
+		      }
+		  });
+		  
+	});
+
+	$(document).on("change","#distrito", function(e){
+		
+		  e.preventDefault();
+
+		  $.ajax({
+		      type: "POST",
+		      cache: false,
+		      beforeSend: function () {},
+		      url: "[(@{/ubicacion/barrios})]",
+		      data: {id:$(this).val(), _csrf:token},
+		      success: function (data)
+		      {
+		      	$("#barrio").html(data); 
+		      	$('#barrio').select2('open');
+		      }, complete: function () {
+		          //loading_hide();
+		      }, error: function (x, t, m) {
+		          if (t === "timeout") {
+		              
+		          } else {
+		              
+		          }
+		      }
+		  });
+		  
+	});
+	
+	
+});
+</script>
+
+</body>
+</html>

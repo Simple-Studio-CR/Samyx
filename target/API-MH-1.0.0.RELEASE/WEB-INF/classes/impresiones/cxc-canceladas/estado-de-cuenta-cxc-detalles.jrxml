@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.13.0.final using JasperReports Library version 6.13.0-46ada4d1be8f3c5985fd0b6146f3ed44caed6f05  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="estado-de-cuenta-cxc-detalles" pageWidth="612" pageHeight="792" columnWidth="612" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="09a92c7b-ea6a-46ef-b550-d7dd8f170c42">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="API_4.3.xml"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="787"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="203"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="226"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="769"/>
+	<parameter name="CLIENTE_ID" class="java.lang.String" nestedType="java.lang.String">
+		<parameterDescription><![CDATA[Número de factura]]></parameterDescription>
+		<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+fe_factura_cxc.id,
+fe_factura_cxc.numero_factura,
+fe_factura_cxc.total_deuda,
+
+IFNULL((select SUM(monto_abondo) abonos from fe_factura_registro_pagos_cxc where factura_cxc_id=fe_factura_cxc.id),0)  AS abonos,
+
+IFNULL((select COUNT(*) from fe_factura_registro_pagos_cxc where factura_cxc_id=fe_factura_cxc.id), 0) numero_abonos,
+
+fe_factura_cxc.emisor_id,
+fe_factura_cxc.user_id,
+DATE_FORMAT(fe_factura_cxc.fecha_emision_fe,'%d/%m/%Y') fecha_emision_fe,
+fe_factura_cxc.plazo_credito,
+fe_factura_cxc.cliente_id,
+fe_factura_cxc.estado_pago,
+fe_factura_cxc.moneda,
+fe_factura_cxc.clave,
+DATE_FORMAT(fe_factura_cxc.fecha_vencimiento_fe,'%d/%m/%Y') fecha_vencimiento_fe,
+DATE_FORMAT(fe_factura_cxc.fecha_cancelacion,'%d/%m/%Y') fecha_cancelacion,
+DATEDIFF(NOW(), fe_factura_cxc.fecha_vencimiento_fe) dias_morosos
+FROM
+fe_factura_cxc
+WHERE fe_factura_cxc.cliente_id=$P{CLIENTE_ID} AND fe_factura_cxc.estado_pago = 'C'
+ORDER BY STR_TO_DATE(fe_factura_cxc.fecha_emision_fe, "%Y-%m-%d") ASC]]>
+	</queryString>
+	<field name="id" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="fe_factura_cxc"/>
+	</field>
+	<field name="numero_factura" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="numero_factura"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="fe_factura_cxc"/>
+	</field>
+	<field name="total_deuda" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="total_deuda"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="fe_factura_cxc"/>
+	</field>
+	<field name="abonos" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="abonos"/>
+	</field>
+	<field name="numero_abonos" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="numero_abonos"/>
+	</field>
+	<field name="emisor_id" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="emisor_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="fe_factura_cxc"/>
+	</field>
+	<field name="user_id" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="user_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="fe_factura_cxc"/>
+	</field>
+	<field name="fecha_emision_fe" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fecha_emision_fe"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="fe_factura_cxc"/>
+	</field>
+	<field name="plazo_credito" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="plazo_credito"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="fe_factura_cxc"/>
+	</field>
+	<field name="cliente_id" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="cliente_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="fe_factura_cxc"/>
+	</field>
+	<field name="estado_pago" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="estado_pago"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="fe_factura_cxc"/>
+	</field>
+	<field name="moneda" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="moneda"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="fe_factura_cxc"/>
+	</field>
+	<field name="clave" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="clave"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="fe_factura_cxc"/>
+	</field>
+	<field name="fecha_vencimiento_fe" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fecha_vencimiento_fe"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="fe_factura_cxc"/>
+	</field>
+	<field name="fecha_cancelacion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fecha_cancelacion"/>
+	</field>
+	<field name="dias_morosos" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="dias_morosos"/>
+	</field>
+	<variable name="total_deuda1" class="java.lang.Double" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{total_deuda}]]></variableExpression>
+	</variable>
+	<variable name="abonos1" class="java.lang.Double" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{abonos}]]></variableExpression>
+	</variable>
+	<variable name="total_deuda2" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[Double.valueOf($F{total_deuda}) - Double.valueOf($F{abonos})]]></variableExpression>
+	</variable>
+	<pageHeader>
+		<band height="27" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="2" width="612" height="20" forecolor="#293674" backcolor="#293674" uuid="53e66ba7-1a0f-4d7b-9f97-56980543410d"/>
+			</rectangle>
+			<staticText>
+				<reportElement positionType="Float" x="8" y="2" width="62" height="20" forecolor="#FFFFFF" backcolor="#293674" uuid="932b7556-43a0-4845-b580-d3135006025b"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[N° Factura]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="415" y="2" width="84" height="20" forecolor="#FFFFFF" backcolor="#293674" uuid="baf6fe1a-1673-41ab-8076-33ddd34c5610"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#293674"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Abonos aplicados]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="343" y="2" width="70" height="20" forecolor="#FFFFFF" backcolor="#293674" uuid="2ac31a8a-5025-462b-8c95-7abb8e630fae"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Deuda inicial]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="2" width="46" height="20" forecolor="#FFFFFF" backcolor="#293674" uuid="a379afcc-2f24-4cd3-a3bc-e62200e4f7e1"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[N° Abonos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="500" y="2" width="90" height="20" forecolor="#FFFFFF" backcolor="#293674" uuid="8e3899d0-e80f-4975-9333-840338820f13"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Deuda actual]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="117" y="2" width="72" height="20" forecolor="#FFFFFF" backcolor="#293674" uuid="e24fd81c-bbf9-4437-a5f3-6cc03e9e6b2f"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha emision]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="252" y="2" width="90" height="20" forecolor="#FFFFFF" backcolor="#293674" uuid="1e4b022c-af28-48e7-8f37-8a795c6d01c8"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha cancelación]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="191" y="2" width="59" height="20" forecolor="#FFFFFF" backcolor="#293674" uuid="9d79c5c5-032a-41de-ae99-70289e2d10fc"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Plazo crédito]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement x="8" y="3" width="62" height="10" uuid="e1a5645e-3d70-4bfa-b503-4028ac4c220d"/>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numero_factura}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="#,##0.00#" isBlankWhenNull="true">
+				<reportElement x="415" y="3" width="84" height="10" uuid="7c69d7a1-7bed-4e9a-a9b6-eee6b9a13ea5"/>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[Double.valueOf($F{abonos})]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="#,##0.00#" isBlankWhenNull="true">
+				<reportElement x="344" y="3" width="70" height="10" uuid="03f66728-91cc-487d-800a-ee7b9d11f38f"/>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[Double.valueOf($F{total_deuda})]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="#,##0.00#" isBlankWhenNull="true">
+				<reportElement x="500" y="3" width="90" height="10" uuid="4471eae1-a346-4394-9c7d-e6585400f00c"/>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[Double.valueOf($F{total_deuda}) - Double.valueOf($F{abonos})]]></textFieldExpression>
+			</textField>
+			<textField pattern="#" isBlankWhenNull="true">
+				<reportElement x="71" y="3" width="46" height="10" uuid="96c0aa8d-e05f-4305-b358-713047b82558"/>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numero_abonos}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement x="117" y="3" width="72" height="10" uuid="042f9c23-2398-4677-925c-7318a5b685a4"/>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_emision_fe}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement x="252" y="3" width="90" height="10" uuid="1719290f-42c2-4de9-80e4-9627225155d2"/>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_vencimiento_fe}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement x="191" y="3" width="59" height="10" uuid="f28089ad-3444-45ae-bc7b-bf395309b7e6"/>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{plazo_credito}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="50">
+			<line>
+				<reportElement x="8" y="6" width="582" height="1" uuid="28ebc4c4-7ae2-45c8-9990-01d8675022a7"/>
+			</line>
+			<textField>
+				<reportElement x="8" y="10" width="150" height="10" uuid="486d70c7-c0b0-4fa4-b9c8-d474d710e0b0">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="DejaVu Sans" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Facturas canceladas: " + $V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

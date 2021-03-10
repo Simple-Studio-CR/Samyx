@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body class="fix-header card-no-border logo-center">
+	<meta charset="utf-8">
+
+	<!-- Mobile Specific Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- Font-->
+	<link rel="stylesheet" type="text/css" href="css/nunito-font.css">
+	<!-- Main Style Css -->
+    <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body class="form-v9">
+	<div class="page-content">
+		<div class="form-v9-content" style="background-image: url('')">
+
+			<div th:if="${response} == 2" class="alert alert-warning alert-dismissible fade show" role="alert">
+				<i class="fas fa-exclamation-triangle"></i> <span th:text="#{txt.error.usuario.ya.existe}"></span>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				  <span aria-hidden="true">&times;</span>
+				</button>
+			  </div>
+
+			<form class="form-detail" id="formRegisterUser" autocomplete="off" th:action="@{/nuevo-registro}" th:object="${usuario}" method="post">
+
+				<h2 class="card-title m-t-10" th:text="#{txt.datos.del.usuario.a.registrar}"></h2>
+
+				<div class="form-row-total">
+					<div class="form-row">
+						<label class="control-label" th:text="#{txt.usuario.username}"></label>
+						<input type="number" minlength="9" maxlength="13" name="full-name" id="full-name" class="input-text" placeholder="Digite su cédula" th:field="*{username}" required="required">
+					</div>
+					<div class="form-row">
+						<label class="control-label" th:text="#{txt.usuario.nombre}"></label>
+						<input type="text" maxlength="255" name="full-name" id="full-name" class="input-text" placeholder="Digite su nombre" th:field="*{nombre}" required="required">
+					</div>
+				</div>
+
+				<div class="form-row-total">
+					<div class="form-row">
+						<label class="control-label" th:text="#{txt.usuario.apellido1}"></label>
+						<input type="text" maxlength="255" name="last-name1" id="last-name1" class="input-text"  placeholder="Digite su primier apellido" th:field="*{apellidoP}" required="required">
+					</div>
+					<div class="form-row">
+						<label class="control-label" th:text="#{txt.usuario.apellido2}"></label>
+						<input type="text" maxlength="255" name="last-name2" id="last-name2" class="input-text" placeholder="Digite su segundo apellido" th:field="*{apellidoM}" required="required">
+					</div>
+				</div>
+
+				<div class="form-row-total">
+					<div class="form-row">
+						<label class="control-label" th:text="#{txt.usuario.telefono}"></label>
+						<input type="tel" maxlength="8" class="input-text" placeholder="Digite su número de teléfono" th:field="*{telefono}" required="required">
+					</div>
+					<div class="form-row">
+						<label class="control-label" th:text="#{txt.correo.electronico}"></label>
+						<input type="email" class="input-text" placeholder="corre@correo.com" th:field="*{email}" required="required">
+					</div>
+				</div>
+
+				<div class="form-row-total">
+					<div class="form-row">
+						<label class="control-label" th:text="#{txt.usuario.password}"></label>
+						<input type="password" name="password" id="password" class="input-text" placeholder="Digite su contraseña" th:field="*{password}" required="required">
+					</div>
+					<div class="form-row">
+						<label class="control-label" th:text="#{txt.usuario.password2}"></label>
+						<input type="password" name="password2" class="input-text" placeholder="Confirme la contraseña" id="password2" required="required">
+					</div>
+				</div>
+
+				<div class="form-row-last">
+
+					<div class="container-login100-form-btn p-t-10"><a  class="login100-form-btn" th:field="*{id}">Registrar</a></div>
+					
+					<div class="container-back100-form-btn p-t-10"><a  class="back100-form-btn" name="login" th:href="@{/catalogos/usuarios}">Ya eres Usuario</a></div>
+					
+				</div>
+			</form>
+		</div>
+	</div>
+
+<input id="csrfToken" type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+<div th:replace="layout/layout :: scripts"></div>
+
+
+<script>
+var token = $('#csrfToken').val();
+
+$(document).ready(function(){
+	$("#formRegisterUser").submit(function( event ) {
+		
+		var p1 = $("#password").val();
+		var p2 = $("#password2").val();
+		
+		if(p1 != p2){
+			swal("","¡Las contraseñas no son iguales, verifíquelas!","warning");
+			return false;
+		}
+
+	});
+
+	$(document).on("change","#provincia", function(e){
+			
+		  e.preventDefault();
+
+		  $.ajax({
+		      type: "POST",
+		      cache: false,
+		      beforeSend: function () {},
+		      url: "[(@{/ubicacion/cantones})]",
+		      data: {id:$(this).val(), _csrf:token},
+		      success: function (data)
+		      {
+		      	$("#canton").html(data);       
+		      	
+		      	$('#canton').select2('open');
+		      	
+		      }, complete: function () {
+		          //loading_hide();
+		      }, error: function (x, t, m) {
+		          if (t === "timeout") {
+		              
+		          } else {
+		              
+		          }
+		      }
+		  });
+		  
+	});
+
+	$(document).on("change","#canton", function(e){
+		
+		  e.preventDefault();
+
+		  $.ajax({
+		      type: "POST",
+		      cache: false,
+		      beforeSend: function () {},
+		      url: "[(@{/ubicacion/distritos})]",
+		      data: {id:$(this).val(), _csrf:token},
+		      success: function (data)
+		      {
+		      	$("#distrito").html(data);    
+		      	$('#distrito').select2('open');
+		      }, complete: function () {
+		          //loading_hide();
+		      }, error: function (x, t, m) {
+		          if (t === "timeout") {
+		              
+		          } else {
+		              
+		          }
+		      }
+		  });
+		  
+	});
+
+	$(document).on("change","#distrito", function(e){
+		
+		  e.preventDefault();
+
+		  $.ajax({
+		      type: "POST",
+		      cache: false,
+		      beforeSend: function () {},
+		      url: "[(@{/ubicacion/barrios})]",
+		      data: {id:$(this).val(), _csrf:token},
+		      success: function (data)
+		      {
+		      	$("#barrio").html(data); 
+		      	$('#barrio').select2('open');
+		      }, complete: function () {
+		          //loading_hide();
+		      }, error: function (x, t, m) {
+		          if (t === "timeout") {
+		              
+		          } else {
+		              
+		          }
+		      }
+		  });
+		  
+	});
+	
+	
+});
+</script>
+
+</body>
+</html>

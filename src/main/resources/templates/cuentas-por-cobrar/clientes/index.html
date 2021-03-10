@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body class="fix-header card-no-border logo-center">
+
+<div id="main-wrapper">
+
+<header th:replace="layout/layout :: header"></header>
+<aside th:replace="layout/layout :: aside"></aside>
+
+<!-- ============================================================== -->
+<!-- Page wrapper  -->
+<!-- ============================================================== -->
+<div class="page-wrapper">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+        	 <h3 class="text-themecolor" th:text="#{txt.cxc.cuentas.por.cobrar}"></h3>
+        </div>
+        <div class="col-md-7 align-self-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)" th:href="@{/}" th:text="#{txt.inicio}"></a></li>
+                <li class="breadcrumb-item active" th:text="#{txt.cxc}"></li>
+            </ol>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                    <form autocomplete="off" th:action="@{/cxc/}" method="get">
+                    <div class="text-align-right row">
+                        <div class="col-md-5"></div>
+                    	<div class="col-md-2">
+                    		<select class="form-control input-sm _select2_" name="e" onchange="this.form.submit()">
+                    			<option th:selected="${#strings.equals('A', #strings.toString(param.e))}" value="A">Pendientes de pago</option>
+                    			<option th:selected="${#strings.equals('C', #strings.toString(param.e))}" value="C">Facturas canceladas</option>
+                    		</select>
+                    	</div>
+	                    <div class="col-md-3">
+	                    	<div class="input-group">
+							    <input th:value="${param.q}" type="search" name="q" class="form-control input" placeholder="Buscar por nombre o identificación...">
+							    <div class="input-group-append">
+								      <button class="btn btn-success btn-sm btn-block"  type="submit">
+								        <i class="fa fa-search"></i>
+								      </button>
+							    </div>
+						  	</div>
+	                    </div>
+	                    <div class="col-md-2">
+                    		<a style="padding:4px 12px !important" th:href="@{/cxc/new}" class="btn btn-success btn-sm btn-block color-blanco">
+                    			<i class="fa fa-plus" aria-hidden="true"></i>&nbsp;<span th:text="#{btn.nuevo.registro}"></span>
+                    		</a>
+                        </div>
+                    </div>
+                    </form>
+                                   
+                    <br>
+                    
+                     <p style="text-align: center;width: 100%;" class="m-t-10" th:if="*{param.q!=null and #strings.length(param.q)>0}">
+	                    	Criterio de búsqueda: <span class="font-weight-bold" th:text="${param.q}"></span> <a style="height: 20px" class="btn btn-danger btn-xs color-blanco" th:href="@{/cxc/}"><i class="fas fa-window-close"></i> Cerrar búsqueda</a>
+	                 </p>
+
+                    	<div class="table-responsive">
+                             <table class="table color-table muted-table">
+                                 <thead>
+                                     <tr>
+                                         <th style="width: 10%" th:text="#{txt.tipo.identificacion}"></th>
+                                         <th style="width: 10%" th:text="#{txt.identificacion}"></th>
+                                         <th style="width: 20%" th:text="#{txt.nombre.completo}"></th>
+                                         <th style="width: 8%" th:text="#{txt.telefono1}"></th>
+                                         <th style="width: 12%" th:text="#{txt.correo1}"></th>
+                                         <th th:if="${tipoAcceso == 1}" style="width: 12%" th:text="'Deuda actual'"></th>                                         
+                                         <th style="width: 10%" class="text-align-center" th:text="#{txt.acciones}"></th>
+                                     </tr>
+                                 </thead>
+                                 <tbody>
+                                     <tr th:each="k: ${ListaFacturas}">
+                                         <td th:text="${k.cliente.tipoDeIdentificacion.tipoDeIdentificacion}"></td>
+                                         <td th:text="${k.cliente.identificacion}"></td>
+                                         <td th:text="${k.cliente.nombreCompleto}"></td>
+                                         <td>
+                                         	<span th:remove="tag" th:if="${k.cliente.telefono1 != ''}"> +[(${k.cliente.codigoPais})] [(${k.cliente.telefono1})] </span>
+                                         </td>
+                                         <td th:text="${k.cliente.correo1}"></td>   
+                                         <td th:if="${tipoAcceso == 1}" th:text="${k.moneda}+' '+${#numbers.formatDecimal(k.totalDeuda, 1, 'DEFAULT', 2, 'DEFAULT')}"></td>   
+                                                                             
+                                         <td class="text-align-center" >
+                                         
+                                         	<a class="btn btn-success btn-xs color-blanco" th:href="@{/cxc/view/}+${k.cliente.id}" th:attr="title=#{btn.cxc.ingresar}" data-toggle="tooltip">
+                                         		<i class="fas fa-search-plus"></i>
+                                         	</a>	
+                                         	
+                                         	&nbsp;
+                                 
+                                         	<a th:if="${tipoAcceso == 1}" class="btn btn-danger btn-xs color-blanco" target="_blank" th:href="@{/estado-de-cuenta-cxc/}+${k.cliente.id}" th:attr="title='Estado de cuenta del cliente'" data-toggle="tooltip">
+                                         		<i class="fas fa-file-pdf"></i>
+                                         	</a>					
+                                         	                                   	
+                                         </td>
+                                     </tr>
+                                 </tbody>
+                             </table>
+                             <nav th:replace="paginator-nav :: paginator"></nav>
+                         </div>   
+                         
+                         <div class="row">
+								<div class="col-md-12"> <p class="sumary-cxp">Total facturas a crédito: <span class="badge badge-info" id="infoFacturasCredito"></span> | Total en abonos: <span class="badge badge-info" id="infoFacturasAbonos"></span> | Monto total por facturas a crédito: <span class="badge badge-info" id="infoTotalFacturasCredito"></span></p> </div>
+						 </div>
+                          
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End PAge Content -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Container fluid  -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- footer -->
+    <!-- ============================================================== -->
+    <footer th:replace="layout/layout :: footer"></footer>
+    <!-- ============================================================== -->
+    <!-- End footer -->
+    <!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- End Page wrapper  -->
+<!-- ============================================================== -->
+
+</div>
+<input id="csrfToken" type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+<div th:replace="layout/layout :: scripts"></div>
+
+<script>
+var token = $('#csrfToken').val();
+var decimales = [(${ session.SESSION_DECIMALES })];
+
+function numberFormat(nStr)
+{
+    nStr += '';
+    x = nStr.split('.');
+    x1 = x[0];
+    x2 = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+    while (rgx.test(x1)) {
+        x1 = x1.replace(rgx, '$1' + ' ' + '$2');
+    }
+    return x1 + x2;
+}
+
+
+$(document).ready(function(){
+	$.ajax({
+	      type: "POST",
+	      cache: false,
+	      beforeSend: function () {
+	     	 loadingShow();
+	     	 //$("#btnEmitirFactura").prop("disabled", true);
+	      },
+	      url: "[(@{/cxc/deuda-cxc})]",
+	      data: {_csrf:token},
+	      success: function (data)
+	      {
+	    	  
+	    	var facturas = data.facturas;
+	    	var totalMovimientos = data.total_movimientos;
+	    	var totalDeuda = data.total_deuda;
+	      	
+	      	$("#infoFacturasCredito").text( numberFormat(toFixed(data.facturas, decimales)) );
+	      	
+	      	$("#infoFacturasAbonos").text( numberFormat(toFixed(data.total_movimientos, decimales)) );	      	
+	      	
+	      	$("#infoTotalFacturasCredito").text(  numberFormat(toFixed(data.total_deuda, decimales)) );
+
+	      }, complete: function () {
+	     	 loadingHide();
+	      }, error: function (x, t, m) {
+	          if (t === "timeout") {
+	              
+	          } else {
+	              
+	          }
+	      }
+	  });
+});
+
+</script>
+
+</body>
+</html>

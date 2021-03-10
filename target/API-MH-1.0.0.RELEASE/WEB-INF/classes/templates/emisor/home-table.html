@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout :: head"></head>
+<body class="fix-header card-no-border logo-center">
+
+<div id="main-wrapper">
+
+<header th:replace="layout/layout :: header"></header>
+<aside th:replace="layout/layout :: aside"></aside>
+
+
+
+<!-- ============================================================== -->
+<!-- Page wrapper  -->
+<!-- ============================================================== -->
+<div class="page-wrapper">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+
+		<div class="card">
+	        <div class="card-body">
+	        
+	        		<div class="align-right">
+
+                    	<div class="row">
+                    		<div class="col-md-8"></div>
+                    		<div class="col-md-4">
+                    			<form class="m-t-10" method="get" autocomplete="off" th:action="@{/emisor/}">
+
+		                    		<div class="input-group">
+									    <input th:value="${param.q}" type="search" name="q" class="form-control input" placeholder="Buscar por nombre o identificación y presione la tecla enter.">
+									    <div class="input-group-append">
+										      <button class="btn btn-success btn-sm btn-block"  type="submit">
+										        <i class="fa fa-search"></i>
+										      </button>
+									    </div>
+								  	</div>
+		                    		
+		                    	</form>
+                    		</div>
+                    	</div>
+                    	
+                    </div>
+                    
+                    <p style="text-align: center;width: 100%;" class="m-t-10" th:if="*{param.q!=null and #strings.length(param.q)>0}">
+	                    	Criterio de búsqueda: <span class="font-weight-bold" th:text="${param.q}"></span> <a style="height: 20px" class="btn btn-danger btn-xs color-blanco" th:href="@{/fe-documentos/}"><i class="fas fa-window-close"></i> Cerrar búsqueda</a>
+	                 </p>
+	        
+	        	<div class="table-responsive">
+				<table class="table color-table muted-table m-t-10">
+					<thead>
+						<tr>
+							<th style="width: 45%">Empresa</th>
+							<th style="width: 10%">Identificación</th>
+							<th style="width: 10%">Correo</th>
+							<th style="width: 5%">Teléfono</th>
+							<th style="width: 15%">Fecha caducidad llave criptográfica</th>
+							<th style="width: 10%">Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:classappend="${!k.emisor.statusEmpresa} ? 'table-danger'" th:each="k: ${listaEmisor}">
+							<td>[(${k.emisor.nombreRazonSocial})]</td>
+							<td>[(${k.emisor.identificacion})]</td>
+							<td>[(${k.emisor.email})]</td>
+							<td>[(${k.emisor.telefono})]</td>
+							<td>							
+								<span class="fecha-caducidad-criptografica" >
+		                             <th:block th:with="sdf = ${new java.text.SimpleDateFormat('yyyy-MM-dd''T''HH:mm:ss')}">
+										<p th:remove="tag" th:text="${#dates.format(k.emisor.fechaCaducidadCert, 'dd/MM/yyyy')}" />
+									 </th:block>
+		                        </span>							
+							</td>
+							<td>
+				               	
+				               	<div class="btn-group dropleft">
+									  <button type="button" class="btn btn-success btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									    <i class="fas fa-cog m-r-10"></i>Acciones
+									  </button>
+									  <div class="dropdown-menu">
+									  
+										<a class="dropdown-item" th:href="@{/emisor/ingresar/}+${k.emisor.id}" th:attr="title=#{txt.ingresar.empresa}" data-toggle="tooltip">
+									    	<i class="fas fa-external-link-alt"></i>&nbsp;[(#{txt.ingresar.empresa})]
+									    </a>
+									    
+									    <a class="dropdown-item" th:href="@{/emisor/edit/}+${k.emisor.id}" th:attr="title=#{txt.modificar.empresa}" data-toggle="tooltip">
+	                                       	<i class="fas fa-edit"></i>&nbsp;[(#{txt.modificar.empresa})]
+	                                    </a>	
+									    
+									</div>	
+								</div>	
+				               	
+				               	
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				</div>
+				<nav th:replace="paginator-nav :: paginator"></nav>
+			</div>
+		</div>
+		
+		
+		<a sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" data-toggle="tooltip" data-placement="left" class="btn btn-success btn-registrar-empresa color-blanco" title=" Registre una nueva empresa" th:href="@{/emisor/registrar-empresa/}"><i class="fas fa-plus-circle"></i> Registrar nueva empresa</a>
+		    
+        
+        <!-- ============================================================== -->
+        <!-- End PAge Content -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Container fluid  -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- footer -->
+    <!-- ============================================================== -->
+    <footer th:replace="layout/layout :: footer"></footer>
+    <!-- ============================================================== -->
+    <!-- End footer -->
+    <!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- End Page wrapper  -->
+<!-- ============================================================== -->
+
+
+
+
+</div>
+
+<div th:replace="layout/layout :: scripts"></div>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:remove="tag">
+
+<div class="table-responsive">
+        <table class="table color-table muted-table">
+            <thead>
+                <tr>
+                    <th style="width: 10%">Tipo documento</th>
+                    <th style="width: 15%" >Clave</th>
+                    <th style="width: 15%" >Fecha de emisión</th>
+                    <th class="" style="width: 10%" >XMLenviado</th>
+                    <th class="" style="width: 10%" >XMLrespuesta</th>
+                    <th style="width: 10%">Fecha aceptación</th>
+                    <th style="width: 10%">Estado documento</th>
+                    <th style="width: 20%" class="text-align-center" th:text="#{txt.acciones}"></th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr th:each="k: ${listaBitacora}">
+                          	  <td class="" th:text="${k.tipoDocumento}"></td>
+                              <td class="" th:text="${k.clave}"></td>
+                              <td th:text="${k.fechaEmision}"></td>
+                              <td><a th:href="${urlApiDownloadXml} + ${identificacionEmpresa} + '/' + ${k.nameXmlEnviado}">Descargar XML</a></td>
+							  <td><a th:if="${k.nameXmlRespuesta != null}" th:href="${urlApiDownloadXml} + ${identificacionEmpresa} + '/' + ${k.nameXmlRespuesta}">Descargar XML</a></td>
+							  <td th:text="${k.fechaAceptacion}"></td>
+                              <td th:text="${k.estadoHacienda}" th:classappend="${k.estadoHacienda == 'rechazado'} ? table-danger : exito"></td>                                     
+                              <td class="text-align-center" >
+                              
+                              	<!--  
+                              		<button data-toggle="modal" data-target=".modalAddNdNc" th:attr="data-f=${k.factura.id},data-id=${k.id}" title="Crear nota de débio o crédito" class="btn btn-success btn-xs btnGetFacturaActual" type="button">ND / NC</button>
+                              	-->
+                              		<a th:href="@{/proformas/edit/} + ${k.factura.id} + '?tp=NC'" class="btn btn-success btn-xs color-blanco">
+										Nota de crédito
+									</a>
+                              		<a href="#" th:attr="data-clave=${k.clave}" class="btnReenviarFactura btn btn-success btn-xs color-blanco" data-toggle="modal" data-target=".reenviarFacturaModal">
+										<i class="fas fa-at" data-toggle="tooltip" data-placement="top" title="Reenviar factura por correo"></i>
+									</a>
+									
+									<button th:if="${k.factura.estado == 'A' and k.estadoHacienda == 'rechazado'}" th:attr="data-id=${k.factura.id}" class="btnAnularFactura btn btn-success btn-xs color-blanco">
+										<i class="fas fa-times-circle" data-toggle="tooltip" data-placement="top" title="Anular factura"></i>
+									</button>
+
+									<a target="_blank" th:href="${urlApiImprimirPdf}+${k.clave}" class="btn btn-success btn-xs color-blanco"  th:attr="title=#{btn.imprimir.pdf}" data-toggle="tooltip">
+                                   		<i class="fas fa-file-pdf"></i>
+                                   	</a>
+                              	                                        	
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>    
+              
+              </html>

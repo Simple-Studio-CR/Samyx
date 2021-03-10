@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:fragment="head">
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  
+    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/images/favicon.png}" />
+    <title>Samyx Facturación Electrónica</title>
+
+    <link  th:href="@{/css/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+	<link th:href="@{/assets/bootstrap-datepicker/bootstrap-datepicker.min.css}" rel="stylesheet" />
+
+    <link th:href="@{/css/jquery-ui.min.css}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+    
+    
+    <link th:href="@{/css/style.css?v=3}" rel="stylesheet" />
+    <link th:href="@{/css/main.css?v=31}" rel="stylesheet" />
+    <link th:href="@{/css/colors/green.css}" id="theme" rel="stylesheet" />
+    
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/jquery.amaran/0.5.4/amaran.min.css">
+    
+
+</head>
+
+<body class="fix-header card-no-border logo-center">
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <header class="topbar" th:fragment="header">
+        
+        <!--  
+        <div class="row">
+        	<div class="col-md-9">
+        		<h4 class="titleEmpresa" ><img class="logo-sfe" th:src="@{/images/facturacion.png}" />&nbsp;&nbsp;[(${session.SESSION_DATOS_EMPRESA_NOMBRE})]</h4>
+        	</div>
+        </div>
+        -->
+        
+         <div class="alert-login-error alert alert-success alert-dismissible fade show" th:if="${param.successPassword}"> <i class="fa fa-check" aria-hidden="true"></i>
+	    	<span th:text="#{txt.password.change.exito}"></span>
+	    	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			    <span aria-hidden="true">&times;</span>
+			</button>
+	     </div>
+	     <div class="alert-login-error alert alert-warning alert-dismissible fade show" th:if="${param.errorPassword}"> <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+	    	<span th:text="#{txt.password.change.error}"></span>
+	    	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			    <span aria-hidden="true">&times;</span>
+			</button>
+	     </div>
+	     
+	     <style th:inline="text">
+		    .btn-nav-movil {
+			    color: gray !important;
+			    background-image: url([[@{/images/nav.png}]]);
+			    width: 50px;
+			    height: 50px;
+			    background-size: 60%;
+			    background-repeat: no-repeat;
+			    background-position: 0% 80%;
+			}
+		 </style>
+	      
+        
+            <nav class="navbar top-navbar navbar-expand-md navbar-light">
+
+                <!-- ============================================================== -->
+                <!-- End Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-collapse">
+                    <!-- ============================================================== -->
+                    <!-- toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav mr-auto mt-md-0">
+                        <!-- This is  -->
+                        <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark  btn-nav-movil" href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
+                        <li class="nav-item m-l-10"> <a class="nav-link sidebartoggler hidden-sm-down text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
+                        <!-- ============================================================== -->
+                        <!-- Comment -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item dropdown">
+                            
+                        </li>
+                        <!-- ============================================================== -->
+                        <!-- End Comment -->
+                        <!-- ============================================================== -->
+                        <!-- ============================================================== -->
+                        <!-- Messages -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item dropdown">
+                           
+                        </li>
+                        <!-- ============================================================== -->
+                        <!-- End Messages -->
+                        <!-- ============================================================== -->
+                        <!-- ============================================================== -->
+                        <!-- Messages -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item dropdown mega-dropdown"> </li>
+                        <!-- ============================================================== -->
+                        <!-- End Messages -->
+                        <!-- ============================================================== -->
+                    </ul>
+                    <!-- ============================================================== -->
+                    <!-- User profile and search -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav my-lg-0">
+                    	
+                    	<li class="nav-item logout-app nav-movil">
+                      		<a th:href="@{/emisor/}" >
+                      			<i class="fas fa-building"></i> <span  th:text="#{txt.mi.perfil}"></span>
+                      		</a>
+                        </li>
+                    	<li th:if="${ #authorization.expression('isAuthenticated()')}" class="nav-item logout-app">
+							<form th:action="@{/logout}" method="post">
+								<button type="submit" class="dropdown-item" style="padding:7px 1rem;color:#293674"><i class="fas fa-sign-out-alt"></i> <span th:text="#{btn.cerrar.sesion}"></span></button>
+							</form>
+                    	</li>
+
+                        <!-- ============================================================== -->
+                        <!-- Profile -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img th:src="@{/images/user.png}" src="" alt="user" class="profile-pic" /></a>
+                            <div class="dropdown-menu dropdown-menu-right scale-up">
+                                <ul class="dropdown-user">
+                          
+                                	<li th:if="${ #authorization.expression('isAuthenticated()')}" style="text-align: center" th:text="'Hola: ' + ${#authentication.getPrincipal().getUsername()}"></li>
+                  
+                                	<li role="separator" class="divider"></li>
+                                	
+                                	
+                                	
+                                	<li sec:authorize="hasAnyRole('ROLE_ADMIN')">
+                                		<a th:href="@{/tipo-de-cambio/}" >
+                                			<i class="fas fa-exchange-alt"></i> Tipo de cambio monedas
+                                		</a>
+                                	</li>
+                                	
+                                	
+                                	<li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
+                                		<a th:href="@{/catalogos/usuarios}" >
+                                			<i class="fa fa-users" aria-hidden="true"></i> <span th:text="#{txt.usuarios}"></span>
+                                		</a>
+                                	</li>
+                                	
+                                	<li>
+                                		<a th:href="@{/emisor/}" >
+                                			<i class="fas fa-building"></i> <span  th:text="#{txt.mi.perfil}"></span>
+                                		</a>
+                                	</li>
+                                	
+                                	<li>
+                                		<a href="#" data-toggle="modal" data-target="#changePassword" >
+                                			<i class="fas fa-unlock-alt"></i> <span  th:text="#{txt.cambiar.password}"></span>
+                                		</a>
+                                	</li>
+                                    
+                                    <li>
+                                    	
+                                    	<form th:action="@{/logout}" method="post">
+											<button type="submit" class="dropdown-item" style="padding:7px 1rem;color:#293674"><i class="fas fa-sign-out-alt"></i> <span th:text="#{btn.cerrar.sesion}"></span></button>
+										</form>
+                                    
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        
+        
+        
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <aside class="left-sidebar" th:fragment="sidebar">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <li class="nav-devider"></li>
+                        <li class="nav-small-cap">Menú</li>
+                        <li> 
+                        	<a class="waves-effect waves-dark" th:href="@{/}" href="#" aria-expanded="false">
+                        		<i class="fas fa-home"></i><span class="hide-menu" th:text="#{txt.inicio}"></span>
+                        	</a>
+                        </li>
+                        <li th:if="${session.SESSION_EMPRESA_ID} != null"> 
+                        	<a class="waves-effect waves-dark" th:href="@{/clientes/}" href="#" aria-expanded="false">
+                        		<i class="fas fa-users"></i><span class="hide-menu" th:text="#{txt.clientes}"></span>
+                        	</a>
+                        </li>
+
+                        <li th:if="${session.SESSION_EMPRESA_ID} != null" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')"> 
+                        	<a class="has-arrow waves-effect waves-dark" href="#">
+                        		<i class="fas fa-file-invoice"></i><span class="hide-menu" th:text="#{txt.inventario}"></span>
+                        		
+                        	 </a>
+                            <ul aria-expanded="false" class="collapse" >
+                            
+                            	<li><a th:href="@{/producto-familia/}" th:text="'Familias productos'"> </a></li>
+                            	<li><a th:href="@{/inventario/proveedores/}" th:text="#{txt.proveedores}"> </a></li>
+                            	<li><a th:href="@{/productos/}" th:text="#{txt.productos}"> </a></li>                            	
+                            	<li><a th:href="@{/inventario/factura-compra/}" th:text="'Compra de inventario'"> </a></li>
+								<li><a th:href="@{/inventario/ajuste/}" th:text="'Ajuste inventario'"> </a></li>
+								<li><a th:href="@{/inventario/reportes/}" th:text="'Reportes'"> </a></li>
+                            </ul>
+                        </li>
+                        
+                        
+                        <li th:if="${session.SESSION_CONTROL_CAJAS} == 'S'"> 
+                        	<a class="waves-effect waves-dark" th:href="@{/control-cajas/}" href="#" aria-expanded="false">
+                        		<i class="fas fa-money-check"></i><span class="hide-menu" th:text="'Cajas'"></span>
+                        	</a>
+                        </li>
+                        
+                        
+                        <li th:if="${session.SESSION_EMPRESA_ID} != null" > 
+                        	 <a class="has-arrow waves-effect waves-dark" href="#">
+                        		<i class="fas fa-file-invoice"></i><span class="hide-menu" th:text="#{txt.comprobantes}"></span>
+                        	 </a>
+                            <ul aria-expanded="false" class="collapse" >                            
+                            	 <li><a th:href="@{/facturar/}+'?f=all'" th:text="#{txt.facturar}"> </a></li>
+                            	 <li th:if="${session.SESSION_SISTEMA_FARMACIA == 'N'}"><a th:href="@{/facturar/}">Facturar precio final</a></li>
+                            	 <li th:if="${session.SESSION_SISTEMA_FARMACIA == 'N'}"><a th:href="@{/prefacturas/}">Prefacturas</a></li>
+                            	 <li><a th:href="@{/proformas/}" th:text="'Proformas'"></a></li>
+                            	 <li th:if="${ #authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ROLE_ADMIN')}"><a th:href="@{/comprobantes-electronicos/}">Comprobantes API</a></li>
+                            	 
+                            	 <li><a th:href="@{/comprobantes-electronicos-enviados}">Comprobantes enviados a Hacienda</a></li>
+                            	 
+                                 <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')"><a th:href="@{/fe-documentos/}" th:text="#{txt.documentos}"></a></li>
+                                 <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')"><a th:href="@{/mensaje-receptor/}" th:text="#{txt.mensaje.receptor}"></a></li>
+                                 <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')"><a th:href="@{/mensaje-receptor-inbox/}" th:text="'Mensaje receptor, bandeja de entrada'"></a></li>
+                                 <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')"><a th:href="@{/consulta-comprobantes-manualmente/}" th:text="#{txt.consulta.documentos.manualmente}"></a></li>
+                                 <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')"><a th:href="@{/historicos/}" th:text="'Históricos otros sistemas'"></a></li>
+                                 
+                            </ul>
+                        </li>
+                        
+                        <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" th:if="${session.SESSION_EMPRESA_ID} != null"> 
+                        	<a class="has-arrow waves-effect waves-dark" href="#">
+                        		<i class="fas fa-file-export"></i><span class="hide-menu" th:text="#{txt.cxc}"></span>
+                        	 </a>
+                            <ul aria-expanded="false" class="collapse" >
+                            
+                            	 <li><a th:href="@{/cxc/(e='A')}" th:text="#{txt.cxc.cuentas.por.cobrar}"> </a></li>
+                            	 <li><a th:href="@{/cxc/reportes/flujo-de-caja}" th:text="#{txt.cxc.flujo.de.caja}"> </a></li>
+                            	 <li><a th:href="@{/cxc/reportes/reportes}">Reportes</a></li>
+                            	 
+                            </ul>
+                        </li>
+                        
+                        <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" th:if="${session.SESSION_EMPRESA_ID} != null"> 
+                        	<a class="has-arrow waves-effect waves-dark" href="#">
+                        		<i class="fas fa-file-export"></i><span class="hide-menu" th:text="#{txt.reportes}"></span>
+                        	 </a>
+                            <ul aria-expanded="false" class="collapse" >
+                            
+                            	 <li><a th:href="@{/reportes/ventas}" th:text="#{txt.reportes.ventas}"> </a></li>
+                            	 <li><a th:href="@{/reportes/ventas-productos}" th:text="'Reporte ventas por producto'"> </a></li>
+                            	 <li><a th:href="@{/reportes/compras}" th:text="#{txt.reportes.compras}"> </a></li>
+                            	 
+                            </ul>
+                        </li>
+                        
+                    </ul>
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="row page-titles">
+                <div class="col-md-5 align-self-center">
+                    <h3 class="text-themecolor">Fix-sidebar</h3>
+                </div>
+                <div class="col-md-7 align-self-center">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                        <li class="breadcrumb-item active">Fix-sidebar</li>
+                    </ol>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+            
+            
+            
+            <footer th:fragment="footer" class="footer">
+            	
+            	  
+            	<span class="poweredby" th:text="'© '+ #{txt.app.name}"></span>
+            	
+            	
+            	<div class="modal fade" id="changePassword" role="dialog" data-backdrop="static" data-keyboard="false">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				    <form id="formChangePass" th:action="@{/usuarios/cambiar-password}" method="post">
+					      <div class="modal-header">
+					        <h5 class="modal-title" id="changePassword" th:text="#{txt.cambiar.password}"></h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					      <div class="modal-body">
+
+		                        <div class="form-group">
+		                            <div class="col-xs-12">
+		                            	<input class="form-control" type="password" required="required" id="_password" name="password" th:placeholder="#{txt.digite.password}"> 
+		                            </div>
+		                        </div>
+		                        <div class="form-group">
+		                            <div class="col-xs-12">
+		                            	<input class="form-control" type="password" required="required" id="_password2" name="password2" th:placeholder="#{txt.confirme.password}"> 
+		                            </div>
+		                        </div>
+		
+					      </div>
+					      <div class="modal-footer">  	
+					         <button type="button" class="btn btn-inverse" style="color:#FFF !important" data-dismiss="modal"> <i class="fa fa-ban" aria-hidden="true"></i>&nbsp; <span th:text="#{btn.cancelar}"></span></button>
+					         <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;<span th:text="#{txt.cambiar.password}"></span></button>
+					      </div>
+				      </form>
+				    </div>
+				  </div>
+				</div>
+            
+            
+                <h4 class="titleEmpresa" th:if="${session.SESSION_DATOS_EMPRESA_NOMBRE} != null">Empresa:&nbsp;[(${session.SESSION_DATOS_EMPRESA_NOMBRE})]</h4>            
+            
+            </footer>
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    
+    <div th:fragment="scripts" >    	
+    	
+    	<script th:src="@{/js/jquery/jquery.min.js}"></script>
+	    <script th:src="@{/js/jquery-ui.min.js}"></script>
+	    <script th:src="@{/js/jquery.number.min.js}"></script>
+	    <script th:src="@{/js/sweetalert.min.js}"></script>
+	    <script th:src="@{/js/bootstrap/js/popper.min.js}"></script>
+	    <script th:src="@{/js/bootstrap/js/bootstrap.min.js}"></script>
+	    <script th:src="@{/js/jquery.slimscroll.js}"></script>
+	    <script th:src="@{/js/waves.js}"></script>
+		<script th:src="@{/js/sidebarmenu.js}"></script>
+		<script th:src="@{/js/sticky-kit-master/dist/sticky-kit.min.js}"></script>
+		<script th:src="@{/js/sparkline/jquery.sparkline.min.js}"></script>
+		<script th:src="@{/assets/bootstrap-datepicker/bootstrap-datepicker.min.js}"></script>
+		<script th:src="@{/js/custom.js}"></script>
+		<script th:src="@{/js/styleswitcher/jQuery.style.switcher.js}"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+		<script src="//cdn.jsdelivr.net/jquery.amaran/0.5.4/jquery.amaran.min.js"></script>
+		<script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+		
+		<script>
+		
+		var token = $('#csrfToken').val();
+		
+		function loadingShow(){
+			$("#btnProcesando").show();
+		}
+		
+		function loadingHide(){
+			$("#btnProcesando").hide();
+		}
+		
+		$('.number-format').number(true, [(${ session.SESSION_DECIMALES })], '.', ' ');
+		$('.number-format-final').number( true, [(${ session.SESSION_DECIMALES })], '.', ' ' );
+		
+		$.fn.modal.Constructor.prototype._enforceFocus = function() {};
+		
+		$('._select2_').select2({
+		  placeholder: 'Seleccione un elemento',
+		  allowClear: true
+		});
+		
+		jQuery('.dd-mm-yyyy').datepicker({
+	        autoclose: true,
+	        format: 'dd/mm/yyyy',
+	        todayHighlight: true
+	    });
+		jQuery('.yyyy').datepicker({
+	        startView: 2,
+	        autoclose: true,
+  			minViewMode: 2,
+	        format: 'yyyy',
+	    });
+		function validateFloatKeyPress(el, evt) {
+
+	        var charCode = (evt.which) ? evt.which : event.keyCode;
+	        var number = el.value.split('.');
+	        if (charCode !== 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
+	            return false;
+	        }
+	        //just one dot
+	        if (number.length > 1 && charCode === 46) {
+	            return false;
+	        }
+	        //get the carat position
+	        var caratPos = getSelectionStart(el);
+	        var dotPos = el.value.indexOf(".");
+	        if (caratPos > dotPos && dotPos > -1 && (number[1].length > 1)) {
+	            if (charCode === 8) {
+	                return true;
+	            } else {
+	                return false;
+	            }
+	        }
+	        return true;
+	    }
+
+	    function getSelectionStart(o) {
+	        if (o.createTextRange) {
+	            var r = document.selection.createRange().duplicate();
+	            r.moveEnd('character', o.value.length);
+	            if (r.text === '')
+	                return o.value.length;
+	            return o.value.lastIndexOf(r.text);
+	        } else
+	            return o.selectionStart;
+	    }
+	    
+	    $('.reload').click(function() {
+	        location.reload();
+	    });
+	    
+	    $('.dd-mm-yyyy').datepicker({
+	        autoclose: true,
+	        format: 'dd/mm/yyyy',
+	        todayHighlight: true
+	    });
+	    
+	    $('.dd-mm-yyyy-exonera').datepicker({
+	        autoclose: true,
+	        format: 'dd/mm/yyyy HH:mm:ss',
+	        todayHighlight: true
+	    });
+	    
+	    
+	    $(document).on("keyup", "input, textarea", function () {
+	        var limit = $(this).attr("maxlength");
+	        var value = $(this).val();
+	        var current = value.length;
+	        if (parseInt(current) > parseInt(limit)) {
+	            swal("", "Este campo no admite más de <b class='badge'>" + limit + "</b> caracteres", "warning");
+	        }
+	        if (limit < current) {
+	            $(this).val(value.substring(0, limit));
+
+	        }
+	    });
+	    
+	    $(document).on('keyup', '.num-integer', function () {
+	        this.value = this.value.replace(/[^0-9]/g, '');
+	    });
+	    
+	    function validateFloatKeyPress(el, evt) {
+	    	
+	        var charCode = (evt.which) ? evt.which : event.keyCode;
+	        var number = el.value.split('.');
+	        if (charCode !== 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
+	            return false;
+	        }
+	        //just one dot
+	        if (number.length > 1 && charCode === 46) {
+	            return false;
+	        }
+	        //get the carat position
+	        var caratPos = getSelectionStart(el);
+	        var dotPos = el.value.indexOf(".");
+	        if (caratPos > dotPos && dotPos > -1 && (number[1].length > 1)) {
+	            if (charCode === 8) {
+	                return true;
+	            } else {
+	                return false;
+	            }
+	        }
+	        return true;
+	    }
+
+	    function getSelectionStart(o) {
+	    	
+	        if (o.createTextRange) {
+	            var r = document.selection.createRange().duplicate();
+	            r.moveEnd('character', o.value.length);
+	            if (r.text === '')
+	                return o.value.length;
+	            return o.value.lastIndexOf(r.text);
+	        } else
+	            return o.selectionStart;
+	    }
+	    
+	    $(document).on('show.bs.modal', '.modal', function () {
+	        var zIndex = 1040 + (10 * $('.modal:visible').length);
+	        $(this).css('z-index', zIndex);
+	        setTimeout(function() {
+	            $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
+	        }, 0);
+	    });
+	    
+	    function redondeo(numero, decimales) {
+		    var flotante = parseFloat(numero);
+		    var resultado = Math.round(flotante*Math.pow(10,decimales))/Math.pow(10,decimales);
+		    return resultado;
+	    }
+	    
+	    function myRound(num, dec) {
+    	  var exp = Math.pow(10, dec || 2); // 2 decimales por defecto
+    	  return parseInt(num * exp, 10) / exp;
+    	}
+	    
+	    function decimalsNumber(number) {
+    	   number += '';
+    	   var numberFixed = parseFloat(number).toFixed(5);
+    	   var numberSplit = numberFixed.split(".");
+    	   var decimalValue = numberSplit[1];
+    	   var returnVal = ".";
+    	   if (decimalValue.substring(0, 5) == "00000")
+    	      returnVal += '00';
+    	   else if (decimalValue.substring(1, 5) == "0000")
+    	      returnVal += decimalValue.substring(0, 2);
+    	   else if (decimalValue.substring(2, 5) == "000")
+    	      returnVal += decimalValue.substring(0, 2);
+    	   else if (decimalValue.substring(3, 5) == "00")
+    	      returnVal += decimalValue.substring(0, 3);
+    	   else if (decimalValue.substring(4, 5) == "0")
+    	      returnVal += decimalValue.substring(0, 4);
+    	   else
+    	      returnVal += decimalValue;
+
+    	   return numberSplit[0].toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + returnVal;
+
+    	}
+	    
+	    function NUM(s, dec) {
+            for (var s = s + "", num = "", x = 0; x < s.length; x++) {
+                c = s.charAt(x);
+                if (".-+/*".indexOf(c) + 1 || c != " " && !isNaN(c)) {
+                    num += c;
+                }
+            }
+            if (isNaN(num)) {
+                num = eval(num);
+            }
+            if (num == "") {
+                num = 0;
+            } else {
+                num = parseFloat(num);
+            }
+            if (dec != undefined) {
+                r = .5;
+                if (num < 0) r = -r;
+                e = Math.pow(10, (dec > 0) ? dec : 0);
+                return parseInt(num * e + r) / e;
+            } else {
+                return num;
+            }
+        }
+	    
+	    function toFixed(x, n) {
+
+            var Truncar = (parseFloat(n) + 1);
+            const v = (typeof x === 'string' ? x : x.toString()).split('.');
+            if (Truncar <= 0) return v[0];
+            let f = v[1] || '';
+            if (f.length > Truncar) return NUM(`${v[0]}.${f.substr(0, Truncar)}`, n);
+            while (f.length < Truncar) f += '0';
+            Numero_Truncado = `${v[0]}.${f}`;
+
+            return NUM(Numero_Truncado, n);
+        }	
+	    	    
+	    /*
+	    $(document).on("keyup","#buscarClienteApi", function(e){
+            
+            e.preventDefault();
+            if($(this).val().length >= 9){
+
+                $.ajax({
+                    type: "GET",
+                    cache: false,
+                    beforeSend: function () {
+                        loadingShow();
+                    },
+                    url: "[(@{/})]consulta-personas-mh",
+                    data: {identificacion: $(this).val()},
+                    success: function (data)
+                    {
+                        
+                      $("#tipoDeIdentificacion").val(data.tipoIdentificacion.substring(1, 2));
+                      $("#identificacion").val( $("#buscarClienteApi").val() );
+                      $("#nombreCompleto").val(data.nombre);              
+                      $('#tipoDeIdentificacion').select2();
+
+                    }, complete: function () {
+                        loadingHide();
+                    }, error: function (x, t, m) {
+                        
+                        $("#tipoDeIdentificacion").val('');
+                        $("#identificacion").val('');
+                        $("#nombreCompleto").val('');             
+                        $('#tipoDeIdentificacion').select2();
+                        if (t === "timeout") {
+                            
+                        } else {
+                            
+                        }
+                    }
+                });
+            
+            }
+            
+      });
+	    */
+	    
+	 		$(document).on("keyup","#buscarClienteApi", function(e){
+	            
+	            e.preventDefault();
+	            if($(this).val().length >= 9){
+	
+	                $.ajax({
+	                    type: "GET",
+	                    //cache: false,
+	                    beforeSend: function () {
+	                        loadingShow();
+	                    },
+	                    url: "https://api.hacienda.go.cr/fe/ae",
+	                    data: {identificacion: $(this).val()},
+	                    success: function (data)
+	                    {
+						
+						  $("#labelIdentificacionNoExiste").remove();
+
+	                      $("#tipoDeIdentificacion").val(data.tipoIdentificacion.substring(1, 2));
+	                      $("#identificacion").val( $("#buscarClienteApi").val() );
+	                      $("#nombreCompleto").val(data.nombre);              
+	                      $('#tipoDeIdentificacion').select2();
+	
+	                    }, complete: function () {
+	                        loadingHide();
+	                    }, error: function (x, t, m) {
+
+	                    	try{
+
+	                    		if(parseInt(x.status) === 404){
+									$("#labelIdentificacionNoExiste").remove();
+									$('<span class="label label-warning" id="labelIdentificacionNoExiste">No se encuentra ningún cliente con esa identificación, verifíquela o digite los datos del cliente manualmente.</span>').insertAfter('#buscarClienteApi');
+
+								}else{
+									$("#labelIdentificacionNoExiste").remove();
+									$('<span class="label label-danger" id="labelIdentificacionNoExiste">El servicio que presta el Ministerio de Hacienda está presentando problemas por favor digite los datos del cliente manualmente.</span>').insertAfter('#buscarClienteApi');
+								}
+	                    	}catch(error){
+								$("#labelIdentificacionNoExiste").remove();
+								$('<span class="label label-danger" id="labelIdentificacionNoExiste">El servicio que presta el Ministerio de Hacienda está presentando problemas por favor digite los datos del cliente manualmente.</span>').insertAfter('#buscarClienteApi');
+	                    	}
+	                        
+	                        $("#tipoDeIdentificacion").val('');
+	                        $("#identificacion").val('');
+	                        $("#nombreCompleto").val('');             
+	                        $('#tipoDeIdentificacion').select2();
+	                        if (t === "timeout") {
+	                            
+	                        } else {
+	                            
+	                        }
+	                    }
+	                });
+	            
+	            }
+	            
+	      });
+	    
+	    
+	    $(document).on("submit", "#formChangePass", function(e){
+		    	
+		    	if($("#_password").val() != $("#_password2").val()){
+			    	  $("#_password, #_password2").addClass("is-invalid");
+			    	  swal("","[(#{txt.password.diferentes})]","warning");
+			    	  return false
+			      }
+	
+		        $.ajax({
+		            type: "POST",
+		            cache: false,
+		            beforeSend: function () {
+		                loadingShow();
+		            },
+		            url: "[(@{/usuarios/cambiar-password})]",
+		            data: $(this).serialize(),
+		            success: function (data)
+		            {
+		            	if(data.message === "OK"){
+		            		swal("Notificación","Su contraseña ha sido cambiada con éxito.", "success");
+		            		
+		            		$("#_password, #_password2").val("");
+		            		
+		            	}else{
+		            		swal("Notificación","Ocurrió un error contacte al administrador del sistema.", "warning");
+		            	}
+	
+		            }, complete: function () {
+		                loadingHide();
+		            }, error: function (x, t, m) {
+	
+	
+		            }
+	
+		    	});
+		        
+		        return false;
+		    
+		});
+	    
+	    $('._select21_').select2({
+		  placeholder: 'Seleccione un elemento',
+		  minimumResultsForSearch: -1
+		});
+	    
+	    var isMobile = {
+	    	    Android: function() {
+	    	        return navigator.userAgent.match(/Android/i);
+	    	    },
+	    	    BlackBerry: function() {
+	    	        return navigator.userAgent.match(/BlackBerry/i);
+	    	    },
+	    	    iOS: function() {
+	    	        return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+	    	    },
+	    	    Opera: function() {
+	    	        return navigator.userAgent.match(/Opera Mini/i);
+	    	    },
+	    	    Windows: function() {
+	    	        return navigator.userAgent.match(/IEMobile/i);
+	    	    },
+	    	    any: function() {
+	    	        return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+	    	    }
+	    	};
+	    
+	    /*
+	    var width = $(window).width(); 
+	    var height = $(window).height(); 
+	    
+	    alert("width " + width + " | height" + height );
+	    */
+
+	    /*
+		'theme'     :'colorful',
+		'content'   :{
+			title:'Notificación',
+			bgcolor:'#47a447',
+			message: m,
+			info:'',
+			//icon:'fas fa-check'
+		},
+		*/
+
+	    function notificacion(m){  
+			$.amaran({
+				'position'  :'top right',
+				'inEffect'  :'slideRight',
+				'message'   : m,
+				'delay'     :2500        
+			});
+		}
+		
+		$(document).on("keyup",".retorna-cero", function(){
+			 if($(this).val() === ""){
+				 $(this).val("0");
+			 }
+		});
+		
+		$(document).on('focus', '.select2-selection.select2-selection--single', function (e) {
+		  $(this).closest(".select2-container").siblings('select:enabled').select2('open');
+		});
+
+		// steal focus during close - only capture once and stop propogation
+		$('select.select2').on('select2:closing', function (e) {
+		  $(e.target).data("select2").$selection.one('focus focusin', function (e) {
+		    e.stopPropagation();
+		  });
+		});
+	    
+
+		</script>
+
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-4NVHCBS0P6"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+		
+		  gtag('config', 'G-4NVHCBS0P6');
+		</script>
+		
+		<button style="display:none;" id="btnProcesando" class="btn btn-primary" type="button" disabled="">
+		  <i class="fas fa-redo fa-spin"></i> Procesando...
+		</button>
+
+    </div>
+    
+</body>
+
+</html>

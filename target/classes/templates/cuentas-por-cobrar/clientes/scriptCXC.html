@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body th:fragment="scriptCXCConfig" class="d-none">
+<script type="text/javascript">
+   
+var token = $('#csrfToken').val();
+var decimales = [(${ session.SESSION_DECIMALES })];
+
+$(document).on("click", ".btn-cargar-factura", function (e) {
+	
+    var id = $("#clienteId").val();
+    
+    loadFactura(id);
+    
+    $(".modalFactura").modal("show");
+
+    setTimeout(function(){ 
+    	saldoCxcPendiente(); 
+    	$("#medioDePago").select2(); 
+    }, 100);
+    
+});
+
+function loadFactura(e){
+	
+	$("#proveedorCXP").text( 'Proveedor: ' + $("#proveedor-factura-"+e).val() ); 
+	
+    $.ajax({
+        type: "POST",
+        cache: false,
+        beforeSend: function () {
+            loadingShow();
+        },
+        url: "[(@{/cxc/cargar-factura-cxc/})]",
+        data: {_csrf: token, c:e},
+        success: function (data) {
+        	
+        	$("#loadCuentaPorCobrar").html(data);
+            
+        }, complete: function () {
+            loadingHide();
+        }, error: function (x, t, m) {
+            if (t === "timeout") {
+
+            } else {
+
+            }
+        }
+    });
+    return false;
+}
+
+function numberFormat(nStr)
+{
+    nStr += '';
+    x = nStr.split('.');
+    x1 = x[0];
+    x2 = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+    while (rgx.test(x1)) {
+        x1 = x1.replace(rgx, '$1' + ' ' + '$2');
+    }
+    return x1 + x2;
+}
+
+function saldoCxcPendiente(){
+	var monto = 0;
+	var facturas = 0;
+    $('#tbodyFacturasPendientes input[id^="row-saldo-cxp-"]').each(function () {
+    	monto += parseFloat($(this).val());
+    	facturas = facturas + 1;
+    });
+    $('#saldoCxcPendiente').text( 'N. facturas: '+facturas+', monto pendiente: ' + numberFormat(toFixed(monto, [(${ session.SESSION_DECIMALES })])) );
+}
+
+function montoCxcCancelar(){
+	var monto = 0;
+	var facturas = 0;
+    $('#tbodyFacturasPorCancelar input[id^="row-saldo-cxp-"]').each(function () {
+    	monto += parseFloat($(this).val());
+    	facturas = facturas + 1;
+    });
+    $('#montoCxcCancelar').text( 'N. facturas: '+facturas+', monto a cancelar: ' + numberFormat(toFixed(monto, [(${ session.SESSION_DECIMALES })])) );
+    
+}
+
+$(document).on("click", ".btn-agregar-factura", function(e){
+	
+	disableEnter();
+	
+	e.preventDefault();
+	
+	var id = $(this).attr("data-id");        
+
+	$("#tbodyFacturasPorCancelar").append( '<tr id="row-'+id+'">' +$("#row-"+id).html()+ '</tr>'); 
+	
+	//Elimino la linea
+	$("#displayFacturasPendientes #row-"+id).remove();
+	
+	//Calculo el nuevo saldo pendiente
+	saldoCxcPendiente();        	
+	
+	montoCxcCancelar()
+	
+	//Cambio el texto de los botones
+	$("#tbodyFacturasPorCancelar .btn-agregar-factura").html( '<i class="fas fa-angle-left"></i> Eliminar' );
+	
+	//Elimino las clases btn-agregar-factura
+	$( "#tbodyFacturasPorCancelar .btn-acciones" ).removeClass( "btn-agregar-factura" );
+	
+	$( "#tbodyFacturasPorCancelar .btn-acciones" ).addClass( "btn-eliminar-factura" );        	        	
+
+});
+
+//Agregar todas las facturas en lote
+$(document).on("click", "#btn-agregar-todas-facturas", function(e){
+	
+	disableEnter();
+	
+	e.preventDefault();
+
+	$("#tbodyFacturasPorCancelar").append( $("#tbodyFacturasPendientes").html() ); 
+	
+	//Elimino la linea
+	$("#tbodyFacturasPendientes").html("");
+	
+	//Calculo el nuevo saldo pendiente
+	saldoCxcPendiente();        	
+	
+	//Calculo 
+	montoCxcCancelar()
+	
+	//Cambio el texto de los botones
+	$("#tbodyFacturasPorCancelar .btn-agregar-factura").html( '<i class="fas fa-angle-left"></i> Eliminar' );
+	
+	//Elimino las clases btn-agregar-factura
+	$( "#tbodyFacturasPorCancelar .btn-acciones" ).removeClass( "btn-agregar-factura" );
+	
+	$( "#tbodyFacturasPorCancelar .btn-acciones" ).addClass( "btn-eliminar-factura" );      	        	
+
+});
+
+$(document).on("click", "#btn-quitar-todas-facturas", function(e){
+	
+	disableEnter();
+	
+	e.preventDefault();
+
+	$("#tbodyFacturasPendientes").append( $("#tbodyFacturasPorCancelar").html() ); 
+	
+	//Elimino la linea
+	$("#tbodyFacturasPorCancelar").html("");
+	
+	//Calculo el nuevo saldo pendiente
+	saldoCxcPendiente();        	
+	
+	//Calculo 
+	montoCxcCancelar()
+	
+	//Cambio el texto de los botones
+	$("#tbodyFacturasPendientes .btn-eliminar-factura").html( 'Agregar <i class="fas fa-angle-right"></i>' );
+	
+	//Elimino las clases btn-agregar-factura
+	$( "#tbodyFacturasPendientes .btn-acciones" ).removeClass( "btn-eliminar-factura" );
+	
+	$( "#tbodyFacturasPendientes .btn-acciones" ).addClass( "btn-agregar-factura" );    
+	
+	//Ordeno por fecha DESC
+	orderCXcPendientes();
+
+});
+
+$(document).on("click", ".btn-eliminar-factura", function(e){
+	
+	disableEnter();
+	
+	e.preventDefault();
+	
+	var id = $(this).attr("data-id");      
+	
+	console.log("estoy aquí " + id);
+
+	$("#tbodyFacturasPendientes").append( '<tr id="row-'+id+'">' +$("#row-"+id).html()+ '</tr>'); 
+	
+	//Elimino la linea
+	$("#tbodyFacturasPorCancelar #row-"+id).remove();
+	
+	//Calculo el nuevo saldo pendiente
+	saldoCxcPendiente();        	
+	
+	montoCxcCancelar();
+	
+	//Cambio el texto de los botones
+	$("#tbodyFacturasPendientes .btn-eliminar-factura").html( 'Agregar <i class="fas fa-angle-right"></i>' );
+	
+	//Elimino las clases btn-agregar-factura
+	$( "#tbodyFacturasPendientes .btn-acciones" ).removeClass( "btn-eliminar-factura" );
+	
+	$( "#tbodyFacturasPendientes .btn-acciones" ).addClass( "btn-agregar-factura" );     
+	
+	//Ordeno por fecha DESC
+	orderCXcPendientes();
+
+})
+
+function orderCXcPendientes(){        	
+	var table = $('#displayFacturasPendientes');
+	$('#orderCXcPendientes')
+	.wrapInner('<span title="Ordenar por esta columna"/>')
+	.each(function(){
+        
+        var th = $(this),
+            thIndex = th.index(),
+            inverse = false;
+        
+        th.click(function(){
+            
+            table.find('tbody td').filter(function(){
+                
+                return $(this).index() === thIndex;
+                
+            }).sortElements(function(a, b){
+                
+                return $.text([a]) > $.text([b]) ? inverse ? -1 : 1 : inverse ? 1 : -1;
+                
+            }, function(){                        
+                // parentNode is the element we want to move
+                return this.parentNode; 
+                
+            });
+            
+            inverse = !inverse;
+                
+        });
+            
+    });
+	
+}
+
+$(document).on("submit", "#formCancelarCxc", function(){
+	
+	disableEnter();
+	
+	var mp = $("#montoPagar").val();
+	
+	if(parseFloat(mp) <= 0){
+		swal("Notificación", "El monto a pagar no puede ser menor o igual a cero (0)", "warning");
+		return false;
+	}
+	
+	$.ajax({
+        type: "POST",
+        cache: false,
+        beforeSend: function () {
+            loadingShow();
+        },
+        url: "[(@{/cxc/abonar-cancelar})]",
+        data: $(this).serialize(),
+        success: function (data) {
+        	
+        	 if ($("#tbodyFacturasPorCancelar tr").length === 0) {
+                 swal("", "Debe agregar almenos una factura.", "warning");
+                 return false;
+             }
+        	 
+        	 if(data.response == 1){
+        		 swal("Éxito", "Proceso ejecutado con éxito", "success");
+        		 
+        		 var id = $("#clienteId").val();
+        		 
+        		 loadFactura(id);
+        		 
+        		 //Quito las lineas 
+        		 $("#tbodyFacturasPorCancelar").html("");
+        		 
+        		 //Refresco el monto de cuentas por cancelar
+        		 montoCxcCancelar();
+        		 
+        		 //Limpio el formulario
+        		 $("#formCancelarCxc").trigger("reset")
+        		 
+        		 //Cargo las facturas pendientes con su nuevo saldo
+                 loadFactura(parseInt(id));   
+        		 
+        		 setTimeout(function(){ 
+        			 
+        			 $("#cxcPrintMasivo").val(data.numeroCXC);
+        			 
+        			 saldoCxcPendiente(); 
+        		 }, 500); 
+        		 
+        	 }
+        	 
+        	 loadPendientes($("#clienteId").val(),"A");
+            
+        }, complete: function () {
+            loadingHide();
+        }, error: function (x, t, m) {
+            if (t === "timeout") {
+
+            } else {
+
+            }
+        }
+    });
+    return false;
+	
+});
+
+$(document).on("click", "#btnImprimirReciboCxp", function(e){
+	e.preventDefault(); 		
+    var print = $(this).attr("data-print");
+	if(print > 0){
+		var href = "[(@{/imprimir-recibo-cxc-masivo/})]" + print +"?j="+$.now();			
+		$('#loadPdfParaImprimir').attr("src", href + "#view=VFit" + "&" + "");	
+		$("#mostrarPdfParaImprimir").modal("show");
+	}
+});
+
+$(document).on("click", "#btnImprimirCxp", function(e){
+	e.preventDefault(); 		
+    var print = $("#cxcPrintMasivo").val();
+	if(print > 0){
+		var href = "[(@{/imprimir-recibo-cxc-masivo/})]" + print +"?j="+$.now();			
+		$('#loadPdfParaImprimir').attr("src", href + "#view=VFit" + "&" + "");	
+		$("#mostrarPdfParaImprimir").modal("show");
+	}
+});
+
+//$('.number-format').number( true, 2, '.', ' ' );
+
+$(document).on("click", ".btn-imprimir-estado-cuenta", function(e){	
+	e.preventDefault(); 		
+	var link = '[(@{/estado-de-cuenta-cxc/})]' + $(this).attr("data-link") + '&jmd='+$.now();	
+	var href = link;			
+	$('#loadPdfParaImprimir').attr("src", href + "#view=VFit" + "&" + "");	
+	$("#mostrarPdfParaImprimir").modal("show");
+});
+
+$(document).on("click", ".btn-imprimir-estado-cuenta-canceladas", function(e){	
+	e.preventDefault(); 		
+	var link = '[(@{/estado-de-cuenta-cxc-canceladas/})]' + $(this).attr("data-link") + '&jmd='+$.now();	
+	var href = link;			
+	$('#loadPdfParaImprimir').attr("src", href + "#view=VFit" + "&" + "");	
+	$("#mostrarPdfParaImprimir").modal("show");
+});
+
+function deudaActualCXC(){
+	var totalDeudaActualCxc = 0;
+	$('input[class^="monto-cxc-actual"]').each(function () {
+		totalDeudaActualCxc += parseFloat($(this).val());
+	});
+	$("#deudaActualCXC").text("Total deuda: " + totalDeudaActualCxc);
+	
+	$("#deudaActualCXC").number( true, decimales, '.', ' ' );
+	
+}
+
+$(document).on("click",".btn-factura-actual",function(){
+	
+	disableEnter();
+	var fa       = $(this).attr("data-id");
+	var cl       = $(this).attr("data-c");
+	/*
+	var f        = $(this).attr("data-f");
+	var fa       = $(this).attr("data-id");
+	var cl       = $(this).attr("data-c");
+	var moneda   = $(this).attr("data-moneda");
+	var saldo    = $(this).attr("data-saldo");
+	var facOriginal = $(this).attr("data-original");
+	var dataEstado = $(this).attr("data-ep");
+	
+	$("#_factura").val(fa);
+	$("#_cliente").val(cl);
+	
+	$("#monedaSaldoFactura").text(moneda);
+	$("#saldoFactura").text(parseFloat(saldo).toFixed(2));
+	$("#numeroFactura").text(parseFloat(f).toFixed(2));
+	$("#_facOriginal").val(parseFloat(facOriginal).toFixed(2))
+	
+	
+	
+	setTimeout(function(){
+	if(dataEstado == "N"){
+			$("#btnAplicarAbondo").prop("disabled", true);
+			$("#montoAbono").prop("disabled", true);
+			$("#_fechaPagoAbondo").prop("disabled", true);	
+			$("#medioDePago").prop("disabled", true);	
+			
+		}else{
+			$("#medioDePago").prop("disabled", false);
+			$("#btnAplicarAbondo").prop("disabled", false);
+			$("#montoAbono").prop("disabled", false);
+			$("#_fechaPagoAbondo").prop("disabled", false);	
+		}
+	}, 300);
+	
+	*/
+	loadAbonos(cl,fa);
+
+	
+});
+
+$("#formNewAbono").submit(function( event ) {
+	
+	disableEnter();
+	
+	  var v1 = $("#saldoFactura").text();
+	  var v2 = $("#montoAbono").val();	  	 
+
+	  if(parseFloat(v2) > parseFloat(v1)){		  
+		  swal("","El monto del abono no puede ser mayor al saldo de la factura.","warning");
+		  return false;		  
+	  }
+	  
+	  $("#_montoActual").val( parseFloat( v1-v2 ) );
+	 
+	  $.ajax({
+      type: "POST",
+      cache: false,
+      beforeSend: function () {
+     	 loadingShow();
+     	 $("#btnEmitirFactura").prop("disabled", true);
+      },
+      url: "[(@{/cxc/abonar-factura})]",
+      data: $(this).serialize(),
+      success: function (data)
+      {
+
+      	if(parseInt(data.response) === 1){
+      		loadPendientes([(${clienteId})],'A');
+      		loadAbonos(data.c,data.f);      
+      		$("#formNewAbono").trigger("reset");
+      		$('#medioDePago').select2();
+      		$(".medio-pago-tarjeta").hide();
+      		$(".numero-documento").hide();
+      	}
+          
+      }, complete: function () {        	
+     	 loadingHide();
+      }, error: function (x, t, m) {
+          if (t === "timeout") {
+              
+          } else {
+              
+          }
+      }
+  });
+	  
+	return false; 
+	
+});
+
+function clearForm(){
+	$("#montoAbono").val("");	
+}
+
+$('.number-format-final').number( true, 2, '.', ' ' );
+
+$(document).on("change","#medioDePago", function(e){
+	 
+	 e.preventDefault();
+	 
+	 var j = $(this).val();
+	
+	 if(parseFloat(j) === 2){
+		 $(".medio-pago-tarjeta").show();
+		 $(".input-medio-pago-tarjeta").prop('required',true);
+	 }else{
+		 $(".medio-pago-tarjeta").hide();
+		 $(".input-medio-pago-tarjeta").prop('required',false);
+	 }
+	 
+	 if(parseFloat(j) === 3 || parseFloat(j) === 4 || parseFloat(j) === 100 || parseFloat(j) === 101){
+		 $(".numero-documento").show();
+		 $("#numDocumento").prop('required',true);
+	 }else{
+		 $(".numero-documento").hide();
+		 $("#numDocumento").prop('required',false);
+	 }
+	 
+});
+
+function loadPendientes(c,e){
+	
+	$.ajax({
+      type: "POST",
+      cache: false,
+      beforeSend: function () {
+     	 loadingShow();
+     	 //$("#btnEmitirFactura").prop("disabled", true);
+      },
+      url: "[(@{/cxc/facturas-pendientes})]",
+      data: {c:c,e:e,_csrf:token},
+      success: function (data)
+      {
+      	
+      	$("#_facturasPendientes").html(data); 
+      	setTimeout(deudaActualCXC(), 2000);
+
+      }, complete: function () {
+     	 loadingHide();
+      }, error: function (x, t, m) {
+          if (t === "timeout") {
+              
+          } else {
+              
+          }
+      }
+  });
+}
+
+$(document).on("click", ".btn-tramitar-factura", function(){
+	
+	var idF = $(this).attr("data-id");
+	var id = $("#clienteId").val();
+	var et = $(this).attr("data-t");
+	
+	
+	$.ajax({
+	      type: "POST",
+	      cache: false,
+	      beforeSend: function () {
+	     	 loadingShow();
+	      },
+	      url: "[(@{/cxc/tramitar-factura})]",
+	      data: {id:idF,et:et,_csrf:token},
+	      success: function (data)
+	      {	      		    	 
+	    	  loadPendientes([(${clienteId})],'A');	    	    
+	      }, complete: function () {
+	     	 loadingHide();
+	      }, error: function (x, t, m) {
+	          if (t === "timeout") {
+	              
+	          } else {
+	              
+	          }
+	      }
+	  });
+});
+
+loadPendientes([(${clienteId})],'A');
+
+$(document).on("change", "#_filtroFacturas", function(){
+	loadPendientes([(${clienteId})], $(this).val());
+});
+
+function loadAbonos(c,f){
+	
+	var h = "";
+	var footer = "";
+	var totalPagos = 0;
+	var moneda = "";
+	
+	var montoActual = 0;
+	var saldoFactura = 0;
+	
+	$.ajax({
+      type: "POST",
+      cache: false,
+      beforeSend: function () {
+     	 loadingShow();
+     	 //$("#btnEmitirFactura").prop("disabled", true);
+      },
+      url: "[(@{/cxc/abonos})]",
+      data: {c:c,f:f,_csrf:token},
+      success: function (data)
+      {
+
+      	$( data ).each(function (key, value) {
+      		h += '<tr id="row-cxc-'+value.id+'">';
+      				h += '<td style="text-align:right">'+value.numeroCXC+'</td>';
+      				h += '<td style="text-align:right">'+value.facturaCXC.numeroFactura+'</td>';
+	        		h += '<td style="text-align:right">'+value.fechaRegistroAbondo+'</td>';
+	        		h += '<td style="text-align:right">'+value.fechaPagoAbondo+'</td>';
+	        		h += '<td style="text-align:right">'+value.facturaCXC.moneda+' '+toFixed(value.montoAbono, decimales)+'</td>'; totalPagos = totalPagos + parseFloat(value.montoAbono);
+	        		h += '<td style="text-align:right">'+value.facturaCXC.moneda+' '+toFixed(value.montoActual, decimales)+'</td>';
+	        		h += '<td class="m-l-20">'+value.medioDePago.medioDePago+'</td>'; moneda = value.facturaCXC.moneda;
+	        		h += '<td><a target="#" id="btnImprimirReciboCxp" class="btn btn-secondary btn-xs" data-print="'+value.numeroCXC+'"><i class="fas fa-print" data-toggle="tooltip" title="" data-original-title="Imprimir recibo"></i></a>    <button data-toggle="tooltip" data-placement="top" title="" class="btn btn-sm btn-danger btn-anular-pago-cxc" data-id="'+value.id+'" data-cxc="'+value.numeroCXC+'" data-cxc-id="'+value.facturaCXC.id+'" data-original-title="Anular pago"><i class="fas fa-window-close"></i></button>     </td>';
+      		h += '</tr>';
+      	});
+      	
+      	$("#detallePagos").html(h);
+      	
+      	footer += '<tr style="border-top:1px solid">';
+	        	footer += '<td colspan="5" style="text-align:right; border-top:1px solid;"><span class="bold">Total:</span></td>';
+	        	footer += '<td style="text-align:right; border-top:1px solid;"><span class="bold"><span class="bold">'+moneda+' </span><span class="bold number-format-final" id="totalPagos">'+totalPagos+'</span></span></td>';
+	        	footer += '<td style="text-align:right; border-top:1px solid;"></td>';
+	        	footer += '<td style="text-align:right; border-top:1px solid;"></td>';
+      	footer += '</tr>';
+      	
+      	$("#footerPagos").html(footer);
+      	
+      	
+      	saldoFactura = parseFloat( $("#_facOriginal").val() ) - parseFloat( $("#totalPagos").text() );        	
+      	$("#saldoFactura").text( saldoFactura.toFixed(2) ); 
+      	
+      	montoActual = parseFloat( $("#_facOriginal").val() ) - parseFloat( $("#totalPagos").text() );        	
+      	$("#_montoActual").val( montoActual.toFixed(2) );
+      	
+      	if( parseFloat($("#saldoFactura").text()) === 0 ){
+      		$("#montoAbono").prop("readonly", true);
+      		$("#btnAplicarAbondo").prop("disabled", true);
+      	}else{
+      		$("#montoAbono").prop("readonly", false);
+      		$("#btnAplicarAbondo").prop("disabled", false);
+      	}
+      	
+
+      }, complete: function () {
+     	 loadingHide();
+      }, error: function (x, t, m) {
+          if (t === "timeout") {
+              
+          } else {
+              
+          }
+      }
+  });
+}
+
+function disableEnter(){    	   
+	   $(window).keydown(function (e) {
+		   if (e.keyCode == 13) {
+			   e.preventDefault();
+		       return false;
+    	   }
+	   });
+}
+
+$(document).on("click", ".btn-anular-pago-cxc", function () {
+    swal({
+        title: "Confirmación",
+        text: "Confirme la anulación del registro, no se podrá recuperar!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+        .then((willDelete) => {
+            if (willDelete) {
+         	   
+         	   var c = $("#clienteId").val();
+         	   var f = $(this).attr("data-cxc");
+         	   var fid = $(this).attr("data-cxc-id");
+
+                $.ajax({
+                    type: "POST",
+                    cache: false,
+                    beforeSend: function () { },
+                    url: "[(@{/cxc/anular-abono-cxc})]",
+                    data: {
+                        _csrf: token,
+                        c: c,
+                        f: f,
+                        fid: fid
+                    },
+                    success: function (data) {
+                        notificacion("Registro anulado con éxito.");
+                        //Refresco las cxc
+                        loadAbonos(c ,$("#_factura").val());
+                        loadPendientes(c,"C");
+                        setTimeout(function () {
+                     	   $("#row-cxc-"+id).remove();                            	   
+                        }, 500);
+                    },
+                    complete: function () {
+                        //loading_hide();
+                    },
+                    error: function (x, t, m) {
+                        if (t === "timeout") {
+
+                        } else {
+
+                        }
+                    }
+                });
+
+            }
+        });
+});
+   
+</script>
+</body>
+
+</html>

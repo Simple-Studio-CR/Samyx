@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:remove="tag">
+
+<tr th:classappend="${k.status} == 2 ? table-danger" th:each="k: ${listaTerminalUsuario}">
+      <td th:text="${k.terminal.nombreTerminal}"></td>
+      <td th:text="${k.usuario.nombre}+' '+${k.usuario.apellidoP}+' '+${k.usuario.apellidoM}"></td>
+	  <td th:text="${#dates.format(k.fechaCreacion, 'dd/MM/yyyy')}"></td>
+	  
+	  <td th:text="${k.tipoDeDocumento}"></td>
+	  <td th:text="${k.actividadEconomica}"></td>
+	  <td th:text="${k.labelModificaPrecioFacturacion}"></td>
+	  <td th:text="${k.labelAplicaDescuentoFacturacion}"></td>
+	  <td th:text="${k.descuentoFacturacion}"></td>
+    
+      <td class="text-align-center" >
+      	
+      	<button class="btn-delete-acceso-terminal btn waves-effect waves-light  btn-xs btn-outline-secondary" th:attr="data-id=${k.id},data-s=${k.terminal.sucursal.id}">
+      		<i class="fas fa-trash"></i> Eliminar acceso
+      	</button>								
+      	                                        	
+      </td>
+  </tr>
+
+</html>

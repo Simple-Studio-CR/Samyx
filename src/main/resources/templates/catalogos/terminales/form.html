@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:remove="tag">
+
+
+<form id="formTerminal" autocomplete="off" th:action="@{/terminales/form/save}" th:object="${terminal}" method="post">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel" th:text="#{txt.terminal}"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      
+      
+      <div class="row p-t-20">
+      	
+      	<div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label" th:text="#{txt.sucursal}"></label>
+                <select style="width: 100%" class="form-control"  th:field="*{sucursal}" required="required">
+                	<option th:value="''" selected="selected" th:text="#{txt.combo.seleccione}"></option>
+                	<option th:value="${k.id}" th:each="k : ${listaSucursales}" th:text="${k.nombreSucursal}"></option>
+                </select>
+          	</div>
+         </div>
+         <div class="col-md-2">
+            <div class="form-group">
+                <label class="control-label" th:text="#{txt.numero.terminal}"></label>
+                <input maxlength="5" th:if="${statusInput} == 1" readonly="readonly" type="text" class="form-control num-integer" th:field="*{terminal}" required="required">
+                <input maxlength="5" th:if="${statusInput} == 0" type="text" class="form-control num-integer" id="terminal" name="terminal" required="required">
+          	</div>
+         </div>   
+         <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label" th:text="#{txt.nombre.terminal}"></label>
+                <input maxlength="200" type="text" class="form-control" th:field="*{nombreTerminal}" required="required">
+          	</div>
+         </div>  
+         <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label" th:text="#{txt.consecutivo.fe}"></label>
+                <input maxlength="20" type="text" class="form-control num-integer" th:field="*{consecutivoFe}" required="required">
+          	</div>
+         </div>
+         <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label" th:text="#{txt.consecutivo.nd}"></label>
+                <input maxlength="20" type="text" class="form-control num-integer" th:field="*{consecutivoNd}" required="required">
+          	</div>
+         </div>
+         <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label" th:text="#{txt.consecutivo.nc}"></label>
+                <input maxlength="20" type="text" class="form-control num-integer" th:field="*{consecutivoNc}" required="required">
+          	</div>
+         </div>
+         <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label" th:text="#{txt.consecutivo.te}"></label>
+                <input maxlength="20" type="text" class="form-control num-integer" th:field="*{consecutivoTe}" required="required">
+          	</div>
+         </div>
+         <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label" th:text="#{txt.consecutivo.cce}"></label>
+                <input maxlength="20" type="text" class="form-control num-integer" th:field="*{consecutivoCCE}" required="required">
+          	</div>
+         </div>
+         <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label" th:text="#{txt.consecutivo.cpce}"></label>
+                <input maxlength="20" type="text" class="form-control num-integer" th:field="*{consecutivoCPCE}" required="required">
+          	</div>
+         </div>
+         <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label" th:text="#{txt.consecutivo.rce}"></label>
+                <input maxlength="20" type="text" class="form-control num-integer" th:field="*{consecutivoRCE}" required="required">
+          	</div>
+         </div>
+         
+         <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label" th:text="#{txt.consecutivo.fec}"></label>
+                <input maxlength="20" type="text" class="form-control num-integer" th:field="*{consecutivoFEC}" required="required">
+          	</div>
+         </div>
+         
+         <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label" th:text="#{txt.consecutivo.fee}"></label>
+                <input maxlength="20" type="text" class="form-control num-integer" th:field="*{consecutivoFEE}" required="required">
+          	</div>
+         </div>
+
+         
+         <div class="col-md-2">
+            <div class="form-group">
+                <label class="control-label" th:text="#{txt.status}"></label>
+                <select class="form-control"  th:field="*{status}" required="required">
+                	<option th:value="'1'">Activa</option>
+                	<option th:value="'2'">Desactivada</option>
+                </select>
+          	</div>
+         </div>
+        
+               
+      </div>
+
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button"  class="btn btn-inverse" data-dismiss="modal" >
+        	<i class="fas fa-ban"></i>&nbsp; <span th:text="'Cerrar'"></span>
+        </button>
+        <input type="hidden" th:field="*{id}" />
+        <button type="submit" class="btn btn-success">
+        	<i class="fas fa-save"></i>&nbsp;<span th:text="#{btn.guardar}"></span>
+        </button>
+      </div>
+      
+</form>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+	$('select').select2({
+	  placeholder: 'Seleccione un elemento'
+	});
+});
+
+</script>
+
+</html>

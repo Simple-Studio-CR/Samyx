@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body class="fix-header card-no-border logo-center">
+
+<div id="main-wrapper">
+
+<header th:replace="layout/layout :: header"></header>
+<aside th:replace="layout/layout :: aside"></aside>
+
+
+
+<!-- ============================================================== -->
+<!-- Page wrapper  -->
+
+<!-- ============================================================== -->
+<div class="page-wrapper form-facturador">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+        	<h3 class="text-themecolor" th:text="'Lista de proformas'"></h3>
+        </div>
+        <div class="col-md-7 align-self-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)" th:href="@{/proformas/}" th:text="#{txt.inicio}"></a></li>
+                <li class="breadcrumb-item active" th:text="'Lista de proformas'"></li>
+            </ol>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                    <div class="align-right">
+                    	<a th:href="@{/proformas/nueva}" style="color:#FFFFFF !important" class="btn btn-success btn-xs">
+                    		<i class="fas fa-plus-circle"></i> Nueva proforma
+                    	</a>
+                    </div>
+                    <div class="align-right">
+                    
+                    	<form class="m-t-10" method="get" autocomplete="off" th:action="@{/proformas/}">
+
+                    		<div class="input-group">
+								    <input th:value="${param.q}" type="search" name="q" class="form-control input" placeholder="Buscar por número de prefactura, nombre, identificación y presione la tecla enter.">
+								    <div class="input-group-append">
+									      <button class="btn btn-success btn-sm btn-block"  type="submit">
+									        <i class="fa fa-search"></i>
+									      </button>
+								    </div>
+							  	</div>
+                    		
+                    	</form>
+                    	
+                    </div>
+                    
+                    <p style="text-align: center;width: 100%;" class="m-t-10" th:if="*{param.q!=null and #strings.length(param.q)>0}">
+	                    	Criterio de búsqueda: <span class="font-weight-bold" th:text="${param.q}"></span> <a style="height: 20px" class="btn btn-danger btn-xs color-blanco" th:href="@{/proformas/}"><i class="fas fa-window-close"></i> Cerrar búsqueda</a>
+	                 </p>
+                    
+                    <br>
+                    	<div class="table-responsive">
+                             <table class="table color-table table-hover muted-table">
+                                 <thead>
+                                     <tr>
+                                         <th class="align-right m-r-10"  style="width: 8%" th:text="#{txt.numero.factura}"></th>
+                                         <th style="width: 10%" th:text="#{txt.consecutivo}"></th>
+                                         <th style="width: 10%" th:text="#{txt.tipo.documento}"></th>
+                                         <th class="align-right p-r-10" style="width: 10%" th:text="#{txt.fecha.emisicon}"></th>
+                                         <th style="width: 10%" th:text="#{txt.identificacion}"></th>
+                                         <th style="width: 25%" th:text="#{txt.cliente}"></th>
+                                         <th style="width: 8%" th:text="#{txt.impuestos}"></th>
+                                         <th style="width: 8%" th:text="#{txt.total.factura}"></th>
+                                         <th style="width: 10%" class="text-align-center" th:text="#{txt.acciones}"></th>
+                                     </tr>
+                                 </thead>
+                                 <tbody>
+                                     <tr th:classappend="${#strings.equals(k.estado,'N')} ? table-danger : ''" th:each="k: ${ListaDocumentos}">
+                                         <td class="align-right m-r-10" th:text="${k.numeroFactura}"></td>
+                                         <td th:text="${k.consecutivo}"></td>
+                                         <td th:text="${k.respTipoDocumento}"></td>
+
+                                         <td class="align-right p-r-10" th:text="${#dates.format(k.fechaEmisionFe, 'dd/MM/yyyy')}"></td>
+                                         
+                                         <td th:text="${k.cliente != null ? k.cliente.identificacion : ' - '}"></td>
+                                         <td th:text="${k.cliente != null ? k.cliente.nombreCompleto : ' - '} + ${k.clienteContado != null ? k.clienteContado : ''}"></td>
+                                         <td th:text="${k.moneda.simboloMoneda}+' '+${#numbers.formatDecimal(k.totalImp, 0, 'POINT', 2, 'COMMA')}"></td>
+                                         <td th:text="${k.moneda.simboloMoneda}+' '+${#numbers.formatDecimal(k.totalComprobante, 0, 'POINT', 2, 'COMMA')}"></td>  
+                                                                           
+                                         <td class="text-align-center" >
+                                         
+											<div class="btn-group dropleft">
+											  <button type="button" class="btn btn-success btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											    <i class="fas fa-cog m-r-10"></i>Acciones
+											  </button>
+											  <div class="dropdown-menu">
+									
+											    <a class="dropdown-item" th:href="@{/proformas/edit/}+${k.id}" th:attr="title=#{title.ver.registro}" data-toggle="tooltip">
+	                                         		<i class="fas fa-search-plus m-r-10"></i>Ver proforma
+	                                         	</a>	
+											    
+											    <a target="_blank" class="dropdown-item" th:href="@{/imprimir-proforma/}+${k.id}">
+											    	<i class="fas fa-print m-r-10"></i>Imprimir carta
+											    </a>
+
+											    <a href="#" th:attr="data-f=${k.id}" class="dropdown-item btnReenviarFactura" title="Reenviar factura por correo" data-toggle="modal" data-target=".reenviarFacturaModal">
+											    	<i class="fas fa-at m-r-10"></i>Reenviar factura por correo
+											    </a>
+											  	
+											</div>							
+                                         	                                        	
+                                         </td>
+                                     </tr>
+                                 </tbody>
+                             </table>
+                             <nav th:replace="paginator-nav :: paginator"></nav>
+                         </div>    
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End PAge Content -->
+        <!-- ============================================================== -->
+    </div>
+    
+    <div class="modal fade reenviarFacturaModal" tabindex="-1" role="dialog" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title">Reenviar factura proforma por correo electrónico</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      
+	      <form id="formReenviarFactura" autocomplete="off" th:action="@{/proformas/enviar-proforma}" method="post">
+		      <div class="modal-body">
+                 <div class="form-group">
+                     <label class="control-label">Correo</label>
+                     <input maxlength="180" placeholder="Digite el correo electrónico" name="correo" type="text" class="form-control input-sm">
+                 </div>
+                 <p><i class="font-weight-bold">* Si no indica el correo se enviará al que tiene registrado el cliente.</i></p>
+		      </div>
+		      <div class="modal-footer">
+		        <input name="factura" type="hidden" id="facturaActual" />
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal" > 
+		        	<i class="fas fa-window-close"></i> <span th:text="#{btn.close}">&nbsp;</span>
+		        </button>
+		        <button type="submit" class="btn btn-success">
+		        	<i class="fas fa-at m-r-10"></i>Enviar factura
+		        </button>
+		      </div>
+	      </form>
+	    </div>
+	  </div>
+	</div>
+    
+    <!-- ============================================================== -->
+    <!-- End Container fluid  -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- footer -->
+    <!-- ============================================================== -->
+    <footer th:replace="layout/layout :: footer"></footer>
+    <!-- ============================================================== -->
+    <!-- End footer -->
+    <!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- End Page wrapper  -->
+<!-- ============================================================== -->
+
+</div>
+<input id="csrfToken" type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+<div th:replace="layout/layout :: scripts"></div>
+
+<script>
+
+var token = $('#csrfToken').val();
+
+$(document).on("click", ".btnReenviarFactura", function(e){
+	e.preventDefault();
+	$("#facturaActual").val( $(this).attr("data-f") );
+});
+
+$(document).on("submit", "#formReenviarFactura", function(e){
+	
+	e.preventDefault();
+	
+	$.ajax({
+        type: "POST",
+        cache: false,
+        beforeSend: function () {
+        	loadingShow();
+        },
+        url: "[(@{/proformas/enviar-proforma})]",
+        data: $(this).serialize(),
+        success: function (data)
+        {
+        	
+        	if(parseInt(data.response) === 200){
+        		swal("",data.msj,"success");
+        	}else{
+        		swal("",data.msj,"warning");
+        	}
+            
+        }, complete: function () {
+            loadingHide();
+        }, error: function (x, t, m) {
+            if (t === "timeout") {
+                
+            } else {
+                
+            }
+        }
+    });
+});
+
+
+
+</script>
+</div>
+</body>
+</html>

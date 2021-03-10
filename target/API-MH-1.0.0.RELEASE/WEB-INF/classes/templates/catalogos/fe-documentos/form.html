@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body class="fix-header card-no-border logo-center">
+
+<div id="main-wrapper">
+
+<header th:replace="layout/layout :: header"></header>
+<aside th:replace="layout/layout :: aside"></aside>
+
+
+
+<!-- ============================================================== -->
+<!-- Page wrapper  -->
+<!-- ============================================================== -->
+<div class="page-wrapper">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h3 class="text-themecolor">Factura #: <i th:text="${consecutivoFactura}"></i></h3>
+        </div>
+        <div class="col-md-7 align-self-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)" th:href="@{/fe-documentos/}" th:text="#{txt.inicio}"></a></li>
+                <li class="breadcrumb-item active">Factura #: <i th:text="${consecutivoFactura}"></i></li>
+            </ol>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                    
+                    	<div class="align-right">
+                    		<a target="_blank" class="btn btn-success color-blanco"  th:href="@{/proformas/edit/}+${factura.id}+'/?tp=NC'">
+                    			Nota de crédito
+                    		</a>
+                    		<a target="_blank" class="btn btn-primary color-blanco"  th:href="@{/imprimir-factura/}+${claveFactura}+'/?print=T'">
+                    			<i class="fas fa-print"></i> Imprimir tiquete
+                    		</a>
+                    		<a target="_blank" class="btn btn-success color-blanco"  th:href="@{/imprimir-factura/}+${claveFactura}+'/?print=C'">
+                    			<i class="fas fa-print"></i> Imprimir carta
+                    		</a>
+                    	</div>
+                    
+                    	<form id="formAddCliente" autocomplete="off" th:object="${factura}" method="post">
+                           <div class="form-body">
+								    
+								 <div class="row p-t-20">
+		                             
+		                             <div class="col-md-2">
+		                                <div class="form-group">
+		                                    <label class="control-label" th:text="#{txt.identificacion}"></label>
+		                                    <input readonly="readonly" type="text" class="form-control" th:field="*{cliente.identificacion}">
+		                              	</div>
+		                             </div>
+		                             <div class="col-md-3">
+		                                <div class="form-group">
+		                                    <label class="control-label" th:text="#{txt.nombre.completo}"></label>
+		                                    <input readonly="readonly" type="text" class="form-control" th:field="*{cliente.nombreCompleto}">
+		                              	</div>
+		                             </div>
+		                             <div class="col-md-2">
+		                                <div class="form-group">
+		                                    <label class="control-label" th:text="#{txt.consecutivo}"></label>
+		                                    <input readonly="readonly" type="text" class="form-control" th:field="*{consecutivo}">
+		                              	</div>
+		                             </div>
+		                             <div class="col-md-3">
+		                                <div class="form-group">
+		                                    <label class="control-label" th:text="#{txt.clave}"></label>
+		                                    <input readonly="readonly" type="text" class="form-control" th:field="*{clave}">
+		                              	</div>
+		                             </div>
+		                             <div class="col-md-2">
+		                                <div class="form-group">
+		                                    <label class="control-label" th:text="#{txt.fecha.emision}"></label>
+		                                    
+		                                    
+		                                    <span th:remove="tag" th:if="${factura.fechaEmision != null and #strings.length(factura.fechaEmision)>0}">
+                                         		<th:block th:if="${factura.fechaEmision != null and #strings.length(factura.fechaEmision)>0}" th:with="sdf = ${new java.text.SimpleDateFormat('yyyy-MM-dd''T''HH:mm:ss')}">												    
+												    <input readonly="readonly" type="text" class="form-control" th:value="${#dates.format(sdf.parse(factura.fechaEmision), 'dd/MM/yyyy hh:mm:ss a')}">
+												 </th:block>
+                                         	</span>
+		                                    
+		                              	</div>
+		                             </div>
+		                             
+                             </div>
+                             
+                             <h4>Productos</h4>
+		                             
+		                     <div class="table-responsive">       
+                             <table class="table color-table muted-table">
+	                             <thead>
+	                             	<tr>
+	                             		<th>Número linea</th>
+	                             		<th>Código</th>
+	                             		<th>Producto</th>
+	                             		<th class="align-right">Cantidad</th>
+	                             		<th class="align-right">Fracciones</th>
+	                             		<th class="align-right">Precio</th>
+	                             		<th class="align-right">Descuento</th>
+	                             		<th class="align-right">Sub total</th>
+	                             		<th class="align-right">Impuestos</th>
+	                             		
+	                             		<th class="align-right p-r-10">Total linea</th>
+	                             	</tr>
+	                             </thead>
+                             	<tbody>
+                             		<tr th:each="k: ${factura.items}">
+                             			<td th:text="${k.numeroLinea}"></td>
+                             			<td th:text="${k.producto.codigo}"></td>
+                             			<td>
+                             			
+	                             			<span th:text="${k.producto.nombreProducto}" th:remove="tag"></span>
+	                             				&nbsp;
+	                             			<i th:text="${k.producto.unidadDeMedida.simbolo}"></i>
+                             			
+                             			</td>
+                             			<td th:if="${k.producto.fraccionesPorUnidad > 0}" class="align-right" th:text="${#numbers.formatDecimal(k.cantidad / k.producto.fraccionesPorUnidad, 0, 'POINT', 2, 'COMMA')}"></td>
+                             			<td th:if="${k.producto.fraccionesPorUnidad == 0 || k.producto.fraccionesPorUnidad == ''}" class="align-right" th:text="${k.cantidad}"></td>
+                             			
+                             			<td th:if="${k.producto.fraccionesPorUnidad > 0}" class="align-right" th:text="${#numbers.formatDecimal(k.cantidad, 0, 'POINT', 2, 'COMMA')}"></td>
+                             			<td th:if="${k.producto.fraccionesPorUnidad == 0 || k.producto.fraccionesPorUnidad == ''}" class="align-right">N/A</td>
+                             			
+                             			
+                             			<td class="align-right" th:text="${#numbers.formatDecimal(k.precioUnitario, 0, 'POINT', 2, 'COMMA')}"></td>
+                             			<td class="align-right" th:text="${#numbers.formatDecimal(k.montoDescuento, 0, 'POINT', 2, 'COMMA')}"></td>
+                             			<td class="align-right" th:text="${#numbers.formatDecimal(k.subTotal, 0, 'POINT', 2, 'COMMA')}"></td>
+                             			<td class="align-right" th:text="${#numbers.formatDecimal(k.totalImpuestos, 0, 'POINT', 2, 'COMMA')}"></td>
+                             			
+                             			<td class="align-right  p-r-10" th:text="${#numbers.formatDecimal(k.montoTotalLinea, 0, 'POINT', 2, 'COMMA')}"></td>
+                             		</tr>
+                             	</tbody>
+                             </table>
+                             </div> 
+                             
+                             <h4>Resumen de la Factura</h4>
+                             <div class="table-responsive">       
+                             <table class="table color-table muted-table">
+	                             <thead>
+	                             	<tr>
+	                             		<th style="width: 50%"></th>
+	                             		<th style="width: 10%" class="align-right">Total Impuestos</th>
+	                             		<th style="width: 10%" class="align-right">Total Venta</th>
+	                             		<th style="width: 10%" class="align-right">Descuentos</th>
+	                             		<th style="width: 10%" class="align-right  p-r-10">Total comprobante</th>
+	                             	</tr>
+	                             </thead>
+                             	<tbody>
+                             		<tr>
+                             			<td></td>
+                             			<td class="align-right" th:text="${factura.moneda.abreviatura}+' '+${#numbers.formatDecimal(factura.totalImp, 0, 'POINT', 2, 'COMMA')}"></td> 
+                             			<td class="align-right" th:text="${factura.moneda.abreviatura}+' '+${#numbers.formatDecimal(factura.totalVentas, 0, 'POINT', 2, 'COMMA')}"></td>
+                             			<td class="align-right" th:text="${factura.moneda.abreviatura}+' '+${#numbers.formatDecimal(factura.totalDescuentos, 0, 'POINT', 2, 'COMMA')}"></td>
+                             			<td class="align-right p-r-10" th:text="${factura.moneda.abreviatura}+' '+${#numbers.formatDecimal(factura.totalComprobante, 0, 'POINT', 2, 'COMMA')}"></td>
+                             		</tr>
+                             	</tbody>
+                             </table>
+                              <div class="row">		                             
+	                             <div class="col-md-12">
+	                                <div class="form-group">
+	                                    <label class="control-label">Observaciones</label>		                                    
+	                                    <textarea rows="3" class="form-control" readonly="readonly">[(${factura.otros})]</textarea>		                                    
+	                              	</div>
+	                             </div>
+                             </div>
+                         </form>  
+                         
+                    </div>
+                </div>
+            </div>
+            
+            
+            
+
+            
+            
+            
+            
+        <!-- ============================================================== -->
+        <!-- End PAge Content -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Container fluid  -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- footer -->
+    <!-- ============================================================== -->
+    <footer th:replace="layout/layout :: footer"></footer>
+    <!-- ============================================================== -->
+    <!-- End footer -->
+    <!-- ============================================================== -->
+    <input id="csrfToken" type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+</div>
+<!-- ============================================================== -->
+<!-- End Page wrapper  -->
+<!-- ============================================================== -->
+
+
+
+
+</div>
+<div th:replace="layout/layout :: scripts"></div>
+<script type="text/javascript">
+var token = $('#csrfToken').val();
+
+$("#formAddCliente").submit(function( event ) {
+	  $.ajax({
+        type: "POST",
+        cache: false,
+        beforeSend: function () {},
+        url: "[(@{/clientes/form/save})]",
+        data: $(this).serialize(),
+        success: function (data)
+        {
+        	if(parseInt(data.response) === 1){
+        		location.href="[(@{/clientes/})]"	
+        	}else if(parseInt(data.response) === 0){
+        		location.href="[(@{/})]"	
+        	}else{
+        		alert("La identificación del cliente o el correo 1 ya existen, debe cambiarlo");
+        	}   
+        	
+        }, complete: function () {
+            //loading_hide();
+        }, error: function (x, t, m) {
+            if (t === "timeout") {
+                
+            } else {
+                
+            }
+        }
+    });
+	  
+	return false;  
+});
+
+$(document).on("change","#provincia", function(e){
+		
+	  e.preventDefault();
+
+	  $.ajax({
+	      type: "POST",
+	      cache: false,
+	      beforeSend: function () {},
+	      url: "[(@{/ubicacion/cantones})]",
+	      data: {id:$(this).val(), _csrf:token},
+	      success: function (data)
+	      {
+	      	$("#canton").html(data);          
+	      }, complete: function () {
+	          //loading_hide();
+	      }, error: function (x, t, m) {
+	          if (t === "timeout") {
+	              
+	          } else {
+	              
+	          }
+	      }
+	  });
+	  
+});
+
+$(document).on("change","#canton", function(e){
+	
+	  e.preventDefault();
+
+	  $.ajax({
+	      type: "POST",
+	      cache: false,
+	      beforeSend: function () {},
+	      url: "[(@{/ubicacion/distritos})]",
+	      data: {id:$(this).val(), _csrf:token},
+	      success: function (data)
+	      {
+	      	$("#distrito").html(data);          
+	      }, complete: function () {
+	          //loading_hide();
+	      }, error: function (x, t, m) {
+	          if (t === "timeout") {
+	              
+	          } else {
+	              
+	          }
+	      }
+	  });
+	  
+});
+
+$(document).on("change","#distrito", function(e){
+	
+	  e.preventDefault();
+
+	  $.ajax({
+	      type: "POST",
+	      cache: false,
+	      beforeSend: function () {},
+	      url: "[(@{~/ubicacion/barrios})]",
+	      data: {id:$(this).val(), _csrf:token},
+	      success: function (data)
+	      {
+	      	$("#barrio").html(data);          
+	      }, complete: function () {
+	          //loading_hide();
+	      }, error: function (x, t, m) {
+	          if (t === "timeout") {
+	              
+	          } else {
+	              
+	          }
+	      }
+	  });
+	  
+});
+
+</script>
+
+
+</div>
+</body>
+</html>
