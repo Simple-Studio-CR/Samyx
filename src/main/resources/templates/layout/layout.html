@@ -9,24 +9,25 @@
     <link rel="icon" type="image/png" sizes="16x16" th:href="@{/images/favicon.png}" />
     <title>Sistema de Facturación Electrónica</title>
 
-    <link  th:href="@{/css/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
-	<link th:href="@{/assets/bootstrap-datepicker/bootstrap-datepicker.min.css}" rel="stylesheet" />
-
-    <link th:href="@{/css/jquery-ui.min.css}" rel="stylesheet" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
-    
-    
-    <link th:href="@{/css/style.css?v=3}" rel="stylesheet" />
-    <link th:href="@{/css/main.css?v=32}" rel="stylesheet" />
-    <link th:href="@{/css/colors/green.css}" id="theme" rel="stylesheet" />
-    
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/jquery.amaran/0.5.4/amaran.min.css">
+	<link rel="icon" href="images/favicon.png" type="image/png" />
+	<!--plugins-->
+	<link href="plugins/simplebar/css/simplebar.css" rel="stylesheet" type="text/css" />
+	<link href="plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" type="text/css" />
+	<link href="plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+	<!-- loader-->
+	<link href="css/pace.min.css" rel="stylesheet" type="text/css" />
+	<script src="js/pace.min.js"></script>
+	<!-- Bootstrap CSS -->
+	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet"
+		type="text/css">
+	<link href="css/app.css" rel="stylesheet" type="text/css">
+	<link href="css/icons.css" rel="stylesheet" type="text/css">
     
 
 </head>
 
-<body class="fix-header card-no-border logo-center">
+<body class="bg-theme bg-theme1">
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
@@ -36,145 +37,146 @@
         <!-- ============================================================== -->
         <header class="topbar" th:fragment="header">
         
-        <!--  
-        <div class="row">
-        	<div class="col-md-9">
-        		<h4 class="titleEmpresa" ><img class="logo-sfe" th:src="@{/images/facturacion.png}" />&nbsp;&nbsp;[(${session.SESSION_DATOS_EMPRESA_NOMBRE})]</h4>
-        	</div>
-        </div>
-        -->
-        
-         <div class="alert-login-error alert alert-success alert-dismissible fade show" th:if="${param.successPassword}"> <i class="fa fa-check" aria-hidden="true"></i>
-	    	<span th:text="#{txt.password.change.exito}"></span>
-	    	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-			    <span aria-hidden="true">&times;</span>
-			</button>
-	     </div>
-	     <div class="alert-login-error alert alert-warning alert-dismissible fade show" th:if="${param.errorPassword}"> <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-	    	<span th:text="#{txt.password.change.error}"></span>
-	    	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-			    <span aria-hidden="true">&times;</span>
-			</button>
-	     </div>
-	     
-	     <style th:inline="text">
-		    .btn-nav-movil {
-			    color: gray !important;
-			    background-image: url([[@{/images/nav.png}]]);
-			    width: 50px;
-			    height: 50px;
-			    background-size: 60%;
-			    background-repeat: no-repeat;
-			    background-position: 0% 80%;
-			}
-		 </style>
-	      
-        
-            <nav class="navbar top-navbar navbar-expand-md navbar-light">
-
-                <!-- ============================================================== -->
-                <!-- End Logo -->
-                <!-- ============================================================== -->
-                <div class="navbar-collapse">
-                    <!-- ============================================================== -->
-                    <!-- toggle and nav items -->
-                    <!-- ============================================================== -->
-                    <ul class="navbar-nav mr-auto mt-md-0">
-                        <!-- This is  -->
-                        <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark  btn-nav-movil" href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
-                        <li class="nav-item m-l-10"> <a class="nav-link sidebartoggler hidden-sm-down text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
-                        <!-- ============================================================== -->
-                        <!-- Comment -->
-                        <!-- ============================================================== -->
-                        <li class="nav-item dropdown">
-                            
-                        </li>
-                        <!-- ============================================================== -->
-                        <!-- End Comment -->
-                        <!-- ============================================================== -->
-                        <!-- ============================================================== -->
-                        <!-- Messages -->
-                        <!-- ============================================================== -->
-                        <li class="nav-item dropdown">
-                           
-                        </li>
-                        <!-- ============================================================== -->
-                        <!-- End Messages -->
-                        <!-- ============================================================== -->
-                        <!-- ============================================================== -->
-                        <!-- Messages -->
-                        <!-- ============================================================== -->
-                        <li class="nav-item dropdown mega-dropdown"> </li>
-                        <!-- ============================================================== -->
-                        <!-- End Messages -->
-                        <!-- ============================================================== -->
-                    </ul>
-                    <!-- ============================================================== -->
-                    <!-- User profile and search -->
-                    <!-- ============================================================== -->
-                    <ul class="navbar-nav my-lg-0">
-                    	
-                    	<li class="nav-item logout-app nav-movil">
-                      		<a th:href="@{/emisor/}" >
-                      			<i class="fas fa-building"></i> <span  th:text="#{txt.mi.perfil}"></span>
-                      		</a>
-                        </li>
-                    	<li th:if="${ #authorization.expression('isAuthenticated()')}" class="nav-item logout-app">
-							<form th:action="@{/logout}" method="post">
-								<button type="submit" class="dropdown-item" style="padding:7px 1rem;color:#293674"><i class="fas fa-sign-out-alt"></i> <span th:text="#{btn.cerrar.sesion}"></span></button>
-							</form>
-                    	</li>
-
-                        <!-- ============================================================== -->
-                        <!-- Profile -->
-                        <!-- ============================================================== -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img th:src="@{/images/user.png}" src="" alt="user" class="profile-pic" /></a>
-                            <div class="dropdown-menu dropdown-menu-right scale-up">
-                                <ul class="dropdown-user">
-                          
-                                	<li th:if="${ #authorization.expression('isAuthenticated()')}" style="text-align: center" th:text="'Hola: ' + ${#authentication.getPrincipal().getUsername()}"></li>
-                  
-                                	<li role="separator" class="divider"></li>
-                                	
-                                	
-                                	
-                                	<li sec:authorize="hasAnyRole('ROLE_ADMIN')">
-                                		<a th:href="@{/tipo-de-cambio/}" >
-                                			<i class="fas fa-exchange-alt"></i> Tipo de cambio monedas
-                                		</a>
-                                	</li>
-                                	
-                                	
-                                	<li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
-                                		<a th:href="@{/catalogos/usuarios}" >
-                                			<i class="fa fa-users" aria-hidden="true"></i> <span th:text="#{txt.usuarios}"></span>
-                                		</a>
-                                	</li>
-                                	
-                                	<li>
-                                		<a th:href="@{/emisor/}" >
-                                			<i class="fas fa-building"></i> <span  th:text="#{txt.mi.perfil}"></span>
-                                		</a>
-                                	</li>
-                                	
-                                	<li>
-                                		<a href="#" data-toggle="modal" data-target="#changePassword" >
-                                			<i class="fas fa-unlock-alt"></i> <span  th:text="#{txt.cambiar.password}"></span>
-                                		</a>
-                                	</li>
-                                    
-                                    <li>
-                                    	
-                                    	<form th:action="@{/logout}" method="post">
-											<button type="submit" class="dropdown-item" style="padding:7px 1rem;color:#293674"><i class="fas fa-sign-out-alt"></i> <span th:text="#{btn.cerrar.sesion}"></span></button>
-										</form>
-                                    
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
+			<div class="topbar d-flex align-items-center">
+				<nav class="navbar navbar-expand">
+					<div class="topbar-logo-header">
+						<div class="">
+							<img src="images/favicon.png" class="logo-icon" alt="logo icon">
+						</div>
+						<div class="">
+							<h4 class="logo-text">Samyx</h4>
+						</div>
+					</div>
+					<div class="mobile-toggle-menu"><i class='bx bx-menu'></i></div>
+					<div class="search-bar flex-grow-1">
+						
+					</div>
+					<div class="top-menu ms-auto">
+						<ul class="navbar-nav align-items-center">
+							<li class="nav-item mobile-search-icon">
+								
+							</li>
+							<li class="nav-item dropdown dropdown-large">
+								
+							</li>
+							<li class="nav-item dropdown dropdown-large">
+								
+								<div class="dropdown-menu dropdown-menu-end">
+									
+									<div class="header-notifications-list">
+										<a class="dropdown-item" href="javascript:;">
+											
+										</a>
+										<a class="dropdown-item" href="javascript:;">
+											
+										</a>
+										<a class="dropdown-item" href="javascript:;">
+											
+										</a>
+										<a class="dropdown-item" href="javascript:;">
+											
+										</a>
+										<a class="dropdown-item" href="javascript:;">
+											
+										</a>
+										<a class="dropdown-item" href="javascript:;">
+											
+										</a>
+										<a class="dropdown-item" href="javascript:;">
+											
+										</a>
+										<a class="dropdown-item" href="javascript:;">
+											
+										</a>
+										<a class="dropdown-item" href="javascript:;">
+											
+										</a>
+									</div>
+									<a href="javascript:;">
+										<div class="text-center msg-footer">View All Notifications</div>
+									</a>
+								</div>
+							</li>
+							<li class="nav-item dropdown dropdown-large">
+								
+								<div class="dropdown-menu dropdown-menu-end">
+									<a href="javascript:;">
+										
+									</a>
+									<div class="header-message-list">
+										<a class="dropdown-item" href="javascript:;">
+											
+										</a>
+										<a class="dropdown-item" href="javascript:;">
+											
+										</a>
+										<a class="dropdown-item" href="javascript:;">
+											
+										</a>
+										<a class="dropdown-item" href="javascript:;">
+											
+										</a>
+										<a class="dropdown-item" href="javascript:;">
+											
+										</a>
+										<a class="dropdown-item" href="javascript:;">
+											
+										</a>
+										<a class="dropdown-item" href="javascript:;">
+											
+										</a>
+										<a class="dropdown-item" href="javascript:;">
+											
+										</a>
+										<a class="dropdown-item" href="javascript:;">
+											
+										</a>
+										<a class="dropdown-item" href="javascript:;">
+											
+										</a>
+										<a class="dropdown-item" href="javascript:;">
+											
+										</a>
+									</div>
+									
+								</div>
+							</li>
+						</ul>
+					</div>
+                        <div class="user-box dropdown">
+							<a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#"
+								role="button" data-bs-toggle="dropdown" aria-expanded="false">
+								<img src="images/avatars/default.png" class="user-img" alt="user avatar">
+								<div class="user-info ps-3">
+									<p class="user-name mb-0" th:text="${#authentication.getPrincipal().getUsername()}"></p>
+								</div>
+							</a>
+							<ul class="dropdown-menu dropdown-menu-end">
+								<li><a class="dropdown-item" href="javascript:;"><i
+											class="bx bx-user"></i><span>Perfil</span></a>
+								</li>
+								<li sec:authorize="hasAnyRole('ROLE_ADMIN')"><a class="dropdown-item" th:href="@{/tipo-de-cambio/}"><i
+											class="bx bx-transfer"></i><span>Tipo de cambio</span></a>
+								</li>
+								<li  sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')"><a class="dropdown-item" th:href="@{/catalogos/usuarios}"><i
+											class='bx bxs-user-detail'></i><span th:text="#{txt.usuarios}"></span></a>
+								</li>
+								<li><a class="dropdown-item" th:href="@{/emisor/}"><i
+											class='bx bx-building'></i><span>Empresas</span></a>
+								</li>
+								<li><a class="dropdown-item" data-toggle="modal" href="#" data-target="#changePassword"><i
+									class='bx bx-lock-open '></i><span th:text="#{txt.cambiar.password}"></span></a>
+								</li>
+								<li>
+									<div class="dropdown-divider mb-0"></div>
+								</li>
+								<li>
+									<form th:action="@{/logout}" method="post">
+										<button type="submit" class="btn btn-danger"><i class="bx bx-power-off"></i> <span th:text="#{btn.cerrar.sesion}"></span></button>
+									</form>
+								</li>
+							</ul>
+						</div>
                     </ul>
                 </div>
             </nav>
@@ -188,103 +190,149 @@
         <!-- ============================================================== -->
         <!-- Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
-        <aside class="left-sidebar" th:fragment="sidebar">
-            <!-- Sidebar scroll-->
-            <div class="scroll-sidebar">
+        <aside class="nav-container" th:fragment="sidebar">
+            <div class="mobile-topbar-header">
+				<div>
+					<img src="images/favicon.png" class="logo-icon" alt="logo icon">
+				</div>
+				<div>
+					<h4 class="logo-text">Samyx</h4>
+				</div>
+				<div class="toggle-icon ms-auto"><i class='bx bx-arrow-to-left'></i>
+				</div>
+			</div>
+			<nav class="topbar-nav">
+				<ul class="metismenu" id="menu">
+					<li>
+						<a href="javascript:;" class="has-arrow">
+							<div class="parent-icon"><i class='bx bx-home-circle'></i>
+							</div>
+							<div class="menu-title">Inicio</div>
+						</a>
+						<ul>
+							<li> <a th:href="@{/}" href="#"></i>Inicio</a>
+							</li>
+							<li th:if="${session.SESSION_EMPRESA_ID} != null" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')"> 
+								<a href="">Dashboard</a>
+							</li>
 
-                <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
-                    <ul id="sidebarnav">
-                        <li class="nav-devider"></li>
-                        <li class="nav-small-cap">Menú</li>
-                        <li> 
-                        	<a class="waves-effect waves-dark" th:href="@{/}" href="#" aria-expanded="false">
-                        		<i class="fas fa-home"></i><span class="hide-menu" th:text="#{txt.inicio}"></span>
-                        	</a>
-                        </li>
-                        <li th:if="${session.SESSION_EMPRESA_ID} != null"> 
-                        	<a class="waves-effect waves-dark" th:href="@{/clientes/}" href="#" aria-expanded="false">
-                        		<i class="fas fa-users"></i><span class="hide-menu" th:text="#{txt.clientes}"></span>
-                        	</a>
-                        </li>
-
-                        <li th:if="${session.SESSION_EMPRESA_ID} != null" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')"> 
-                        	<a class="has-arrow waves-effect waves-dark" href="#">
-                        		<i class="fas fa-file-invoice"></i><span class="hide-menu" th:text="#{txt.inventario}"></span>
-                        		
-                        	 </a>
-                            <ul aria-expanded="false" class="collapse" >
-                            
-                            	<li><a th:href="@{/producto-familia/}" th:text="'Familias productos'"> </a></li>
-                            	<li><a th:href="@{/inventario/proveedores/}" th:text="#{txt.proveedores}"> </a></li>
-                            	<li><a th:href="@{/inventario/cabys/}">Catálogo CABYS</a></li>
-                            	<li><a th:href="@{/productos/}" th:text="#{txt.productos}"> </a></li>                            	
-                            	<li><a th:href="@{/inventario/factura-compra/}" th:text="'Compra de inventario'"> </a></li>
-								<li><a th:href="@{/inventario/ajuste/}" th:text="'Ajuste inventario'"> </a></li>
-								<li><a th:href="@{/inventario/reportes/}" th:text="'Reportes'"> </a></li>
-                            </ul>
-                        </li>
-                        
-                        
-                        <li th:if="${session.SESSION_CONTROL_CAJAS} == 'S'"> 
-                        	<a class="waves-effect waves-dark" th:href="@{/control-cajas/}" href="#" aria-expanded="false">
-                        		<i class="fas fa-money-check"></i><span class="hide-menu" th:text="'Cajas'"></span>
-                        	</a>
-                        </li>
-                        
-                        
-                        <li th:if="${session.SESSION_EMPRESA_ID} != null" > 
-                        	 <a class="has-arrow waves-effect waves-dark" href="#">
-                        		<i class="fas fa-file-invoice"></i><span class="hide-menu" th:text="#{txt.comprobantes}"></span>
-                        	 </a>
-                            <ul aria-expanded="false" class="collapse" >                            
-                            	 <li><a th:href="@{/facturar/}+'?f=all'" th:text="#{txt.facturar}"> </a></li>
-                            	 <li th:if="${session.SESSION_SISTEMA_FARMACIA == 'N'}"><a th:href="@{/facturar/}">Facturar precio final</a></li>
-                            	 <li th:if="${session.SESSION_SISTEMA_FARMACIA == 'N'}"><a th:href="@{/prefacturas/}">Prefacturas</a></li>
-                            	 <li><a th:href="@{/proformas/}" th:text="'Proformas'"></a></li>
-                            	 <li th:if="${ #authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ROLE_ADMIN')}"><a th:href="@{/comprobantes-electronicos/}">Comprobantes API</a></li>
-                            	 
-                            	 <li><a th:href="@{/comprobantes-electronicos-enviados}">Comprobantes enviados a Hacienda</a></li>
-                            	 
-                                 <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')"><a th:href="@{/fe-documentos/}" th:text="#{txt.documentos}"></a></li>
-                                 <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')"><a th:href="@{/mensaje-receptor/}" th:text="#{txt.mensaje.receptor}"></a></li>
-                                 <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')"><a th:href="@{/mensaje-receptor-inbox/}" th:text="'Mensaje receptor, bandeja de entrada'"></a></li>
-                                 <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')"><a th:href="@{/consulta-comprobantes-manualmente/}" th:text="#{txt.consulta.documentos.manualmente}"></a></li>
-                                 <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')"><a th:href="@{/historicos/}" th:text="'Históricos otros sistemas'"></a></li>
-                                 
-                            </ul>
-                        </li>
-                        
-                        <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" th:if="${session.SESSION_EMPRESA_ID} != null"> 
-                        	<a class="has-arrow waves-effect waves-dark" href="#">
-                        		<i class="fas fa-file-export"></i><span class="hide-menu" th:text="#{txt.cxc}"></span>
-                        	 </a>
-                            <ul aria-expanded="false" class="collapse" >
-                            
-                            	 <li><a th:href="@{/cxc/(e='A')}" th:text="#{txt.cxc.cuentas.por.cobrar}"> </a></li>
-                            	 <li><a th:href="@{/cxc/reportes/flujo-de-caja}" th:text="#{txt.cxc.flujo.de.caja}"> </a></li>
-                            	 <li><a th:href="@{/cxc/reportes/reportes}">Reportes</a></li>
-                            	 
-                            </ul>
-                        </li>
-                        
-                        <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" th:if="${session.SESSION_EMPRESA_ID} != null"> 
-                        	<a class="has-arrow waves-effect waves-dark" href="#">
-                        		<i class="fas fa-file-export"></i><span class="hide-menu" th:text="#{txt.reportes}"></span>
-                        	 </a>
-                            <ul aria-expanded="false" class="collapse" >
-                            
-                            	 <li><a th:href="@{/reportes/ventas}" th:text="#{txt.reportes.ventas}"> </a></li>
-                            	 <li><a th:href="@{/reportes/ventas-productos}" th:text="'Reporte ventas por producto'"> </a></li>
-                            	 <li><a th:href="@{/reportes/compras}" th:text="#{txt.reportes.compras}"> </a></li>
-                            	 
-                            </ul>
-                        </li>
-                        
-                    </ul>
-                </nav>
-                <!-- End Sidebar navigation -->
-            </div>
+						</ul>
+					</li>
+					<li th:if="${session.SESSION_EMPRESA_ID} != null">
+						<a href="javascript:;" class="has-arrow">
+							<div class="parent-icon"><i class="bx bx-group"></i>
+							</div>
+							<div class="menu-title">Clientes</div>
+						</a>
+						<ul>
+							<li> <a th:href="@{/clientes/form}">Nuevo Registro</a>
+							</li>
+							<li> <a th:href="@{/clientes/}">Listar</a>
+							</li>
+						</ul>
+					</li>
+					<li th:if="${session.SESSION_EMPRESA_ID} != null" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
+						<a class="has-arrow" href="javascript:;">
+							<div class="parent-icon"><i class="bx bx-layer"></i>
+							</div>
+							<div class="menu-title" th:text="#{txt.inventario}"></div>
+						</a>
+						<ul>
+							<li> <a th:href="@{/producto-familia/}" th:text="#{txt.familia}"></a>
+							</li>
+							<li> <a th:href="@{/inventario/proveedores/}" th:text="#{txt.proveedores}"></a>
+							</li>
+							<li> <a th:href="@{/inventario/cabys/}" >Catálogo CABYS</a>
+							</li>
+							<li> <a th:href="@{/productos/}"  th:text="#{txt.productos}"></a>
+							</li>
+							<li> <a th:href="@{/inventario/factura-compra/}"  th:text="'Compra de inventario'"></a>
+							</li>
+							<li> <a th:href="@{/inventario/ajuste/}"  th:text="'Ajuste inventario'"></a>
+							</li>
+							<li> <a th:href="@{/inventario/reportes/}"  th:text="'Reportes'"></a>
+							</li>
+						</ul>
+					</li>
+					<li th:if="${session.SESSION_CONTROL_CAJAS} == 'S'">
+						<a class="has-arrow" th:href="@{/control-cajas/}">
+							<div class="parent-icon"><i class='bx bx-cabinet'></i>
+							</div>
+							<div>Cajas</div>
+						</a>
+					</li>
+					<li th:if="${session.SESSION_EMPRESA_ID} != null">
+						<a class="has-arrow" href="javascript:;">
+							<div class="parent-icon"><i class='bx bx-message-square-edit'></i>
+							</div>
+							<div class="menu-title" th:text="#{txt.comprobantes}"></div>
+						</a>
+						<ul>
+							<li> <a th:href="@{/facturar/}+'?f=all'" th:text="#{txt.facturar}"></a>
+							</li>
+							<li th:if="${session.SESSION_SISTEMA_FARMACIA == 'N'}"> 
+								<a th:href="@{/facturar/}">Facturar Precio Final</a>
+							</li>
+							<li th:if="${session.SESSION_SISTEMA_FARMACIA == 'N'}"> 
+								<a th:href="@{/prefacturas/}">Prefacturas</a>
+							</li>
+							<li> <a th:href="@{/proformas/}" th:text="'Proformas'"></a>
+							</li>
+							<li th:if="${ #authorization.expression('isAuthenticated()') and 
+							#strings.contains(#authentication.principal.authorities,'ROLE_ADMIN')}"> 
+							<a th:href="@{/comprobantes-electronicos/}">API</a>
+							</li>
+							<li > <a th:href="@{/comprobantes-electronicos-enviados}">Todos los comprobantes</a>
+							</li>
+							<li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')"> 
+								<a th:href="@{/fe-documentos/}" th:text="#{txt.documentos}"></a>
+							</li>
+							<li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')"> 
+								<a th:href="@{/mensaje-receptor/}" th:text="#{txt.mensaje.receptor}"></a>
+							</li>
+							<li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')"> 
+								<a th:href="@{/mensaje-receptor-inbox/}" th:text="'Bandeja de entrada'"></a>
+							</li>
+							<li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')"> 
+								<a th:href="@{/consulta-comprobantes-manualmente/}" th:text="#{txt.consulta.documentos.manualmente}"></a>
+							</li>
+							<li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')"> 
+								<a th:href="@{/historicos/}" th:text="'Históricos otros sistemas'"></a>
+							</li>
+						</ul>
+					</li>
+					<li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" th:if="${session.SESSION_EMPRESA_ID} != null">
+						<a class="has-arrow" href="javascript:;">
+							<div class="parent-icon icon-color-6"> <i class="bx bx-donate-blood"></i>
+							</div>
+							<div class="menu-title" th:text="#{txt.cxc}"></div>
+						</a>
+						<ul>
+							<li> <a th:href="@{/cxc/(e='A')}" th:text="#{txt.cxc.cuentas.por.cobrar}"></a>
+							</li>
+							<li> <a th:href="@{/cxc/reportes/flujo-de-caja}" th:text="#{txt.cxc.flujo.de.caja}"></a>
+							</li>
+							<li> <a th:href="@{/cxc/reportes/reportes}"></i>Reportes</a>
+							</li>
+						</ul>
+					</li>
+					<li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" th:if="${session.SESSION_EMPRESA_ID} != null">
+						<a class="has-arrow" href="javascript:;">
+							<div class="parent-icon"><i class="bx bx-line-chart"></i>
+							</div>
+							<div class="menu-title" th:text="#{txt.reportes}"></div>
+						</a>
+						<ul>
+							<li> <a th:href="@{/reportes/ventas}" th:text="#{txt.reportes.ventas}"></a>
+							</li>
+							<li> <a th:href="@{/reportes/ventas-productos}" th:text="'Reporte ventas por producto'"></a>
+							</li>
+							<li> <a th:href="@{/reportes/compras}" th:text="#{txt.reportes.compras}"></a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
             <!-- End Sidebar scroll-->
         </aside>
         <!-- ============================================================== -->
@@ -339,7 +387,7 @@
             
             
             
-            <footer th:fragment="footer" class="footer">
+            <footer th:fragment="footer"  class="page-footer">
             	
             	  
             	<span class="poweredby" th:text="'© '+ #{txt.app.name}"></span>
@@ -379,7 +427,7 @@
 				</div>
             
             
-                <h4 class="titleEmpresa" th:if="${session.SESSION_DATOS_EMPRESA_NOMBRE} != null">Empresa:&nbsp;[(${session.SESSION_DATOS_EMPRESA_NOMBRE})]</h4>            
+                <p class="titleEmpresa" th:if="${session.SESSION_DATOS_EMPRESA_NOMBRE} != null">Empresa:&nbsp;[(${session.SESSION_DATOS_EMPRESA_NOMBRE})]</p>            
             
             </footer>
             <!-- ============================================================== -->
@@ -399,23 +447,16 @@
     
     <div th:fragment="scripts" >    	
     	
-    	<script th:src="@{/js/jquery/jquery.min.js}"></script>
-	    <script th:src="@{/js/jquery-ui.min.js}"></script>
-	    <script th:src="@{/js/jquery.number.min.js}"></script>
-	    <script th:src="@{/js/sweetalert.min.js}"></script>
-	    <script th:src="@{/js/bootstrap/js/popper.min.js}"></script>
-	    <script th:src="@{/js/bootstrap/js/bootstrap.min.js}"></script>
-	    <script th:src="@{/js/jquery.slimscroll.js}"></script>
-	    <script th:src="@{/js/waves.js}"></script>
-		<script th:src="@{/js/sidebarmenu.js}"></script>
-		<script th:src="@{/js/sticky-kit-master/dist/sticky-kit.min.js}"></script>
-		<script th:src="@{/js/sparkline/jquery.sparkline.min.js}"></script>
-		<script th:src="@{/assets/bootstrap-datepicker/bootstrap-datepicker.min.js}"></script>
-		<script th:src="@{/js/custom.js}"></script>
-		<script th:src="@{/js/styleswitcher/jQuery.style.switcher.js}"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-		<script src="//cdn.jsdelivr.net/jquery.amaran/0.5.4/jquery.amaran.min.js"></script>
-		<script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+		<script src="js/bootstrap.bundle.min.js"></script>
+		<!--plugins-->
+		<script src="js/jquery.min.js"></script>
+		<script src="plugins/simplebar/js/simplebar.min.js"></script>
+		<script src="plugins/metismenu/js/metisMenu.min.js"></script>
+		<script src="plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
+		<script src="plugins/apexcharts-bundle/js/apexcharts.min.js"></script>
+		<script src="js/widgets.js"></script>
+		<!--app JS-->
+		<script src="js/app.js"></script>
 		
 		<script>
 		
