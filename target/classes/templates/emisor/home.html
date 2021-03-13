@@ -1,107 +1,170 @@
-<!DOCTYPE html>
+<!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="layout/layout :: head"></head>
-<body class="fix-header card-no-border logo-center">
 
-<div id="main-wrapper">
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--favicon-->
+	<link rel="icon" href="../../images/favicon.png" type="image/png" />
+	<!--plugins-->
+	<link href="../plugins/simplebar/css/simplebar.css" rel="stylesheet" type="text/css" />
+	<link href="../plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" type="text/css" />
+	<link href="../plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+	<!-- loader-->
+	<link href="../css/pace.min.css" rel="stylesheet" type="text/css" />
+	<script src="../js/pace.min.js"></script>
+	<!-- Bootstrap CSS -->
+	<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet"
+		type="text/css">
+	<link href="../css/app.css" rel="stylesheet" type="text/css">
+	<link href="../css/icons.css" rel="stylesheet" type="text/css">
 
-<header th:replace="layout/layout :: header"></header>
-<aside th:replace="layout/layout :: aside"></aside>
+	<title>Samyx - Emisores</title>
+</head>
+
+<body class="bg-theme bg-theme1">
+	<!--wrapper-->
+	<div class="wrapper">
+		<!--start header -->
+		<header>
+			<div class="topbar d-flex align-items-center">
+				<nav class="navbar navbar-expand">
+					<div class="topbar-logo-header">
+						<div class="">
+							<img src="../images/favicon.png" class="logo-icon" alt="logo icon">
+						</div>
+						<div class="">
+							<h4 class="logo-text">Samyx</h4>
+						</div>
+					</div>
+
+					<div class="search-bar flex-grow-1">
+
+					</div>
+					<div class="top-menu ms-auto">
+						<ul class="navbar-nav align-items-center">
+
+							<li class="nav-item dropdown dropdown-large">
 
 
+							</li>
+							<li class="nav-item dropdown dropdown-large">
 
-<!-- ============================================================== -->
-<!-- Page wrapper  -->
-<!-- ============================================================== -->
-<div class="page-wrapper">
-    <!-- ============================================================== -->
-    <!-- Bread crumb and right sidebar toggle -->
-    <!-- ============================================================== -->
 
-    <!-- ============================================================== -->
-    <!-- End Bread crumb and right sidebar toggle -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- Container fluid  -->
-    <!-- ============================================================== -->
-    <div class="container-fluid">
-        <!-- ============================================================== -->
-        <!-- Start Page Content -->
-        <!-- ============================================================== -->
+							</li>
+							<li class="nav-item dropdown dropdown-large">
 
-        
-        <div class="row justify-content-md-center m-t-10">
-       
-        
-		  <div class="col-sm-4" th:each="k: ${listaEmisor}" style="text-align: center;">
-		    <div class="card card-outline-success" th:classappend="${!k.emisor.statusEmpresa} ? 'card-inverse card-danger'">
-		    
-		      <div class="card-header">
-                  <h4 class="m-b-0 text-white" th:text="${k.emisor.nombreRazonSocial}"></h4>
-              </div>
-		      <div class="card-body">
-		      
-		        <ul class="list-group m-b-10">
-	        		<li class="list-group-item item-emisor-inicio"><span class="font-weight-bold">[(#{txt.identificacion})]: </span>  [(${k.emisor.identificacion})]</li>
-	        		<li class="list-group-item item-emisor-inicio"><span class="font-weight-bold">[(#{txt.correo})]: </span> [(${k.emisor.email})]</li>
-	        		<li th:if="${k.emisor.fechaCaducidadCert != null and #strings.length(k.emisor.fechaCaducidadCert)>0}" class="list-group-item item-emisor-inicio"><span class="font-weight-bold">Fecha caducidad llave criptográfica: </span>
-	        			
-	        			<span class="fecha-caducidad-criptografica" >
-                             <th:block th:with="sdf = ${new java.text.SimpleDateFormat('yyyy-MM-dd''T''HH:mm:ss')}">
-								<p th:remove="tag" th:text="${#dates.format(k.emisor.fechaCaducidadCert, 'dd/MM/yyyy')}" />
-							 </th:block>
-                        </span>
-	        		
-	        		</li>
-	        	</ul>
-		        
-		        <a sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" style="color:#FFF !important" class="btn btn-warning btn-sm m-r-10" th:href="@{/emisor/edit/}+${k.emisor.id}" th:attr="title=#{btn.actualizar.title}">
-		        	<i class="fas fa-edit"></i>&nbsp;[(#{txt.modificar.empresa})]
-		        </a>
-		        
-		        <a style="color:#FFF !important" class="btn btn-success btn-sm" th:href="@{/emisor/ingresar/}+${k.emisor.id}" th:attr="title=#{txt.accesar.empresa}" >
-                		<i class="fas fa-external-link-alt"></i>&nbsp;[(#{txt.ingresar.empresa})]
-                	</a>	
-     
-		      </div>
-		    </div>
-		  </div>
-      
+								
+							</li>
+						</ul>
+					</div>
+					<div class="user-box dropdown">
+						<a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#"
+							role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<img src="../images/avatars/default.png" class="user-img" alt="user avatar">
+							<div class="user-info ps-3">
+								<p class="user-name mb-0" th:text="${#authentication.getPrincipal().getUsername()}"></p>
+							</div>
+						</a>
+						<ul class="dropdown-menu dropdown-menu-end">
+							<li><a class="dropdown-item" href="javascript:;"><i
+										class="bx bx-user"></i><span>Perfil</span></a>
+							</li>
+							<li sec:authorize="hasAnyRole('ROLE_ADMIN')"><a class="dropdown-item" th:href="@{/tipo-de-cambio/}"><i
+										class="bx bx-dollar-circle"></i><span>Tipo de cambio</span></a>
+							</li>
+							<li  sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')"><a class="dropdown-item" th:href="@{/catalogos/usuarios}"><i
+										class='bx bxs-user-detail'></i><span th:text="#{txt.usuarios}"></span></a>
+							</li>
+							<li><a class="dropdown-item" th:href="@{/emisor/}"><i
+										class='bx bx-building'></i><span>Empresas</span></a>
+							</li>
+							<li><a class="dropdown-item" data-toggle="modal" href="#" data-target="#changePassword"><i
+								class='bx bx-lock-open '></i><span th:text="#{txt.cambiar.password}"></span></a>
+							</li>
+							<li>
+								<div class="dropdown-divider mb-0"></div>
+							</li>
+							<li>
+								<form th:action="@{/logout}" method="post">
+									<button type="submit" class="btn btn-danger"><i class="bx bx-power-off"></i> <span th:text="#{btn.cerrar.sesion}"></span></button>
+								</form>
+							</li>
+						</ul>
+					</div>
+				</nav>
+			</div>
+		</header>
+		<!--end header -->
+		<!--start page wrapper -->
+		<div class="page-wrapper">
+			<div class="page-content">
+				<!--breadcrumb-->
+				<div class="row row-cols-1 row-cols-lg-3 row-cols-xl-3">
+					<div class="col" th:each="k: ${listaEmisor}">
+						<div class="card radius-15 ">
+							<div class="card-body text-center">
+								<div class="p-4 border radius-15">
+									<h6 class="mb-0 mt-5" th:text="${k.emisor.nombreRazonSocial}"></h6>
+									<hr>
+									<ul class="list-group m-b-10">
+										<li class="list-group-item item-emisor-inicio"><span
+												class="font-weight-bold">[(#{txt.identificacion})]: </span>
+											[(${k.emisor.identificacion})]</li>
+										<li class="list-group-item item-emisor-inicio"><span
+												class="font-weight-bold">[(#{txt.correo})]: </span>
+											[(${k.emisor.email})]</li>
+										<li th:if="${k.emisor.fechaCaducidadCert != null and #strings.length(k.emisor.fechaCaducidadCert)>0}"
+											class="list-group-item item-emisor-inicio"><span
+												class="font-weight-bold">Fecha caducidad llave criptográfica: </span>
+											<span class="fecha-caducidad-criptografica">
+												<th:block
+													th:with="sdf = ${new java.text.SimpleDateFormat('yyyy-MM-dd''T''HH:mm:ss')}">
+													<p th:remove="tag"
+														th:text="${#dates.format(k.emisor.fechaCaducidadCert, 'dd/MM/yyyy')}" />
+												</th:block>
+											</span>
+										</li>
+									</ul>
+									<hr>
+
+									<div class="d-grid "> <a href="#" class="btn btn-outline-info radius-15 bx bx-right-arrow"
+											th:href="@{/emisor/ingresar/}+${k.emisor.id}"
+											th:attr="title=#{txt.accesar.empresa}">Acceder</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<a sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" data-toggle="tooltip" data-placement="left"
+					class="btn btn-success btn-registrar-empresa color-blanco" title=" Registre una nueva empresa"
+					th:href="@{/emisor/registrar-empresa/}"><i class="fas fa-plus-circle"></i> Registrar nueva
+					empresa</a>
+
+				<nav th:replace="paginator-nav :: paginator"></nav>
+			</div>
 		</div>
-    <nav th:replace="paginator-nav :: paginator"></nav>
-		
-		<a sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" data-toggle="tooltip" data-placement="left" class="btn btn-success btn-registrar-empresa color-blanco" title=" Registre una nueva empresa" th:href="@{/emisor/registrar-empresa/}"><i class="fas fa-plus-circle"></i> Registrar nueva empresa</a>
-		    
-        
-        <!-- ============================================================== -->
-        <!-- End PAge Content -->
-        <!-- ============================================================== -->
-    </div>
-    <!-- ============================================================== -->
-    <!-- End Container fluid  -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- footer -->
-    <!-- ============================================================== -->
-    <footer th:replace="layout/layout :: footer"></footer>
-    <!-- ============================================================== -->
-    <!-- End footer -->
-    <!-- ============================================================== -->
-</div>
-<!-- ============================================================== -->
-<!-- End Page wrapper  -->
-<!-- ============================================================== -->
-
-
-
-
-</div>
-
-<div th:replace="layout/layout :: scripts"></div>
-
-
-
-
-
+		<!--end page wrapper -->
+		<!--start overlay-->
+		<div class="overlay toggle-icon"></div>
+		<!--end overlay-->
+		<!--Start Back To Top Button--> <a href="javaScript:;" class="back-to-top"><i
+				class='bx bxs-up-arrow-alt'></i></a>
+		<!--End Back To Top Button-->
+		<footer th:replace="layout/layout :: footer"></footer>
+	</div>
+	
+	<script src="../js/bootstrap.bundle.min.js"></script>
+	<!--plugins-->
+	<script src="../js/jquery.min.js"></script>
+	<script src="../plugins/simplebar/js/simplebar.min.js"></script>
+	<script src="../plugins/metismenu/js/metisMenu.min.js"></script>
+	<script src="../plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
+	<!--app JS-->
+	<script src="../js/app.js"></script>
 </body>
+
 </html>

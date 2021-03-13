@@ -1,3 +1,4 @@
+e:\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\IEmisorCabysService.java
 e:\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\IMonedaDao.java
 e:\Progra\Samyx\Samyx\src\main\java\com\samyx\controllers\controlcajas\ControlCajasController.java
 e:\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\Producto.java
@@ -9,6 +10,7 @@ e:\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\ICTerminalUsuar
 e:\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\ICProductoService.java
 e:\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\CCodigoReferenciaServiceImpl.java
 e:\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\CInventarioMovimiento.java
+e:\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\EmisorCabysServiceImpl.java
 e:\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\MonedaServiceImpl.java
 e:\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\ICBarrioService.java
 e:\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\ICTipoDeDocumentoReferenciaService.java
@@ -47,6 +49,7 @@ e:\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\EmisorActividades.ja
 e:\Progra\Samyx\Samyx\src\main\java\com\samyx\controllers\PrefacturasController.java
 e:\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\ICNivelDao.java
 e:\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\IFEBitacoraDao.java
+e:\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\IEmisorCabysDao.java
 e:\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\ICInventarioMovimientoDao.java
 e:\Progra\Samyx\Samyx\src\main\java\com\samyx\util\PageItem.java
 e:\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\FEFacturaReferencia.java
@@ -200,6 +203,7 @@ e:\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\ICActividadEconomicaDao
 e:\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\IFEBitacoraService.java
 e:\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\IUnidadDeMedidaDao.java
 e:\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\IFEItemFacturaService.java
+e:\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\EmisorCabys.java
 e:\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\ICProductoDao.java
 e:\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\CDistrito.java
 e:\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\FEExoneracionImpuestoItemFactura.java
