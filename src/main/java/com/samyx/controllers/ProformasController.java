@@ -1212,7 +1212,7 @@ public class ProformasController {
             helper.setFrom(new InternetAddress(this.correoDistribucion, td));
             helper.setSubject(td + " - " + e.getNombreComercial());
             helper.setText(msj, true);
-            helper.addAttachment("factura-proforma-numero-" + factura.getNumeroFactura() + ".pdf", (javax.activation.DataSource)pdfBytes);
+            helper.addAttachment("factura-proforma-numero-" + factura.getNumeroFactura() + ".pdf", (DataSource)pdfBytes);
             this.emailSender.send(message);
             response.put("msj", "Se envío un correo con la factura a: " + emailEnviar);
             response.put("response", Integer.valueOf(200));

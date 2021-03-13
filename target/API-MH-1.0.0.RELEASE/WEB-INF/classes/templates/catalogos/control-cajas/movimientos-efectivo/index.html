@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/layout :: head"></head>
+
+<body class="fix-header card-no-border logo-center">
+
+    <div id="main-wrapper">
+
+        <header th:replace="layout/layout :: header"></header>
+        <aside th:replace="layout/layout :: aside"></aside>
+
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="row page-titles">
+                <div class="col-md-5 align-self-center">
+                    <h3 class="text-themecolor" th:text="'Movimientos de efectivo'"></h3>
+                </div>
+                <div class="col-md-7 align-self-center">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="javascript:void(0)" th:href="@{/control-cajas/}" th:text="#{txt.inicio}"></a>
+                        </li>
+                        <li class="breadcrumb-item active" th:text="'Movimientos de efectivo'"></li>
+                    </ol>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+
+                                       <form th:if="${statusCaja == 'A'}" id="formAddMovimiento" autocomplete="off" th:action="@{/control-cajas/movimientos-efectivo/save}" th:object="${controlCajaMovimientos}" method="post">
+
+                                           <div class="row">
+                                               <div class="col-md-2">
+                                                   <div class="form-group">
+                                                       <label class="control-label"><i class="fas fa-asterisk color-rojo"></i>Tipo movimiento</label>
+                                                       <select class="form-control _select2_" th:field="*{tipoMovimiento}" required="required">
+                                                           <option value="S" selected="selected">Salida efectivo</option>
+                                                           <option value="E">Entrada efectivo</option>
+                                                       </select>
+                                                   </div>
+                                               </div>
+
+      
+                                               <div class="col-sm-2 col-md-2">
+				                                    <div class="form-group">
+				                                       <label class="control-label"><i class="fas fa-asterisk color-rojo"></i> [(#{txt.moneda})]</label>
+				                                       <select class="form-control _select2_" name="moneda" id="moneda" required="required">
+				                                          <option th:each="k : ${listaMonedas}" th:value="${k.id}" th:attr="selected=${k.id == MONEDA_USUARIO ? 'selected' : null}" th:text="${k.simboloMoneda}"></option>
+				                                       </select>
+				                                    </div>
+				                                 </div>
+
+                                               <div class="col-md-2">
+                                                   <div class="form-group">
+                                                       <label class="control-label"><i class="fas fa-asterisk color-rojo"></i> Monto movimiento</label>
+                                                       <input type="text" maxlength="20" onclick="return this.select();" class="form-control" th:field="*{montoMovimiento}" required="required">
+                                                   </div>
+                                               </div>
+                                               
+                                               <div class="col-md-4">
+                                                   <div class="form-group">
+                                                       <label class="control-label"><i class="fas fa-asterisk color-rojo"></i> Detalle</label>
+                                                       <input type="text" maxlength="255" onclick="return this.select();" class="form-control" th:field="*{detalle}" required="required">
+                                                   </div>
+                                               </div>
+
+                                               <div class="col-md-2">
+                                                   <div class="form-group">
+
+                                                       <label class="control-label">&nbsp;</label>
+                                                       <input type="hidden" th:field="*{id}">
+                                                       <input type="hidden" name="controlCaja" th:value="${CAJA_ID}" />
+                                                       
+                                                       <button type="submit" class="btn btn-success btn-sm btn-block">
+                                                           <i class="fas fa-save"></i>&nbsp;<span th:text="'Registrar movimiento'"></span>
+                                                       </button>
+
+                                                   </div>
+                                               </div>
+
+                                           </div>
+
+                                       </form>
+
+
+                                <br>
+
+                                <p style="text-align: center;width: 100%;" class="m-t-10" th:if="*{param.q!=null and #strings.length(param.q)>0}">
+                                    Criterio de búsqueda: <span class="font-weight-bold" th:text="${param.q}"></span> <a style="height: 20px" class="btn btn-danger btn-xs color-blanco" th:href="@{/control-cajas/movimientos-efectivo/}"><i class="fas fa-window-close"></i> Cerrar búsqueda</a>
+                                </p>
+
+                                <div class="table-responsive">
+                                    <table class="table color-table table-hover muted-table">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 10%">Tipo movimiento</th>
+                                                <th style="width: 10%">Fecha movimiento</th>
+                                                <th style="width: 10%">Usuario</th>
+                                                <th style="width: 10%">Monto</th>
+                                                <th style="width: 10%">Detalle</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="k: ${listaMovimientos}">
+                                                <td>
+                                                	<span class="label label-info" th:if="${k.tipoMovimiento == 'E'}">Entrada</span>
+                                                	<span class="label label-danger" th:if="${k.tipoMovimiento == 'S'}">Salida</span>
+                                                </td>
+                                                <td  th:text="${#dates.format(k.fechaMovimiento, 'dd/MM/yyyy hh:mm:ss a')}"></td>
+                                                <td th:text="${k.usuario.nombre}+' '+${k.usuario.apellidoP}+' '+${k.usuario.apellidoM}"></td>
+                                                <td th:text="${k.montoMovimiento}"></td>
+                                                <td th:text="${k.detalle}"></td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+            <footer th:replace="layout/layout :: footer"></footer>
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+
+    </div>
+
+    <div th:replace="layout/layout :: scripts"></div>
+
+    <script type="text/javascript">
+
+        	var token = $('#csrfToken').val();
+        	$("#formAddMovimiento").submit(function( event ) {
+        		
+        	
+        		event.preventDefault();
+	
+	        	 $.ajax({
+	 		        type: "POST",
+	 		        cache: false,
+	 		        beforeSend: function () {
+	 		        	loadingShow();
+	 		        },
+	 		        url: "[(@{/control-cajas/movimientos-efectivo/save})]",
+	 		        data: $(this).serialize(),
+	 		        success: function (data)
+	 		        {
+	 		        	
+	 		        	if(parseInt(data.response) === 1){
+	 		        		
+	 		        		swal("Notificación", "Registro guardado con éxito, refrescando...", "success");
+             				
+             				setTimeout(function(){
+             					location.reload();
+                   			}, 3000);             				
+	 		        		
+	 		        	}else{
+	 		        		swal("","Ha ocurrido un error contacte al administrador del sistema.","warning");
+	 		        	} 
+	 		        	
+	 		        	
+	 		        }, complete: function () {
+	 		            loadingHide();
+	 		        }, error: function (x, t, m) {
+	 		            if (t === "timeout") {
+	 		                
+	 		            } else {
+	 		                
+	 		            }
+	 		        }
+	 		    });
+        	
+        });
+    </script>
+</body>
+
+</html>
