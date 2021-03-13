@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body class="fix-header card-no-border logo-center">
+
+<div id="main-wrapper">
+
+<header th:replace="layout/layout :: header"></header>
+<aside th:replace="layout/layout :: aside"></aside>
+
+
+
+<!-- ============================================================== -->
+<!-- Page wrapper  -->
+<!-- ============================================================== -->
+<div class="page-wrapper">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+        	 <h3 class="text-themecolor" th:text="#{txt.reportes.ventas}"></h3>
+        </div>
+        <div class="col-md-7 align-self-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)" th:href="@{/}" th:text="#{txt.inicio}"></a></li>
+                <li class="breadcrumb-item active" th:text="#{txt.reportes.ventas}"></li>
+            </ol>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+       	<div class="card">
+           <div class="card-body">
+           	    <form autocomplete="off" th:action="@{/reportes/ventas}" method="post">
+	           		<h3>Generar reporte de los documentos emitidos</h3>
+			        <div class="row">
+			        	<div class="col-sm-2 col-md-4">
+                            <div class="form-group" style="position: relative;">
+                               <label class="control-label" th:text="'Actividades económicas'"></label>
+                               <select class="form-control _select2_" name="actividad" required="required">
+                               		<option th:each="k : ${listaActividades}" th:value="${k.codigoActividadEmisor}" th:text="${k.detalleActividad}"></option>
+                               		<option th:value="'ALL'">Todas las actividades</option>
+                               </select>   
+                            </div>
+                         </div>
+			        	<div class="col-md-2">
+				            <div class="form-group">
+				                <label class="control-label">Criterio del reporte</label>
+				                <div class="input-group">
+				                	<select id="_cr" name="cr" class="form-control _select2_" required="required">
+				                		<optgroup label="Presente">
+				                			<option value="1" selected="selected">Hoy</option>
+					                		<option value="2">Esta semana</option>
+					                		<option value="3">Este mes</option>
+					                		<option value="4">Este año</option>
+				                		</optgroup>
+				                		<optgroup label="Pasado">
+				                			<option value="5">Ayer</option>
+					                		<option value="6">Semana pasada</option>
+					                		<option value="7">Mes pasado</option>
+				                		</optgroup>
+				                		<optgroup label="Rango de fechas manual">
+				                			<option value="9">Asigne el rango de fechas</option>
+				                		</optgroup>
+				                	</select>
+				                </div>
+				            </div>
+			            </div>
+			            
+			            
+			             <div class="col-md-3">
+                             <div class="form-group">
+                                 <label class="control-label" th:text="#{txt.sucursal}"></label>
+                                 <select id="sucursalId" name="sucursal" class="form-control _select21_" required="required">
+                                 	<option value="0" selected="selected" th:text="'Todos'"></option>
+                                 	<option th:each="k : ${listaSucursales}" th:value="${k.terminal.sucursal.id}" th:text="${k.terminal.sucursal.nombreSucursal}"></option>
+                                 </select>
+                           	</div>
+                          </div>	
+                          
+                          <div class="col-md-3">
+                              <div class="form-group">
+                                  <label class="control-label" th:text="#{txt.terminal}"></label>
+                                  <select id="terminalId" name="terminal" class="form-control _select21_" required="required">
+                                  	<option value="0" selected="selected" th:text="'Todos'"></option>
+                                  </select>
+                            	</div>
+                           </div>	
+			            
+			            
+			            <div class="col-md-2">
+				            <div class="form-group">
+				                <label class="control-label">
+				                	<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Fecha emisión de los documentos" class="fas fa-question-circle"></i>
+				                	Desde</label>
+				                <div class="input-group">
+				                	<input type="text" name="f1" id="_f1" class="form-control align-right dd-mm-yyyy" placeholder="dd/mm/yyyy" required="required">
+				                	<span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+				                </div>
+				            </div>
+			            </div>
+			            <div class="col-md-2">
+				            <div class="form-group">
+				                <label class="control-label">
+				                	<i style="cursor:pointer" data-toggle="tooltip" data-placement="top" title="Fecha emisión de los documentos" class="fas fa-question-circle"></i>
+				                	hasta</label>
+				                <div class="input-group">
+				                	<input type="text" name="f2" id="_f2" class="form-control align-right dd-mm-yyyy" placeholder="dd/mm/yyyy" required="required">
+				                	<span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+				                </div>
+				            </div>
+			            </div>
+			            <div class="col-md-2">
+				            <div class="form-group">
+				                <label class="control-label">Tipo de documento</label>
+				                <div class="input-group">
+				                	<select name="td" class="form-control _select2_" required="required">
+				                	    <option value="1">Facturas, Tiquetes, Factura Exportación y Notas de credito</option>
+			                			<option value="2">Factura Electrónica</option>
+				                		<option value="3">Nota de débito</option>
+				                		<option value="4">Nota de crédito</option>
+				                		<option value="5">Tiquete Electrónica</option>
+				                		<option value="6">Factura Electrónica Compra</option>
+				                		<option value="7">Factura Electrónica Exportación</option>
+				                		<option value="8">Todos</option>
+				                	</select>
+				                </div>
+				            </div>
+			            </div>
+
+			            <div class="col-md-2">
+				            <div class="form-group">
+				                <label class="control-label">Estado documento</label>
+				                <div class="input-group">
+				                	<select name="e" class="form-control _select2_" required="required">
+			                			<option value="A" selected="selected">Aplicado</option>
+				                		<option value="N">Anulado</option>
+				                		<option value="*">Todos</option>
+				                	</select>
+				                </div>
+				            </div>
+			            </div>
+			            <div class="col-md-2">
+                            <div class="form-group">
+                               <label class="control-label" th:text="#{txt.condicion.de.venta}"></label>
+                               <select style="width: 100%" class="form-control _select2_" name="cv" required="required">
+                               	  <option th:value="'100'" th:text="'Todos'" selected="selected"></option>
+                                  <option th:each="k : ${listaCondicionDeVenta}" th:value="${k.id}" th:text="${k.condicionVenta}"></option>
+                               </select>
+                            </div>
+                         </div>
+                         <div class="col-md-2">
+                            <div class="form-group">
+                               <label class="control-label" th:text="#{txt.medio.de.pago}"></label>
+                               <select style="width: 100%" class="form-control _select2_" name="mp" required="required">
+                                  <option th:value="'100'" th:text="'Todos'" selected="selected"></option>
+                                  <option th:each="k : ${listaMedioDePago}" th:value="${k.id}" th:text="${k.medioDePago}"></option>
+                               </select>
+                            </div>
+                         </div>
+                         <div class="col-sm-2 col-md-2">
+                            <div class="form-group">
+                               <label class="control-label" th:text="#{txt.moneda}"></label>
+                               <select class="form-control _select2_" name="m" required="required">
+                                  <option th:value="'100'" th:text="'Todos'" selected="selected"></option>
+                                  <option th:each="k : ${listaMonedas}" th:value="${k.id}" th:text="${k.simboloMoneda}"></option>
+                               </select>
+                            </div>
+                         </div>
+                         
+                         <div class="col-md-2">
+				            <div class="form-group">
+				                <label class="control-label">Aplicar conversión a</label>
+				                <div class="input-group">
+				                	<select name="sr" class="form-control _select2_" required="required">
+			                			<option value="C" selected="selected">Colones</option>
+				                		<option value="D">Dolares</option>
+				                		<option value="E">Euros</option>
+				                	</select>
+				                </div>
+				            </div>
+			            </div>
+                         
+                         <div class="col-md-4">
+				            <div class="form-group">
+				                <label class="control-label">Usuario</label>
+				                <div class="input-group">
+				                	<select name="user" class="form-control _select2_" required="required">
+				                		<option value="0">Todos</option>
+				                	    <option th:each="k : ${listUsuarios}" th:value="${k.usuario.id}" th:text="${k.usuario.nombre} + ' ' + ${k.usuario.apellidoP} + ' ' + ${k.usuario.apellidoM}"></option>
+				                	</select>
+				                </div>
+				            </div>
+			            </div>
+                         
+			            <div class="col-md-2">
+				            <div class="form-group">
+				                <label class="control-label">&nbsp;</label>
+				                <div class="input-group">
+				                	<button type="submit" class="btn-block btn btn-success btn-sm">
+				                		<i class="fas fa-file-excel"></i> Generar reporte
+				                	</button>
+				                </div>
+				            </div>
+			            </div>
+			            <div class="col-md-2">
+				            <div class="form-group">
+				                <label class="control-label">&nbsp;</label>
+				                <div class="input-group">
+				                	<button type="button" class="reload-page btn-block btn btn-danger btn-sm">
+				                		<i class="fas fa-redo-alt"></i> Resetear
+				                	</button>
+				                </div>
+				            </div>
+			            </div>
+			        </div>
+		        </form>
+	        </div>	        
+        </div>
+        <!-- ============================================================== -->
+        <!-- End PAge Content -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Container fluid  -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- footer -->
+    <!-- ============================================================== -->
+    <footer th:replace="layout/layout :: footer"></footer>
+    <!-- ============================================================== -->
+    <!-- End footer -->
+    <!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- End Page wrapper  -->
+<!-- ============================================================== -->
+
+
+
+
+</div>
+<input id="csrfToken" type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+<div th:replace="layout/layout :: scripts"></div>
+
+<script th:src="@{/js/date.js}"></script>
+
+<script type="text/javascript">
+var token = $('#csrfToken').val();
+
+$(document).ready(function(){
+	
+	$("#_f1").val( Date.today().toString("dd/MM/yyyy") );
+	$("#_f2").val( Date.today().toString("dd/MM/yyyy") );
+	
+	$(document).on("click",".reload-page",function(){
+		location.reload();
+	});
+	
+	
+	$(document).on("change", "#_cr", function(){
+		
+		var v = $(this).val();
+		
+		switch (parseInt(v)) {
+		case 1:
+			//Día de hoy
+			$("#_f1").val( Date.today().toString("dd/MM/yyyy") );
+			$("#_f2").val( Date.today().toString("dd/MM/yyyy") );
+			break;
+		case 2:
+			//Esta semana
+			$("#_f1").val( Date.today().last().monday().toString("dd/MM/yyyy") );
+			$("#_f2").val( Date.today().next().sunday().toString("dd/MM/yyyy") );
+			break;
+		case 3:
+			//Este mes
+			$("#_f1").val( Date.today().moveToFirstDayOfMonth().toString("dd/MM/yyyy") );
+			$("#_f2").val( Date.today().moveToLastDayOfMonth().toString("dd/MM/yyyy") );
+			break;
+		case 4:
+			//Este año
+			$("#_f1").val( Date.january().toString("dd/MM/yyyy") );
+			$("#_f2").val( Date.december().moveToLastDayOfMonth().toString("dd/MM/yyyy") );
+			break;
+		case 5:
+			//Ayer
+			$("#_f1").val( Date.parse("yesterday").toString("dd/MM/yyyy") );
+			$("#_f2").val( Date.parse("yesterday").toString("dd/MM/yyyy") );
+			break;	
+		case 6:
+			//Semana pasada
+			$("#_f1").val( new Date().last().week().monday().toString("dd/MM/yyyy") );
+			$("#_f2").val( new Date().last().sunday().toString("dd/MM/yyyy") );
+			break;	
+		case 7:
+			//Mes pasado
+			$("#_f1").val( new Date().last().month().moveToFirstDayOfMonth().toString("dd/MM/yyyy") );
+			$("#_f2").val( new Date().last().month().moveToLastDayOfMonth().toString("dd/MM/yyyy") );
+			break;		
+		default:
+			break;
+		}
+		
+		
+	});
+	
+	
+	loadingHide();
+	
+});
+
+
+$(document).on("change","#sucursalId", function(e){
+		
+	  e.preventDefault();
+
+	  $.ajax({
+	      type: "POST",
+	      cache: false,
+	      beforeSend: function () {},
+	      url: "[(@{/proformas/sucursal-terminal})]",
+	      data: {id:$(this).val(), _csrf:token},
+	      success: function (data)
+	      {
+	      	$("#terminalId").html(data);    
+	      	
+	      	$("#terminalId").select2('open');
+	      	
+	      }, complete: function () {
+	          loading_hide();
+	      }, error: function (x, t, m) {
+	          if (t === "timeout") {
+	              
+	          } else {
+	              
+	          }
+	      }
+	  });
+	  
+});
+
+</script>
+
+</body>
+</html>

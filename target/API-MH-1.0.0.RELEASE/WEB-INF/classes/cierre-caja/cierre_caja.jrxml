@@ -1,0 +1,1914 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.13.0.final using JasperReports Library version 6.13.0-46ada4d1be8f3c5985fd0b6146f3ed44caed6f05  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CierreCaja" pageWidth="215" pageHeight="2041" whenNoDataType="NoPages" columnWidth="195" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10" isFloatColumnFooter="true" isIgnorePagination="true" uuid="8ba3ed60-3849-4ce9-a518-124f45a3b99e">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="API_4.3.xml"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="713"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="277"/>
+	<property name="net.sf.jasperreports.print.create.bookmarks" value="false"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<parameter name="ID_CAJA" class="java.lang.String"/>
+	<parameter name="EMISOR_ID" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+caja_cierres.emisor_fax_a,
+caja_cierres.emisor_tel_a,
+caja_cierres.emisor_fax_b,
+caja_cierres.emisor_tel_b,
+caja_cierres.emisor_email,
+caja_cierres.emisor_nombre,
+caja_cierres.emisor_num_identif,
+caja_cierres.emisor_tipo_identif,
+caja_cierres.receptor_tel_anombre_comercial,
+caja_cierres.detalle_en_factura1,
+caja_cierres.detalle_en_factura2,
+caja_cierres.direccion_emisor,
+caja_cierres.id,
+caja_cierres.apertura_colones,
+caja_cierres.apertura_dolares,
+caja_cierres.apertura_euros,
+caja_cierres.fecha_apertura,
+caja_cierres.fecha_cierre,
+caja_cierres.salidas_colones,
+caja_cierres.salidas_dolares,
+caja_cierres.salidas_euros,
+caja_cierres.emisor_id,
+caja_cierres.usuario_id,
+caja_cierres.entradas_colones,
+caja_cierres.entradas_dolares,
+caja_cierres.entradas_euros,
+caja_cierres.ventas_colones_efectivo,
+caja_cierres.ventas_colones_tarjeta,
+caja_cierres.ventas_dolares_efectivo,
+caja_cierres.ventas_dolares_tarjeta,
+caja_cierres.ventas_euros_efectivo,
+caja_cierres.ventas_eurostarjeta,
+caja_cierres.ventas_colones_credito,
+caja_cierres.ventas_dolares_credito,
+caja_cierres.ventas_euros_credito,
+caja_cierres.cxc_colones_efectivo,
+caja_cierres.cxc_colones_tarjeta,
+caja_cierres.cxc_dolares_efectivo,
+caja_cierres.cxc_dolares_tarjeta,
+caja_cierres.cxc_euros_efectivo,
+caja_cierres.cxc_euros_tarjeta,
+caja_cierres.cxc_colones_deposito,
+caja_cierres.cxc_dolares_deposito,
+caja_cierres.cxc_euros_deposito,
+caja_cierres.usuario_cerro_id,
+caja_cierres.estado_caja,
+caja_cierres.cxc_colones_cheques,
+caja_cierres.cxc_dolares_cheques,
+caja_cierres.cxc_euros_cheques,
+caja_cierres.ventas_colones_cheques,
+caja_cierres.ventas_dolares_cheques,
+caja_cierres.ventas_euros_cheques,
+caja_cierres.ventas_colones_deposito,
+caja_cierres.ventas_dolares_deposito,
+caja_cierres.ventas_euros_deposito,
+caja_cierres.usuario_abrio_caja,
+caja_cierres.usuario_cerro_caja,
+caja_cierres.cierre_total_cheque_colones,
+caja_cierres.cierre_total_cheque_dolares,
+caja_cierres.cierre_total_cheque_euros,
+caja_cierres.cierre_total_depositos_colones,
+caja_cierres.cierre_total_depositos_dolares,
+caja_cierres.cierre_total_depositos_euros,
+caja_cierres.cierre_total_efectivo_colones,
+caja_cierres.cierre_total_efectivo_dolares,
+caja_cierres.cierre_total_efectivo_euros,
+caja_cierres.cierre_total_tarjeta_colones,
+caja_cierres.cierre_total_tarjeta_dolares,
+caja_cierres.cierre_total_tarjeta_euros,
+caja_cierres.total_cheque_colones,
+caja_cierres.total_cheque_dolares,
+caja_cierres.total_cheque_euros,
+caja_cierres.total_depositos_colones,
+caja_cierres.total_depositos_dolares,
+caja_cierres.total_depositos_euros,
+caja_cierres.total_efectivo_colones,
+caja_cierres.total_efectivo_dolares,
+caja_cierres.total_efectivo_euros,
+caja_cierres.total_tarjeta_colones,
+caja_cierres.total_tarjeta_dolares,
+caja_cierres.total_tarjeta_euros,
+caja_cierres.observaciones,
+caja_cierres.cierre_colones,
+caja_cierres.cierre_dolares,
+caja_cierres.cierre_euros,
+
+(ventas_colones_efectivo + ventas_colones_tarjeta + ventas_colones_cheques + ventas_colones_credito) ventas_colones,
+(ventas_dolares_efectivo + ventas_dolares_tarjeta + ventas_dolares_cheques + ventas_dolares_credito) ventas_dolares,
+(ventas_euros_efectivo + ventas_eurostarjeta + ventas_euros_cheques + ventas_euros_credito) ventas_euros,
+
+caja_cierres.total_devoluciones_colones,
+caja_cierres.total_devoluciones_dolares,
+caja_cierres.total_devoluciones_euros
+
+FROM
+caja_cierres
+WHERE
+caja_cierres.emisor_id = $P{EMISOR_ID} AND
+caja_cierres.id = $P{ID_CAJA}]]>
+	</queryString>
+	<field name="emisor_fax_a" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="emisor_fax_a"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="emisores"/>
+	</field>
+	<field name="emisor_tel_a" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="emisor_tel_a"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="emisores"/>
+	</field>
+	<field name="emisor_fax_b" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="emisor_fax_b"/>
+	</field>
+	<field name="emisor_tel_b" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="emisor_tel_b"/>
+	</field>
+	<field name="emisor_email" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="emisor_email"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="emisores"/>
+	</field>
+	<field name="emisor_nombre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="emisor_nombre"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="emisores"/>
+	</field>
+	<field name="emisor_num_identif" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="emisor_num_identif"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="emisores"/>
+	</field>
+	<field name="emisor_tipo_identif" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="emisor_tipo_identif"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="emisores"/>
+	</field>
+	<field name="receptor_tel_anombre_comercial" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="receptor_tel_anombre_comercial"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="emisores"/>
+	</field>
+	<field name="detalle_en_factura1" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="detalle_en_factura1"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="emisores"/>
+	</field>
+	<field name="detalle_en_factura2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="detalle_en_factura2"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="emisores"/>
+	</field>
+	<field name="direccion_emisor" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="direccion_emisor"/>
+	</field>
+	<field name="id" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="apertura_colones" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="apertura_colones"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="apertura_dolares" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="apertura_dolares"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="apertura_euros" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="apertura_euros"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="fecha_apertura" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="fecha_apertura"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="fecha_cierre" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="fecha_cierre"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="salidas_colones" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="salidas_colones"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="salidas_dolares" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="salidas_dolares"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="salidas_euros" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="salidas_euros"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="emisor_id" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="emisor_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="usuario_id" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="usuario_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="entradas_colones" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="entradas_colones"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="entradas_dolares" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="entradas_dolares"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="entradas_euros" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="entradas_euros"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="ventas_colones_efectivo" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="ventas_colones_efectivo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="ventas_colones_tarjeta" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="ventas_colones_tarjeta"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="ventas_dolares_efectivo" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="ventas_dolares_efectivo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="ventas_dolares_tarjeta" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="ventas_dolares_tarjeta"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="ventas_euros_efectivo" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="ventas_euros_efectivo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="ventas_eurostarjeta" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="ventas_eurostarjeta"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="ventas_colones_credito" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="ventas_colones_credito"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="ventas_dolares_credito" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="ventas_dolares_credito"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="ventas_euros_credito" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="ventas_euros_credito"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="cxc_colones_efectivo" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="cxc_colones_efectivo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="cxc_colones_tarjeta" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="cxc_colones_tarjeta"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="cxc_dolares_efectivo" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="cxc_dolares_efectivo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="cxc_dolares_tarjeta" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="cxc_dolares_tarjeta"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="cxc_euros_efectivo" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="cxc_euros_efectivo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="cxc_euros_tarjeta" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="cxc_euros_tarjeta"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="cxc_colones_deposito" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="cxc_colones_deposito"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="cxc_dolares_deposito" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="cxc_dolares_deposito"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="cxc_euros_deposito" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="cxc_euros_deposito"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="usuario_cerro_id" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="usuario_cerro_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="estado_caja" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="estado_caja"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="cxc_colones_cheques" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="cxc_colones_cheques"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="cxc_dolares_cheques" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="cxc_dolares_cheques"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="cxc_euros_cheques" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="cxc_euros_cheques"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="ventas_colones_cheques" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="ventas_colones_cheques"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="ventas_dolares_cheques" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="ventas_dolares_cheques"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="ventas_euros_cheques" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="ventas_euros_cheques"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="ventas_colones_deposito" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="ventas_colones_deposito"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="ventas_dolares_deposito" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="ventas_dolares_deposito"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="ventas_euros_deposito" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="ventas_euros_deposito"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="usuario_abrio_caja" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="usuario_abrio_caja"/>
+	</field>
+	<field name="usuario_cerro_caja" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="usuario_cerro_caja"/>
+	</field>
+	<field name="cierre_total_cheque_colones" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="cierre_total_cheque_colones"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="cierre_total_cheque_dolares" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="cierre_total_cheque_dolares"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="cierre_total_cheque_euros" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="cierre_total_cheque_euros"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="cierre_total_depositos_colones" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="cierre_total_depositos_colones"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="cierre_total_depositos_dolares" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="cierre_total_depositos_dolares"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="cierre_total_depositos_euros" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="cierre_total_depositos_euros"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="cierre_total_efectivo_colones" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="cierre_total_efectivo_colones"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="cierre_total_efectivo_dolares" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="cierre_total_efectivo_dolares"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="cierre_total_efectivo_euros" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="cierre_total_efectivo_euros"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="cierre_total_tarjeta_colones" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="cierre_total_tarjeta_colones"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="cierre_total_tarjeta_dolares" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="cierre_total_tarjeta_dolares"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="cierre_total_tarjeta_euros" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="cierre_total_tarjeta_euros"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="total_cheque_colones" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="total_cheque_colones"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="total_cheque_dolares" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="total_cheque_dolares"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="total_cheque_euros" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="total_cheque_euros"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="total_depositos_colones" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="total_depositos_colones"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="total_depositos_dolares" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="total_depositos_dolares"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="total_depositos_euros" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="total_depositos_euros"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="total_efectivo_colones" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="total_efectivo_colones"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="total_efectivo_dolares" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="total_efectivo_dolares"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="total_efectivo_euros" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="total_efectivo_euros"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="total_tarjeta_colones" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="total_tarjeta_colones"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="total_tarjeta_dolares" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="total_tarjeta_dolares"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="total_tarjeta_euros" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="total_tarjeta_euros"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="observaciones" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="observaciones"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="cierre_colones" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="cierre_colones"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="cierre_dolares" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="cierre_dolares"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="cierre_euros" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="cierre_euros"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="ventas_colones" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="ventas_colones"/>
+	</field>
+	<field name="ventas_dolares" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="ventas_dolares"/>
+	</field>
+	<field name="ventas_euros" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="ventas_euros"/>
+	</field>
+	<field name="total_devoluciones_colones" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="total_devoluciones_colones"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="total_devoluciones_dolares" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="total_devoluciones_dolares"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<field name="total_devoluciones_euros" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="total_devoluciones_euros"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="control_cajas"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="1903" splitType="Stretch">
+			<property name="com.jaspersoft.studio.layout"/>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement key="textField" x="0" y="81" width="195" height="30" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="1eaaa9a3-92ca-4939-b7d3-74228bc74027"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{direccion_emisor}.toUpperCase()]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement key="textField" x="0" y="17" width="195" height="15" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="dd14f5bb-b7bc-4fd8-a1d2-02e719b40872"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{emisor_num_identif}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement key="textField" x="0" y="65" width="195" height="15" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="2d805633-80ff-423e-9cc2-ec5586384b9c">
+					<printWhenExpression><![CDATA[$F{emisor_fax_a}.trim().equals("")?Boolean.FALSE:Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Fax:" + $F{emisor_fax_b}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement key="textField" positionType="Float" x="0" y="0" width="195" height="17" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="74cfde71-fdf5-4f3d-9973-a318615941fc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{emisor_nombre}.toUpperCase()]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement key="textField" x="0" y="33" width="195" height="15" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="c4f85bac-df7f-4d89-a884-2343a734de3e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{emisor_email}.toUpperCase()]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement key="textField" x="0" y="49" width="195" height="15" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="d4e77705-63d6-4fb4-b472-48fe621fa709"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Tel: " + $F{emisor_tel_b}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="229" width="195" height="15" uuid="c75bfa62-a82a-467b-96e7-04df649d3609"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Apertura de caja]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="245" width="42" height="15" uuid="01459da3-9f58-489c-b029-d40ccf0e3399"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Colones:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="261" width="42" height="15" uuid="4cdcd797-4975-48ce-a721-a5151191c72c"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Dolares:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="277" width="42" height="15" uuid="5ebbac77-0e1b-45a4-ab46-e2b9108e4847"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Euros:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="245" width="100" height="15" uuid="8368cced-a10a-48e8-8457-7ea8ed21eece"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{apertura_colones}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="261" width="100" height="15" uuid="2310f028-d200-4ac2-99f9-7d4a9f6a85f7"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{apertura_dolares}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="277" width="100" height="15" uuid="aaf16bdb-8f26-4f99-9b94-f723eab2b0b9"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{apertura_euros}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="301" width="195" height="15" uuid="d4b5aa21-7d0f-4e06-939d-0830b0661f8d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Salidas de efectivo]]></text>
+			</staticText>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="317" width="100" height="15" uuid="75f4a1b8-6a8e-4e6e-8c30-3cdcce8bd53a"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{salidas_colones}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="333" width="100" height="15" uuid="433ad9d0-696b-4382-b511-c7b698d295f6"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{salidas_dolares}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="349" width="100" height="15" uuid="81305b9c-0dd2-4ff3-bf2f-924cb85562f1"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{salidas_euros}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="349" width="42" height="15" uuid="10d532a2-a8a1-46cd-addc-3591def3b16b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Euros:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="317" width="42" height="15" uuid="35122cb9-6881-4200-81f5-4557c34eab20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Colones:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="333" width="42" height="15" uuid="2c03b04f-5e33-457f-b01f-53a05f8a2260"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Dolares:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="376" width="195" height="15" uuid="2fbe6179-7fc5-4546-b6ba-873d7ed68959"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Entradas de efectivo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="392" width="42" height="15" uuid="a9ef037d-ee88-48b5-bc62-55efdd043cf0"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Colones:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="408" width="42" height="15" uuid="8a1124d9-9b9d-4f16-95bf-5890661d0812"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Dolares:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="424" width="42" height="15" uuid="1fb19dce-8def-401d-b429-02e34dc8ff5b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Euros:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="392" width="100" height="15" uuid="4f0dc07d-9f0d-47cf-afb9-49515242a669"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{entradas_colones}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="408" width="100" height="15" uuid="9f94a8d3-3d33-483d-b92e-3e6dc8ce193f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{entradas_dolares}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="424" width="100" height="15" uuid="16c09e65-e43b-44de-aff7-ec62c42a2c2d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{entradas_euros}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="451" width="195" height="15" uuid="14536320-563e-4cda-b6bd-7cf8667cd628"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ventas efectivo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="467" width="42" height="15" uuid="b48b88e4-a72e-43dd-af72-b01b65847511"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Colones:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="483" width="42" height="15" uuid="514f6ec0-bfb9-442e-8174-d4459bf8853e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Dolares:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="499" width="42" height="15" uuid="282de1ac-3ce5-4545-9195-daec567c4937"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Euros:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="558" width="42" height="15" uuid="39a7b578-3079-460f-b062-944d70f2634d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Dolares:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="542" width="42" height="15" uuid="18e7536e-28bb-4ea4-bb66-f8c3fc2722b2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Colones:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="526" width="195" height="15" uuid="6f2544b4-3136-4633-a35b-5cdc37d11ed2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ventas tarjeta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="574" width="42" height="15" uuid="2130b4bd-c1cb-4c53-9ff2-db9781947a9e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Euros:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="467" width="151" height="15" uuid="3d3c7f95-7eca-4fa8-8f33-a71ae6ae33b7"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ventas_colones_efectivo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="483" width="151" height="15" uuid="442190f1-1b89-411f-8d54-4b1de2b4386d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ventas_dolares_efectivo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="499" width="151" height="15" uuid="7ca9a846-db9d-41e4-abc5-93fbc74bd727"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ventas_euros_efectivo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="542" width="151" height="15" uuid="4e75e358-b39e-4c34-90d2-06c8f3d02d58"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ventas_colones_tarjeta}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="558" width="151" height="15" uuid="ed9b55eb-f355-4770-86c3-5f96a167cd85"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ventas_dolares_tarjeta}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="574" width="151" height="15" uuid="33adfb0d-dddf-4f6e-99f5-696b1f10d1c9"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ventas_eurostarjeta}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="602" width="195" height="15" uuid="4560f1ec-e8fb-4901-a016-8e615646696b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ventas con cheque]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="618" width="42" height="15" uuid="f3fac570-e1b9-449d-8d6b-fcc769a2c72a"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Colones:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="634" width="42" height="15" uuid="f83e0c92-d2f3-4e30-ad33-59ad4f96d637"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Dolares:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="650" width="42" height="15" uuid="8d47b82d-047b-44e9-8550-474b6bb48fb3"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Euros:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="618" width="151" height="15" uuid="1671e5da-36e4-4e39-99fa-024b3d5cd168"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ventas_colones_cheques}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="634" width="151" height="15" uuid="fe7c30a3-167a-4bf6-a16e-b6701b8f412a"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ventas_dolares_cheques}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="650" width="151" height="15" uuid="76ce3f06-0557-400c-9ee6-9be915d830ad"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ventas_euros_cheques}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="678" width="195" height="15" uuid="4eea7b39-5aea-4df7-8a2b-130a5d7e442f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ventas por transferencia - depósito bancario]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="694" width="42" height="15" uuid="00572689-4bd7-4401-b98a-a1d5875f1d8c"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Colones:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="710" width="42" height="15" uuid="3bf860e0-4e72-47aa-852c-34d35b28b57c"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Dolares:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="726" width="42" height="15" uuid="c0bd02f4-fd98-49e5-bf59-1c83311dd4c4"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Euros:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00#">
+				<reportElement x="43" y="694" width="152" height="15" uuid="396ee037-15c8-4c18-96cd-5a40587e6e67"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ventas_colones_deposito}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="43" y="710" width="152" height="15" uuid="8e439be8-b618-424e-af56-c42db5922f72"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ventas_dolares_deposito}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="43" y="726" width="152" height="15" uuid="4781ad50-25a7-4cc4-a25e-aa4c3f2d85d4"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ventas_euros_deposito}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="750" width="195" height="15" uuid="48c198b1-aa10-48e2-a614-842260e26c89"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ventas a crédito]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="798" width="42" height="15" uuid="e1351fd9-2b05-41a5-baa4-4c41ab0bbfdb"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Euros:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="766" width="42" height="15" uuid="62a322da-5575-4f1d-bceb-9a9b0c8c85b0"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Colones:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="782" width="42" height="15" uuid="5ecc1556-6d1a-48ff-a541-89024fc429a2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Dolares:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="766" width="151" height="15" uuid="89b873a9-0bd5-420f-9402-6c8a9859f83e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ventas_colones_credito}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="782" width="151" height="15" uuid="292a8867-8269-4daf-8585-4bc3510d6bbf"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ventas_dolares_credito}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="798" width="151" height="15" uuid="90f66b46-5e10-49e9-8c7e-70387ba3d8f7"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ventas_euros_credito}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="823" width="195" height="15" uuid="d1d80a05-bf4f-451a-a898-da378f77fa49"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cuentas por cobrar efectivo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="839" width="44" height="15" uuid="e92a1ded-c5af-46de-a5c3-c01231ace2de"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Colones:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="855" width="44" height="15" uuid="fda93cf3-af39-454f-9372-418b24af285f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Dolares:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="871" width="44" height="15" uuid="5bf04b9f-8b2d-4173-b858-7850c014ec64"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Euros:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="839" width="151" height="15" uuid="cea73b0c-88d4-471c-bb23-cd5f35fb11a8"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cxc_colones_efectivo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="855" width="151" height="15" uuid="a4c8b78b-4179-4de8-9df8-7a4e99b4893f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cxc_dolares_efectivo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="871" width="151" height="15" uuid="272452f5-8665-45b8-a595-e6fde7540502"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cxc_euros_efectivo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="896" width="195" height="15" uuid="b6faa98d-0f6c-4c0b-8ab2-cd52a8359323"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cuentas por cobrar tarjeta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="944" width="42" height="15" uuid="0dfb707e-b23b-41f3-ad5b-793c057cbd48"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Euros:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="912" width="42" height="15" uuid="a0b9ad58-fb2d-4317-a4df-ad15adf5b127"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Colones:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="928" width="42" height="15" uuid="cb8086b7-3be6-425d-ac88-cb2833f1b444"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Dolares:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="912" width="151" height="15" uuid="afd6e21a-f0e1-41bb-ae60-99f37b4c78ad"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cxc_colones_efectivo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="928" width="151" height="15" uuid="6e6b0ba0-3ab9-47b0-b2df-dd384ca35b98"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cxc_dolares_tarjeta}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="944" width="151" height="15" uuid="d6a53acf-b05a-4c1a-b315-320eea8e1060"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cxc_euros_tarjeta}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="969" width="195" height="15" uuid="e3e40d80-5da2-4e15-a20a-b0db5bb8b64e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cuentas por cobrar depósitos o transferencias]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="985" width="42" height="15" uuid="efbc82b2-01c0-4ea3-bd92-00ba0c50f571"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Colones:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="1001" width="42" height="15" uuid="4d6ae9ad-ebda-44c8-8d71-13fb3c447f3b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Dolares:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="1017" width="42" height="15" uuid="eb1cb1c4-f2d1-4d22-b6b1-23e165bc9d90"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Euros:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00#">
+				<reportElement x="43" y="985" width="152" height="15" uuid="0f39de30-49cf-496f-84e2-141d569b441e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cxc_colones_deposito}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="43" y="1001" width="152" height="15" uuid="842c78b7-a0bb-4098-9531-bc824852b3ba"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cxc_dolares_deposito}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="43" y="1017" width="152" height="15" uuid="a082f3a5-baa5-464c-9293-659bdead8de7"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cxc_euros_deposito}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="1042" width="195" height="15" uuid="074e4ddb-05cd-4728-8bce-ec5a0f597c47"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cuentas por cobrar pagos con cheques]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="1058" width="42" height="15" uuid="3e8e40c9-f8e2-4d1d-8062-9c59404eeedf"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Colones:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="1074" width="42" height="15" uuid="a408a4f9-9dbb-4a1a-94f8-4c79ef796ad2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Dolares:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="1090" width="42" height="15" uuid="96cc05fa-8fdf-467f-8d56-3bc4bd3b3456"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Euros:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="1058" width="151" height="15" uuid="6051e241-6634-45ba-a2b4-7d90e11320b1"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cxc_colones_cheques}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="1074" width="151" height="15" uuid="a4f40ce1-c6f2-4064-8391-0cb42229261b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cxc_dolares_cheques}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="1090" width="151" height="15" uuid="1acd7484-a0d2-4027-993a-05f9392ca0db"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cxc_euros_cheques}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="1114" width="195" height="15" uuid="43509fff-14a4-44c4-a0c3-04d50ca02585"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Resumen de la caja]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="1204" width="111" height="15" uuid="83dfc669-af8f-4c8c-a973-43abf7a95319"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Efectivo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="1220" width="42" height="15" uuid="80cb383d-9911-4928-a6a8-7a430e3d145a"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Colones:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="1236" width="42" height="15" uuid="81b35a36-fd2a-4843-a10d-b6d485a95896"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Dolares:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="1252" width="42" height="15" uuid="8ad69dc7-01a3-4399-8921-62fc006f05b3"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Euros:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="1220" width="67" height="15" uuid="4513a349-7638-40bd-8472-d733a7129111"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_efectivo_colones}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="1236" width="67" height="15" uuid="3eaa3dd9-2527-42a8-b175-3c8357297739"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_efectivo_dolares}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="1252" width="67" height="15" uuid="ac61e1fc-8290-4927-95ef-beae9882ad4d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_efectivo_euros}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="134" y="1205" width="61" height="15" uuid="4396ce23-ef3f-4127-b95a-d67b55585479"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Diferencia]]></text>
+			</staticText>
+			<textField pattern="#,##0.00#">
+				<reportElement x="134" y="1221" width="61" height="15" uuid="bdb0cf5a-bfd7-4495-ab77-bed5a52af4d9"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cierre_total_efectivo_colones} - $F{total_efectivo_colones}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="134" y="1253" width="61" height="15" uuid="8b4b9c63-adc5-48f9-969b-dc004880e90a"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cierre_total_efectivo_euros} - $F{total_efectivo_euros}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="134" y="1237" width="61" height="15" uuid="f78496e7-1032-4d3c-a9f8-4c29c9157477"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cierre_total_efectivo_dolares} - $F{total_efectivo_dolares}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="134" y="1327" width="61" height="15" uuid="1bad9116-73fa-4255-8a25-a68859c0d852"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cierre_total_tarjeta_euros} - $F{total_tarjeta_euros}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="1310" width="42" height="15" uuid="91345033-736b-4c8d-9f64-ab4d84f06816"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Dolares:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00#">
+				<reportElement x="134" y="1295" width="61" height="15" uuid="4195dc30-5e68-47de-83d4-2f54f84aced6"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cierre_total_tarjeta_colones} - $F{total_tarjeta_colones}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="1278" width="110" height="15" uuid="07d393af-8666-4bba-b629-f931ca278c37"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tarjeta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="1326" width="42" height="15" uuid="f156b695-beaa-4e18-8e2c-3ccbc4153da6"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Euros:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="1294" width="42" height="15" uuid="8e90f8f6-12dc-4ad4-a8d7-77c874b42a4d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Colones:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="1294" width="85" height="15" uuid="e4bb707e-7dde-4478-8d68-4fe91c94891f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_tarjeta_colones}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="134" y="1279" width="61" height="15" uuid="b255589d-26b9-4c77-a03b-54296c3c4800"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Diferencia]]></text>
+			</staticText>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="1326" width="85" height="15" uuid="8e132dd0-6d8d-4e9a-a7d0-70ba515bd7f3"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_tarjeta_euros}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="1310" width="85" height="15" uuid="cba4d824-992f-4445-a913-d5484d383784"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_tarjeta_dolares}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="134" y="1311" width="61" height="15" uuid="e480d2ed-82ce-49c6-8c4a-aea766bcd66e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cierre_total_tarjeta_dolares} - $F{total_tarjeta_dolares}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="1384" width="85" height="15" uuid="1fe09834-8421-4ed8-89f5-61579f491b45"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_cheque_dolares}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="1400" width="85" height="15" uuid="bf66dfd9-bc59-445b-9e3c-6bdbe846b3ff"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_cheque_euros}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="1352" width="110" height="15" uuid="98ed17bf-355c-4dae-a5ae-4c7827f0f9d3"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cheques]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="1368" width="42" height="15" uuid="3230cdec-1e33-4c4e-a30a-7dcbf8d2a3a7"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Colones:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="1368" width="85" height="15" uuid="34ac7088-2119-4f15-90b8-d3f972c918a6"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_cheque_colones}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="1400" width="42" height="15" uuid="e68134d6-9e92-41c6-af2c-c04a22cc6d8c"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Euros:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="1384" width="42" height="15" uuid="e3679701-7a35-4b22-bba5-8c1b1236924f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Dolares:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00#">
+				<reportElement x="134" y="1369" width="61" height="15" uuid="07d0293b-3ec8-4549-9528-f425070de0b9"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cierre_total_cheque_colones} - $F{total_cheque_colones}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="134" y="1353" width="61" height="15" uuid="a3e1c583-ad15-4a4f-bda8-80ca8b734289"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Diferencia]]></text>
+			</staticText>
+			<textField pattern="#,##0.00#">
+				<reportElement x="134" y="1385" width="61" height="15" uuid="036ffa99-7c18-422e-987b-3fce46ff2d01"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cierre_total_cheque_dolares} - $F{total_cheque_dolares}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="134" y="1401" width="61" height="15" uuid="d8831ca6-b7f0-4bed-9a13-aabe93808c6c"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cierre_total_cheque_euros} - $F{total_cheque_euros}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="1458" width="85" height="15" uuid="33a0da7f-15ad-40c0-8d3e-d54be4fbbe0f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_depositos_dolares}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="1474" width="42" height="15" uuid="6d289052-7649-41b1-ab5c-6fb0ecb0df14"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Euros:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="134" y="1426" width="61" height="15" uuid="a46e758a-56f4-4935-ace2-ff6fce403840"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Diferencia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="1426" width="128" height="15" uuid="7c7e974e-c438-4d6e-b516-419343f64fc5"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Depósitos o transferencias]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="1442" width="42" height="15" uuid="718fe5dd-076c-4e2c-892b-ac23bc6addbe"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Colones:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="1442" width="85" height="15" uuid="46a144f5-8618-49bf-8b5e-2b34a3c09512"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_depositos_colones}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="134" y="1442" width="61" height="15" uuid="a9b17533-8a98-44bf-955d-6f9ac7c8e8cf"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cierre_total_depositos_colones} - $F{total_depositos_colones}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="134" y="1458" width="61" height="15" uuid="8cc3bce7-053c-4d63-94ea-ff6d1d4fb0d7"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cierre_total_depositos_dolares} - $F{total_depositos_dolares}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="134" y="1474" width="61" height="15" uuid="e66edc4c-4f17-4b9f-ada5-ef4d8c208198"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cierre_total_depositos_euros} - $F{total_depositos_euros}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="1474" width="85" height="15" uuid="03c61ce8-a6d3-455f-93ed-7bb5eee33da1"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_depositos_euros}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="1458" width="42" height="15" uuid="f75e8cd7-0288-4617-8fd9-b469af24e1a7"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Dolares:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="141" width="37" height="15" uuid="7b6b54ea-1f41-4544-b158-52ab8b338f65"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Caja de:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="44" y="141" width="151" height="15" uuid="df450842-f8f8-4e4b-ac87-74d62d754356"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{usuario_abrio_caja}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="86" y="187" width="109" height="15" uuid="dbd32480-a708-407c-acd4-712c6d4979f7"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{usuario_cerro_caja}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="187" width="86" height="15" uuid="b4c1308c-a788-42bd-913a-1e171a812d47"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Caja cerrada por:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="158" width="86" height="15" uuid="ec4b5bbe-84fe-4cf8-bf13-f0c3655654ff"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha apertura:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy hh:mm:ss a">
+				<reportElement x="86" y="158" width="109" height="15" uuid="e3bfd939-9df2-415b-a95a-0c3b10a9a2d2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_apertura}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy hh:mm:ss a">
+				<reportElement x="86" y="204" width="109" height="15" uuid="bd355bdd-faf1-4e5c-83d6-a6efe3ed5985"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_cierre}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="204" width="86" height="15" uuid="216172da-f71b-49fd-b0c1-ee03adcb0742"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha de cierre:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="1" y="1753" width="110" height="15" uuid="3f8451cd-cf03-4c5c-8e29-92f0005894e4"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Creado por:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="1" y="1805" width="110" height="15" uuid="e308633a-743a-42ba-b2f2-1434261c3a02"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Recibido por:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="1861" width="195" height="30" uuid="b33473c1-fb42-44d6-82fa-2e9f7646f188"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Este cierre de caja ya fue aplicado con éxito y no puede ser modificado.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="124" width="195" height="15" uuid="e0553d90-2382-4b78-8d23-f4b1e433f02b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte de cierre de caja]]></text>
+			</staticText>
+			<line>
+				<reportElement positionType="Float" x="0" y="119" width="195" height="1" uuid="2ca1e40d-1276-465c-a66b-dfb91f6e5f60"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="0" y="180" width="195" height="1" uuid="9434f88e-fd07-4d08-8984-889e439d47a5"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="0" y="224" width="195" height="1" uuid="cc22848e-0274-4b29-bd06-ddec9de7693f"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="0" y="296" width="195" height="1" uuid="8c701e36-701a-4c03-bcd5-99aa4af25d0f"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="370" width="195" height="1" uuid="b3b8c78a-5fe7-4c51-877b-545545b89b57"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="0" y="445" width="195" height="1" uuid="c37bf0fa-1aba-480e-9ae4-f5ad5150697e"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="0" y="520" width="195" height="1" uuid="994afd06-3136-4da3-a05e-4ef9bcaf6972"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="0" y="672" width="195" height="1" uuid="71365fd2-c3eb-4d50-a1e4-f48bbb3891f2"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="1" y="590" width="195" height="1" uuid="7b7cb8bb-8924-4178-a7b4-8850f3807e75"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="0" y="745" width="195" height="1" uuid="bfff08c8-9967-45bb-b804-521a16f639f5"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="0" y="817" width="195" height="1" uuid="a1382882-4f6d-4b61-9d0a-c345fd0892b6"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="0" y="891" width="195" height="1" uuid="b0d2e1ac-0f7c-4fe5-8c69-3487b2383110"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="0" y="964" width="195" height="1" uuid="79bdabf9-19b6-4529-b624-9417fa535cae"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="0" y="1037" width="195" height="1" uuid="c3259aa4-83ae-419c-9a5e-464147fab91d"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="0" y="1112" width="195" height="1" uuid="ff2bccb8-ffad-436a-9ac7-373f12d1b6b4"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="0" y="1274" width="195" height="1" uuid="c390e041-bfe6-4b0c-9381-a9fea3444fae"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="0" y="1348" width="195" height="1" uuid="da2b6b00-c200-4e75-aed1-8830df238c73"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="0" y="1420" width="195" height="1" uuid="dec6e061-7b1d-4e7f-bb5a-b6c5efea6118"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="1" y="1792" width="195" height="1" uuid="885ab6d5-2bc2-48ee-9abb-e4721d512687"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="0" y="1843" width="195" height="1" uuid="368a793c-fe27-46e0-bc7c-c2f2e4c953ce"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="1" y="1726" width="195" height="20" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="0681ad13-8fe3-44e6-bcdc-3fa2eba8086b"/>
+				<textElement verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA[$F{observaciones}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="1710" width="195" height="15" uuid="ecd6bacc-e119-48d4-8757-b2e09b639e1e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Observaciones]]></text>
+			</staticText>
+			<line>
+				<reportElement positionType="Float" x="0" y="1493" width="195" height="1" uuid="a0556c87-c125-4627-9006-64bfe9502e6f"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement positionType="Float" x="0" y="1201" width="195" height="1" uuid="82becfb3-90ae-4705-bb29-f731267d6664"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="1166" width="42" height="15" uuid="7c609502-8e7f-4d2b-9d2a-cd46e7b505f2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Dolares:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="1166" width="67" height="15" uuid="c4f28cfb-96fd-4c43-8ca3-bca087c3c055"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cierre_dolares}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="#,##0.00#" isBlankWhenNull="true">
+				<reportElement x="134" y="1167" width="61" height="15" uuid="f038f482-9ef4-489a-8b14-ec62663ac61a"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cierre_dolares} - $F{apertura_dolares}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="1182" width="42" height="15" uuid="36e02fb4-871a-4a3f-842c-4eef351926cf"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Euros:]]></text>
+			</staticText>
+			<textField textAdjust="StretchHeight" pattern="#,##0.00#" isBlankWhenNull="true">
+				<reportElement x="134" y="1183" width="61" height="15" uuid="5b82fe2e-da3c-4247-b9ec-5097ed1b3a45"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cierre_euros} - $F{apertura_euros}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="Float" x="0" y="1131" width="195" height="1" uuid="1fbf8721-fcd1-4bed-aa02-042e0da8ce64"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="1134" width="111" height="15" uuid="7cc8c4f4-c023-4a4b-abac-e61bf513c4ae"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cierre]]></text>
+			</staticText>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="1150" width="67" height="15" uuid="b24f6ee1-1a52-41d9-beb5-63d5c0dde34d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cierre_colones}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="1182" width="67" height="15" uuid="8a2dbe5d-6b14-4972-9c6f-d0ddda70b5ca"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cierre_euros}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="1150" width="42" height="15" uuid="b12194e5-49d7-491a-bce2-5875d5effaf4"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Colones:]]></text>
+			</staticText>
+			<textField textAdjust="StretchHeight" pattern="#,##0.00#" isBlankWhenNull="true">
+				<reportElement x="134" y="1151" width="61" height="15" uuid="95ccb271-3dc0-4876-9fa9-57f8598135ed"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cierre_colones} - $F{apertura_colones}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="134" y="1135" width="61" height="15" uuid="74730969-db4e-4d7d-ac40-b919fde7fc27"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Diferencia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="1600" width="42" height="15" uuid="4f02f21f-f0ed-48ab-9cdd-726f29e2b5d6"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Dolares]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="1568" width="194" height="15" uuid="7c2c2830-74b5-4701-b8f8-b0f7911ee0e0"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total de ventas]]></text>
+			</staticText>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="1616" width="85" height="15" uuid="f052015d-473a-40e1-9698-a9640d0103dd"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ventas_euros}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="1616" width="42" height="15" uuid="929e3caf-46ad-4e5d-a87d-a4cef1a42baa"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Euros]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="1584" width="42" height="15" uuid="946c7874-13c1-495a-a3bf-dc72e7c53ec7"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Colones:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="1584" width="85" height="15" uuid="dce0f192-1bd5-4618-b30e-8e663ef980ff"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ventas_colones}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="1600" width="85" height="15" uuid="543ba178-ccfa-421f-b6dd-c1ab40bc138b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ventas_dolares}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="Float" x="1" y="1705" width="195" height="1" uuid="f9d29450-17fc-4b8a-a685-5332017f8573"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="1670" width="85" height="15" uuid="f7e424fb-5a48-4417-b918-41002af55983"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cierre_total_tarjeta_dolares}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="1686" width="85" height="15" uuid="6e9992fb-e817-4acb-a35d-0269b8033090"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cierre_total_depositos_euros}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="1670" width="42" height="15" uuid="27bd7996-37c8-48a9-84ec-5fc431e5aaaa"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Dolares:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00#">
+				<reportElement x="44" y="1654" width="85" height="15" uuid="344e7842-068a-47a1-8055-7555a2e58294"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cierre_total_efectivo_colones}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="1638" width="194" height="15" uuid="1e12a3ab-934c-4670-b09b-0036563d5e46"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total efectivo del cierre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="1686" width="42" height="15" uuid="1ff284b1-b60c-43e4-9b21-48e4f9526df8"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Euros:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="1654" width="42" height="15" uuid="596b8233-187e-42d7-917b-6aec0fe45217"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Colones:]]></text>
+			</staticText>
+			<line>
+				<reportElement positionType="Float" x="0" y="1634" width="195" height="1" uuid="b7f00d92-f4a3-4597-9711-e018b0e26f93"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<textField pattern="#,##0.00#">
+				<reportElement x="45" y="1514" width="85" height="15" uuid="394a081a-16df-4c01-8e6b-b38a5147c9a6"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_devoluciones_colones}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="1546" width="42" height="15" uuid="2e663c69-253c-4e90-85ce-bb47f2e78e67"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Euros:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="1514" width="42" height="15" uuid="bb933f74-5894-4055-90c7-b8ecae0466f2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Colones:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00#">
+				<reportElement x="45" y="1546" width="85" height="15" uuid="c6ea03cd-04f4-44b4-9775-e10aeae28771"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_devoluciones_euros}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="1498" width="194" height="15" uuid="1d5e5d9e-7a38-47b7-92be-a8d73ffd63f4"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Devoluciones por notas de crédito]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="1530" width="42" height="15" uuid="8201635e-34da-4f90-a0e7-be1c5159e97d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[Dolares:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00#">
+				<reportElement x="45" y="1530" width="85" height="15" uuid="a0141a4c-b7cb-4212-a386-033605e9146f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_devoluciones_dolares}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="Float" x="0" y="1564" width="195" height="1" uuid="138402b6-c9f9-46f4-a857-b6918df12a27"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

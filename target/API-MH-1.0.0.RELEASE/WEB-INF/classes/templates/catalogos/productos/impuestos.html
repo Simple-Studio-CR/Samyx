@@ -1,0 +1,11 @@
+<html xmlns:th="http://www.thymeleaf.org" th:remove="tag">
+
+<tr th:each="k :${listaImpuestos}">
+	<td th:text="${k.impuesto.detalleImpuesto}"></td>
+	<td th:text="${k.codigosTarifasIva != null ? k.codigosTarifasIva.detalleTarifaImpuestoIva : ' - '}"></td>
+	<td class="porcentajeImpuesto" th:text="${k.porcentaje}"></td>
+	<td class="text-align-center">
+		<button class="btn-delete-impuesto" type="button" th:attr="data-id=${k.id},data-p=${k.producto.id}"><i class="fa fa-trash" aria-hidden="true"></i></button>
+	</td>
+</tr>
+</html>

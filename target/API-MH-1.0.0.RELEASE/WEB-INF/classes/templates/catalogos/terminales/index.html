@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:remove="tag">
+
+<tr th:classappend="${k.status} == 2 ? table-danger" th:each="k: ${listaTerminales}">
+      <td th:text="${k.terminal}"></td>
+      <td th:text="${k.nombreTerminal}"></td>
+      <td th:text="${k.consecutivoFe}"></td>
+      <td th:text="${k.consecutivoNd}"></td>
+      <td th:text="${k.consecutivoNc}"></td>
+      <td th:text="${k.consecutivoTe}"></td>
+      <td th:text="${k.consecutivoCCE}"></td>
+      <td th:text="${k.consecutivoCPCE}"></td>
+      <td th:text="${k.consecutivoRCE}"></td>
+      
+      <td th:text="${k.consecutivoFEC}"></td>
+      <td th:text="${k.consecutivoFEE}"></td>
+             
+      <td class="text-align-center" >
+      	
+      	<button data-toggle="modal" data-target=".modal-terminal" class="btn-form-terminal btn waves-effect waves-light  btn-xs btn-outline-secondary" th:attr="data-id=${k.id}">
+      		<i class="fas fa-edit"></i> Editar
+      	</button>								
+      	                                        	
+      </td>
+  </tr>
+
+
+</html>
