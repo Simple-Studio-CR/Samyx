@@ -905,7 +905,10 @@ public class ProformasController {
           } else {
             coma2 = ",";
           } 
+          System.out.println(referenciaFechaDeEmision[k].toString());
           String fechaReferencia = formatDate.format((new SimpleDateFormat("dd/MM/yyyy")).parse(referenciaFechaDeEmision[k].toString())) + "-06:00";
+          
+          
           r = r + "\"" + k + "\":{";
           r = r + "\"tipoDoc\":\"" + referenciaTipoDoc[k].toString() + "\",";
           r = r + "\"numero\":\"" + referenciaClaveDocumento[k].toString() + "\",";
