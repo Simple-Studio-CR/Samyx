@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<div class="row">
+	<div class="col-md-5">
+		<div class="table-responsive tableFixHead table-scroll table-cxc">
+			<div class="table-responsive">
+			    <table id="displayFacturasPendientes" class="table color-bordered-table info-bordered-table">      
+			            <thead>
+			            	<tr>
+			            		<th colspan="6" class="text-align-center"><h2 class="color-blanco">Facturas pendientes</h2></th>
+			            	</tr>
+			            	<tr>
+				                <th style="width: 10%">Factura</th>
+				                <th style="width: 10%">Consecutivo</th>
+				                <th style="width: 10%" class="text-align-right">Vence</th>
+				                <th id="orderCXcPendientes" style="width: 8%" class="text-align-right">Días restantes</th>
+				                <th style="width: 8%" class="text-align-right">Saldo</th>
+				                <th style="width: 8%" class="text-align-center"></th>
+				            </tr>
+			            </thead>
+			  			<tbody id="tbodyFacturasPendientes">
+				            <tr th:id="'row-' + ${k.id}" th:attr="data-j=${k.id}" th:each="k: ${listaFacturasPendientes}">
+				                <td class="sinmata next" th:attr="data-id=${k.id}">
+				                <input type="hidden" th:value="${k.id}" name="idLinea[]" />
+				                [(${k.numeroFactura})]
+				                </td>
+				                <td>  [(${k.consecutivo})] </td>
+				                <td class="sinmata next text-align-right" th:attr="data-id=${k.id}">[(${#dates.format(k.fechaVencimientoFe, 'dd/MM/yyyy')})]</td>                
+				      			<td class="text-align-center">[(${k.statusFactura})]</td>
+				                <td class="sinmata next text-align-right" th:attr="data-id=${k.id}">
+				                	[(${#numbers.formatDecimal(k.deudaActualCXC, 0, 'POINT', 2, 'COMMA')})]
+				                	<input th:id="'row-saldo-cxp-' + ${k.id}" type="hidden" th:value="${k.deudaActualCXC}" />
+				                </td>
+				                <td class="sinmata next text-align-right" th:attr="data-id=${k.id}">
+				                	<button th:id="'btn-cxp-pendiente' + ${k.id}" th:attr="data-id=${k.id}" class="btn btn-xs btn-success btn-block btn-acciones btn-agregar-factura">Agregar<i class="fas fa-angle-right"></i></button>
+				                </td>
+				            </tr>      
+				        </tbody>
+			        <tfoot>
+			        	<tr>
+			        		<td id="saldoCxcPendiente" colspan="6"></td>
+			        	</tr>
+			        </tfoot>
+			    </table>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-1">
+		<button class="btn btn-sm btn-success btn-block" id="btn-agregar-todas-facturas">Agregar todas <i class="fas fa-angle-double-right"></i></button>		
+		<button class="btn btn-sm btn-warning btn-block" id="btn-quitar-todas-facturas"><i class="fas fa-angle-double-left"></i> Eliminar todas</button>
+	</div>
+	<div class="col-md-6">
+		<form id="formCancelarCxc" autocomplete="off" th:action="@{/cxc/abonar-cancelar}" method="post">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="table-responsive">
+						<div class="table-responsive tableFixHead table-scroll table-cxc">
+						    <table id="displayFacturasPorCancelar" class="table color-bordered-table info-bordered-table">      
+						            <thead>
+						            	<tr>
+						            		<th colspan="6" class="text-align-center"><h2 class="color-blanco">Facturas por cancelar</h2></th>
+						            	</tr>
+						            	<tr>
+							                <th style="width: 10%">Factura</th>
+							                <th style="width: 10%">Consecutivo</th>
+							                <th id="orderCXPCancelar" style="width: 10%" class="text-align-right">Vence</th>
+							                <th style="width: 8%" class="text-align-right">Días restantes</th>
+							                <th style="width: 8%" class="text-align-right">Saldo</th>
+							                <th style="width: 8%" class="text-align-right"></th>
+							            </tr>
+						            </thead>
+						  			<tbody id="tbodyFacturasPorCancelar"></tbody>
+						        <tfoot>
+						        	<tr>
+						        		<td id="montoCxcCancelar" colspan="6"></td>
+						        	</tr>
+						        </tfoot>
+						    </table>
+						</div>
+					</div>
+				</div>
+							
+				<div class="col-md-4">
+                     <div class="form-group">
+                         <label class="control-label">Monto a pagar</label>
+                         <input type="text" class="form-control input-lg" onclick="return this.select();" onkeypress="return validateFloatKeyPress(this,event);" maxlength="20" id="montoPagar" name="montoPagar" required="required">
+                     </div>
+                 </div>
+                 
+                 <div class="col-md-4">
+		              <div class="form-group">
+			            <label class="control-label">Fecha pago</label>
+			            <div class="input-group">
+			            	<input type="text" name="fechaPago" th:value="${#calendars.format(#calendars.createNow(), 'dd/MM/yyyy')}" class="form-control input-lg align-right dd-mm-yyyy" placeholder="dd/mm/yyyy" required="required">
+			            	<span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+			            </div>
+			         </div>
+			     </div>
+
+                 <div class="col-md-4">
+                        <div style="margin-bottom: 5px !important;" class="form-group">
+                           <label class="control-label" th:text="#{txt.medio.de.pago}"></label>
+                           <select style="width: 100%" class="form-control input-lg _select2_" name="medioDePago" id="medioDePago" required="required">
+                              <option th:each="k : ${listaMedioDePago}" th:value="${k.id}" th:text="${k.medioDePago}"></option>
+                           </select>
+                        </div>
+                     </div>		                                 
+                  <div style="display: none;"  class="col-md-4 medio-pago-tarjeta">
+                        <div style="margin-bottom: 5px !important;" class="form-group">
+                           <label class="control-label" th:text="#{txt.ultimos.4.digitos.tarjeta}"></label>
+                           <input name="numeroTarjeta" maxlength="4" onclick="return this.select();" type="text" class="input-medio-pago-tarjeta form-control input-lg num-integer">
+                        </div>
+                     </div>
+                     <div style="display: none;"  class="col-md-4 medio-pago-tarjeta">
+                        <div style="margin-bottom: 5px !important;" class="form-group">
+                           <label class="control-label" th:text="#{txt.numero.autorizacion}"></label>
+                           <input name="numeroAutorizacion" maxlength="50" onclick="return this.select();" type="text" class="input-medio-pago-tarjeta form-control input-lg">
+                        </div>
+                     </div>  
+                     <div style="display: none;" class="col-md-4 numero-documento">
+                        <div style="margin-bottom: 5px !important;" class="form-group">
+                           <label class="control-label" th:text="'Número documento'"></label>
+                           <input name="numDocumento" id="numDocumento" maxlength="100" onclick="return this.select();" type="text" class="form-control input-lg" >
+                        </div>
+                     </div> 
+                     
+                     
+                 
+				
+				<div class="col-md-12">
+					<button type="submit" id="btnCancelarCxp" class="btn btn-success"><i class="fas fa-shopping-cart"></i> Pagar factura(a)</button>
+					
+					<button type="button" id="btnImprimirCxp" class="btn btn-info"><i class="fas fa-print"></i> Imprimir recibo</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<script>
+$(document).ready(function(){
+	$('.dd-mm-yyyy').datepicker({
+        autoclose: true,
+        format: 'dd/mm/yyyy',
+        todayHighlight: true
+    });
+	
+	$('.number-format').number(true, [(${ session.SESSION_DECIMALES })], '.', ' ');
+})
+</script>
+
+</html>

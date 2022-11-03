@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout :: head"></head>
+<body class="fix-header card-no-border logo-center">
+
+<div id="main-wrapper">
+
+<header th:replace="layout/layout :: header"></header>
+<aside th:replace="layout/layout :: aside"></aside>
+
+
+
+<!-- ============================================================== -->
+<!-- Page wrapper  -->
+<!-- ============================================================== -->
+<div class="page-wrapper">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    
+    
+    <style th:inline="text">
+		    .clientes{
+		        background-image: url([[@{/images/clientes.png}]]);
+		            padding: 4em 1em;
+				    background-size: 30%;
+				    background-repeat: no-repeat;
+				    background-position: 90% 50%;
+			}
+			.productos{
+		        background-image: url([[@{/images/productos.png}]]);
+		            padding: 4em 1em;
+				    background-size: 30%;
+				    background-repeat: no-repeat;
+				    background-position: 90% 50%;
+			}
+			.facturar{
+		        background-image: url([[@{/images/facturacion.png}]]);
+		            padding: 4em 1em;
+				    background-size: 30%;
+				    background-repeat: no-repeat;
+				    background-position: 90% 50%;
+			}
+			.comprobantes{
+		        background-image: url([[@{/images/comprobantes.png}]]);
+		            padding: 4em 1em;
+				    background-size: 30%;
+				    background-repeat: no-repeat;
+				    background-position: 90% 50%;
+			}
+			.mensaje-receptor{
+		        background-image: url([[@{/images/mr.png}]]);
+		            padding: 4em 1em;
+				    background-size: 30%;
+				    background-repeat: no-repeat;
+				    background-position: 90% 50%;
+			}
+	</style>
+    
+    
+    <div class="container-fluid m-b-10">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        
+       
+       <br> 
+       
+        <div style="display: none;" class="summary-facturas card-group" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h2 class="m-b-0"><i class="mdi mdi-briefcase-check text-info"></i></h2>
+                                    <h3 class="" th:text="${tfe}"></h3>
+                                    <h6 class="card-subtitle">Facturas Electrónicas</h6></div>
+                                <div class="col-12">
+                                    <div class="progress">
+                                        <div th:style="'width: '+${pfe}+'%; height: 6px;'" class="progress-bar bg-info" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <!-- Column -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h2 class="m-b-0"><i class="mdi mdi-alert-circle text-success"></i></h2>
+                                    <h3 class="" th:text="${tnd}"></h3>
+                                    <h6 class="card-subtitle">Notas de Débito</h6></div>
+                                <div class="col-12">
+                                    <div class="progress">
+                                        <div class="progress-bar bg-success" role="progressbar" th:style="'width: '+${pnd}+'%; height: 6px;'" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <!-- Column -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h2 class="m-b-0"><i class="mdi mdi-wallet text-purple"></i></h2>
+                                    <h3 class="" th:text="${tnc}"></h3>
+                                    <h6 class="card-subtitle">Notas de Crédito</h6></div>
+                                <div class="col-12">
+                                    <div class="progress">
+                                        <div class="progress-bar bg-primary" role="progressbar" th:style="'width: '+${pnc}+'%; height: 6px;'" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <!-- Column -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h2 class="m-b-0"><i class="mdi mdi-buffer text-warning"></i></h2>
+                                    <h3 class="" th:text="${tte}"></h3>
+                                    <h6 class="card-subtitle">Tiquetes Electrónicos</h6></div>
+                                <div class="col-12">
+                                    <div class="progress">
+                                        <div class="progress-bar bg-warning" role="progressbar" th:style="'width: '+${pte}+'%; height: 6px;'" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h2 class="m-b-0"><i class="mdi mdi-buffer text-warning"></i></h2>
+                                    <h3 class="" th:text="${tfec}"></h3>
+                                    <h6 class="card-subtitle">Factura Electrónica Compra</h6></div>
+	                                <div class="col-12">
+	                                    <div class="progress">
+	                                        <div class="progress-bar bg-warning" role="progressbar" th:style="'width: '+${pfec}+'%; height: 6px;'" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+	                                    </div>
+	                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h2 class="m-b-0"><i class="mdi mdi-buffer text-warning"></i></h2>
+                                    <h3 class="" th:text="${tfee}"></h3>
+                                    <h6 class="card-subtitle">Factura Electrónica Exportación</h6></div>
+	                                <div class="col-12">
+	                                    <div class="progress">
+	                                        <div class="progress-bar bg-warning" role="progressbar" th:style="'width: '+${pfee}+'%; height: 6px;'" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+	                                    </div>
+	                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+        
+
+        <div class="row justify-content-md-center">
+            <div class="col-md-3">
+            	<a th:href="@{/clientes/}">
+                	<div class="card">
+	                    <div class="card-body clientes">
+	   						<h3>Clientes</h3>
+	                    </div>
+	                </div>
+                </a>
+            </div>
+            <div class="col-md-3" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
+            	<a th:href="@{/productos/}">
+                	<div class="card">
+	                    <div class="card-body productos">
+	   						<h3>Productos</h3>
+	                    </div>
+	                </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+            	<a th:href="@{/facturar/?f=all}">
+                	<div class="card">
+	                    <div class="card-body facturar">
+	   						<h3>Facturar</h3>
+	                    </div>
+	                </div>
+                </a>
+            </div>
+            <div class="col-md-3" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
+            	<a th:href="@{/fe-documentos/}">
+                	<div class="card">	                
+	                    <div class="card-body comprobantes">
+	   						<h3>Comprobantes</h3>
+	                    </div>
+	                </div>
+                </a>
+            </div>
+            <div class="col-md-3" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
+            	<a th:href="@{/mensaje-receptor/}">
+                	<div class="card">	                
+	                    <div class="card-body mensaje-receptor">
+	   						<h3>Mensaje Receptor</h3>
+	                    </div>
+	                </div>
+                </a>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End PAge Content -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Container fluid  -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- footer -->
+    <!-- ============================================================== -->
+    <footer th:replace="layout/layout :: footer"></footer>
+    <!-- ============================================================== -->
+    <!-- End footer -->
+    <!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- End Page wrapper  -->
+<!-- ============================================================== -->
+
+
+
+
+</div>
+
+<div th:replace="layout/layout :: scripts"></div>
+
+
+
+
+
+</body>
+</html>

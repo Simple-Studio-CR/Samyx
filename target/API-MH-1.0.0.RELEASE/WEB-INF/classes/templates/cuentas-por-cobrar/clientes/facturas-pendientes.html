@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+     		<tr th:classappend="${k.estadoPago} == 'N' ? table-danger" th:each="k : ${listaFacturasPendientes}">
+     			<td th:text="${k.numeroFactura}"></td>
+     			<td th:text="${k.consecutivo}"></td>
+     			<td th:text="${#dates.format(k.fechaEmisionFe, 'dd/MM/yyyy')}"></td>
+     			<td th:text="${#dates.format(k.fechaVencimientoFe, 'dd/MM/yyyy')}"></td>
+     			<td class="text-align-center">[(${k.statusFactura})]</td>     			
+     			<td>
+     				<span th:text="${k.moneda}+' '+${#numbers.formatDecimal(k.totalDeuda, 1, 'DEFAULT', 2, 'DEFAULT')}"></span>
+     			</td>
+     			<td>
+     				<span th:text="${k.moneda}+' '+${#numbers.formatDecimal(k.totalDeuda - k.deudaActualCXC, 1, 'DEFAULT', 2, 'DEFAULT')}"></span>
+     			</td>
+     			<td>
+     				<span th:text="${k.moneda}+' '+${#numbers.formatDecimal(k.deudaActualCXC, 1, 'DEFAULT', 2, 'DEFAULT')}"></span>     			
+     				<input class="monto-cxc-actual" type="hidden" th:value="${k.deudaActualCXC}" />
+     			</td>
+     			<td th:text="${k.estadoCuenta}"></td>
+     			<td class="text-align-center">[(${k.estadoTramite})]</td>
+       			<td>
+       				<!--  
+       				<button th:attr="data-id=${k.id}, data-t=${k.enTramite != null ? k.enTramite : 'N'}" type="button" class="btn btn-xs btn-tramitar-factura" th:classappend="${k.enTramite != null && k.enTramite eq 'S'} ? 'btn-success' : 'btn-warning'">
+       					<i class="fas fa-receipt" th:attr="title=#{btn.cxc.tabla.de.abonos}" data-toggle="tooltip"></i> &nbsp;[(${k.enTramite != null && k.enTramite eq 'S' ? 'Cancelar tramite' : 'Tramitar'})]
+       				</button> 
+       				-->
+       				<button th:attr="data-f=${k.numeroFactura},data-id=${k.id},data-c=${k.cliente.id},data-moneda=${k.moneda},data-saldo=${k.deudaActualCXC},data-original=${k.totalDeuda},data-ep=${k.estadoPago}" type="button" class="btn btn-info btn-xs btn-factura-actual">
+       					<i class="fas fa-receipt" th:attr="title=#{btn.cxc.tabla.de.abonos}" data-toggle="tooltip"></i> &nbsp;Ver recibos
+       				</button>
+       				<a th:if="${k.clave != null}" target="_blank" class="btn btn-secondary btn-xs" th:href="@{/imprimir-factura/}+${k.clave}+'/?print=T'">
+						<i class="fas fa-print" th:attr="title=#{btn.cxc.imprimir.factura.original}" data-toggle="tooltip"></i> Imprimir factura original
+					</a>
+			 	</td>     			
+         	</tr>
+         	
+                         	
+</html>

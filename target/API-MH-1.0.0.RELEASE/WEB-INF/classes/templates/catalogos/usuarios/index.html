@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body class="fix-header card-no-border logo-center">
+
+<div id="main-wrapper">
+
+<header th:replace="layout/layout :: header"></header>
+<aside th:replace="layout/layout :: aside"></aside>
+
+
+
+<!-- ============================================================== -->
+<!-- Page wrapper  -->
+<!-- ============================================================== -->
+<div class="page-wrapper">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h3 class="text-themecolor" th:text="#{txt.usuarios}"></h3>
+        </div>
+        <div class="col-md-7 align-self-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)" th:href="@{/}" th:text="#{txt.inicio}"></a></li>
+                <li class="breadcrumb-item active" th:text="#{txt.usuarios}"></li>
+            </ol>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                    <div class="btn btn-success m-b-10 text-align-right float-right">
+                    	<a th:href="@{/catalogos/usuario/form}" class="color-blanco">
+                    		<i class="fa fa-plus" aria-hidden="true"></i> [(#{btn.nuevo.registro})]</span>
+                    	</a>
+                    	
+                    </div>
+                    <br><br>
+                    	<div class="table-responsive">
+                             <table class="table color-table muted-table">
+                                 <thead>
+                                     <tr>
+                                         <th style="width: 20%" th:text="#{txt.usuario.nombre.completo}"></th>
+                                         <th style="width: 10%" th:text="#{txt.usuario.username}"></th>
+                                         <th style="width: 10%" th:text="#{txt.usuario.direccion}"></th>
+                                         <th style="width: 10%" th:text="#{txt.usuario.email}"></th>
+                                         <th style="width: 10%" th:text="#{txt.usuario.estado}"></th>
+                                         <th style="width: 10%" class="text-align-center" th:text="#{txt.acciones}"></th>
+                                     </tr>
+                                 </thead>
+                                 <tbody>
+                                     <tr th:each="k: ${listUsuarios}">
+                                         <td th:text="${k.usuario.nombre}+' '+${k.usuario.apellidoP}+' '+${k.usuario.apellidoM}"></td>
+                                         <td th:text="${k.usuario.username}"></td>
+                                         <td th:text="${k.usuario.direccion}"></td>
+                                         <td th:text="${k.usuario.email}"></td>
+                                         <td>
+                                         	<div th:switch="${k.usuario.enabled}" th:remove="tag"> 
+											  <p th:case="true" th:text="#{txt.estado.activo}"  th:remove="tag">Activo</p>
+											  <p th:case="false" th:text="#{txt.estado.desactivado}"  th:remove="tag">Desactivado</p>
+											</div>
+                                         </td>
+                                         <td class="text-align-center" >
+                                         	<a th:href="@{/catalogos/usuario/edit/}+${k.usuario.id}" th:attr="title=#{btn.actualizar.title}" >
+                                         		<i class="fa fa-edit text-inverse m-r-10"></i>
+                                         	</a>										                                       	
+                                         </td>
+                                     </tr>
+                                 </tbody>
+                             </table>
+                         </div>    
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End PAge Content -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Container fluid  -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- footer -->
+    <!-- ============================================================== -->
+    <footer th:replace="layout/layout :: footer"></footer>
+    <!-- ============================================================== -->
+    <!-- End footer -->
+    <!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- End Page wrapper  -->
+<!-- ============================================================== -->
+
+
+
+
+</div>
+<div th:replace="layout/layout :: scripts"></div>
+
+</body>
+</html>

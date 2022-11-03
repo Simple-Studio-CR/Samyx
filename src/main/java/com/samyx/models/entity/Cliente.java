@@ -2,14 +2,6 @@ package com.samyx.models.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.samyx.models.entity.CBarrio;
-import com.samyx.models.entity.CCanton;
-import com.samyx.models.entity.CDistrito;
-import com.samyx.models.entity.CProvincia;
-import com.samyx.models.entity.CTipoDeIdentificacion;
-import com.samyx.models.entity.CTipoDocumentoExoneracionOAutorizacion;
-import com.samyx.models.entity.Emisor;
-import com.samyx.models.entity.Usuario;
 
 import java.util.Date;
 import javax.persistence.Column;

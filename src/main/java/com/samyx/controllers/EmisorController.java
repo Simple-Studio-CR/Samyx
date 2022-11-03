@@ -120,7 +120,7 @@ public class EmisorController {
 	private String pathUploadFilesApi;
 
 	@GetMapping({ "/" })
-	public String Home(HttpServletRequest request, Model model, Authentication authentication,
+	public Page<Emisor> Home(HttpServletRequest request, Model model, Authentication authentication,
 			@RequestParam(name = "page", defaultValue = "0") int page,
 			@RequestParam(name = "q", defaultValue = "") String q, HttpSession session) {
 		session.removeAttribute("SESSION_EMPRESA_ID");
@@ -136,8 +136,8 @@ public class EmisorController {
 		model.addAttribute("page", pageRender);
 		model.addAttribute("listaEmisor", listaEmisor);
 		if (request.isUserInRole("ROLE_SUPER_ADMIN"))
-			return "/emisor/home";
-		return "/emisor/home";
+			return (Page<Emisor>) ResponseEntity.ok().body(model + "SUPER_ADMIN");
+		return (Page<Emisor>) ResponseEntity.ok().body(model);
 	}
 
 	@Secured({ "ROLE_ADMIN", "ROLE_USER" })

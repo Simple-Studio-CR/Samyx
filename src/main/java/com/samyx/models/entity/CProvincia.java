@@ -16,6 +16,9 @@ public class CProvincia {
 
 	private String provincia;
 
+	public CProvincia() {
+	}
+
 	public Long getId() {
 		return this.id;
 	}
