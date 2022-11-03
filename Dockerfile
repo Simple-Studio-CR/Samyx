@@ -1,4 +1,4 @@
 FROM openjdk:8-jre
 VOLUME /tmp
-ADD ./target/servicing-0.0.1-SNAPSHOT.jar jireh-servicing.jar
-ENTRYPOINT ["java", "-jar", "jireh-servicing.jar"]
+ADD ./target/API-MH-1.0.0.RELEASE.war samyx.jar
+ENTRYPOINT ["java", "-war", "samyx.jar"]
