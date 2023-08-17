@@ -1,252 +1,252 @@
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\controllers\ReportesController.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\IProductoFamiliaService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\ComprobantesElectronicosServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\controllers\cxc\CuentasPorCobrarController.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\CImpuesto.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\FEMensajeReceptorItems.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\CTerminal.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\ICCodigoReferenciaService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\ICProvinciaDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\FEFacturaOtrosCargos.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\IEmisorService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\IUsuarioService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\ICTipoDocumentoExoneracionOAutorizacionDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\util\ConsultaPersonasMH.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\FEItemFacturaServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\controllers\HomeController.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\CProductoImpuestoServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\CActividadEconomica.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\CTipoDeIdentificacionServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\ClienteServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\FEFacturaServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\FEMensajeReceptor.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\ICCantonDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\controllers\controlcajas\ControlCajasController.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\indicadores\economicos\TipoCambio.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\FEMensajeReceptorServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\ICTipoProductoDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\FEFactura.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\controllers\LocaleController.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\IEmpresaUsuarioAccesoDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\ICTerminalService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\IEmisorActividadesService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\CInventarioAjusteItems.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\CTipoDeCambio.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\IMonedaDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\IFEItemFacturaService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\IFEFacturaService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\controllers\UsuarioController.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\util\PasswordGenerator.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\controllers\HandlerErrorController.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\EmpresaUsuarioAccesoServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\FEFacturaRegistroPagosCXC.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\IUploadFileService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\UploadFileServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\EmisorActividades.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\ICProductoImpuestoService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\ICTipoProductoService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\COtrosCargosTipoDocumento.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\FEImpuestosItemFactura.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\controllers\historicos\HistoricoOtrosSistemasController.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\controllers\inventario\ProveedoresController.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\HistoricoOtrosSistemasServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\CTerminalServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\IFEFacturaRegistroPagosCXCDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\ICMedioDePagoService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\ICBarrioDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\ICProductoDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\HistoricoOtrosSistemas.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\CCondicionDeVenta.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\controllers\inventario\AjusteInventarioController.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\ControlCaja.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\ICActividadEconomicaDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\Emisor.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\CDistritoServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\ProductoBodegaServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\IEmisorActividadesDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\FEMensajeReceptorAutomatico.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\controllers\ImpresionController.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\ICCodigosTarifasIvaService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\indicadores\economicos\GetMethod.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\util\PageItem.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\IEmpresaUsuarioAccesoService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\IFEBitacoraService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\IPlanesDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\MonedaServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\Role.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\CTipoDeDocumentoReferenciaServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\FEMensajeReceptorAutomaticoServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\IControlCajaService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\Planes.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\FEFacturaReferencia.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\CInventarioMovimientoItems.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\controllers\TerminalUsuarioController.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\IProductoBodegaService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\CInventarioMovimientoAjusteServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\IFEBitacoraDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\ControlCajaServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\ICDistritoService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\CInventarioMovimientoServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\ICInventarioMovimientoDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\ICProductoService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\IRoleUsuarioDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\UsuarioServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\ICImpuestoDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\controllers\mr\MensajeReceptorController.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\controllers\clientes\ClienteController.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\ProductoFamiliaServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\EmpresaUsuarioAcceso.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\MyEApplication.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\IControlCajaDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\ICTerminalUsuarioDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\ICNivelDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\controllers\UbicacionController.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\IUnidadDeMedidaDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\IFEMensajeReceptorAutomaticoService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\CMedioDePago.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\ICTipoDeIdentificacionService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\ProductoBodega.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\CInventarioMovimiento.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\ICCodigoReferenciaDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\CInventarioAjuste.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\IRoleService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\IControlCajaMovimientosDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\controllers\ConsultarComprobantesController.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\CCodigosTarifasIvaServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\CTerminalUsuario.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\IFEMensajeReceptorAutomaticoDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\IUsuarioDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\ICCondicionDeVentaDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\CCondicionDeVentaServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\FEFacturasCXCServicesImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\ControlCajaMovimientos.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\RoleServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\ICCodigosTarifasIvaDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\ICImpuestoService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\CBarrioServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\ICOtrosCargosTipoDocumentoDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\IFEItemFacturaDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\CTipoProducto.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\PlanesServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\ICTipoDeDocumentoReferenciaService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\ICActividadEconomicaService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\EmisorCabys.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\CTipoDocumentoExoneracionOAutorizacionServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\ICTipoDeCambioService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\CInventarioAjusteItemsImpuesto.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\IFEFacturasCXCServices.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\ICTipoDeDocumentoReferenciaDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\EmisorCabysServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\FEExoneracionImpuestoItemFactura.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\MvcConfig.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\controllers\productos\ProductoController.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\CImpuestoServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\controllers\ComprobantesElectronicosApiController.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\controllers\EmisorController.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\controllers\cxc\ReportesCXC.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\ICCantonService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\IFEMensajeReceptorService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\CCabys.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\UnidadDeMedida.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\ICCondicionDeVentaService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\JpaUserDetailsService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\controllers\FEDocumentosController.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\FEFacturaRegistroPagosCXCServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\CTipoDeIdentificacion.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\IFEFacturaRegistroPagosCXCService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\controllers\mr\MensajeReceptorInboxController.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\FEFacturasCXC.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\controllers\SucursalController.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\CDistrito.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\UnidadDeMedidaServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\controllers\DownloadResourceController.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\ComprobantesElectronicos.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\CTipoProductoServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\IRoleDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\controllers\productos\ProductoFamiliaController.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\ICMedioDePagoDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\IHistoricoOtrosSistemasService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\controllers\PrefacturasController.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\controllers\inventario\FacturaCompraController.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\CInventarioMovimientoItemsImpuesto.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\CBarrio.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\IClienteService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\CCodigoReferencia.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\ProductoFamilia.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\CSucursalServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\CTerminalUsuarioServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\auth\handler\LoginSuccessHandler.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\ICTipoDeCambioDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\controllers\inventario\ReportesInventarioController.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\ICTipoDeIdentificacionDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\controllers\TipoDeCambioController.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\IUnidadDeMedidaService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\util\PageRender.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\ICProductoImpuestoDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\COtrosCargosTipoDocumentoImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\IFEFacturaDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\IProductoBodegaDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\IRolesUsuarioService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\CMedioDePagoServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\Producto.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\CCodigoReferenciaServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\IHistoricoOtrosSistemasDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\SpringSecurityConfig.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\CCanton.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\FEMensajeReceptorItemsImpuestos.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\ICSucursalService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\ICDistritoDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\CNivel.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\IEmisorDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\CProductoImpuesto.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\FuncionesService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\ICInventarioMovimientoService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\FEBitacoraServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\ICTerminalUsuarioService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\FEMensajeReceptorItemsImpuestosExoneraciones.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\FEBitacora.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\CProvinciaServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\IComprobantesElectronicosService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\ICInventarioAjusteDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\Moneda.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\controllers\FacturadorController.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\controllers\LoginController.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\IComprobantesElectronicosDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\EmisorServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\ICBarrioService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\ServletInitializer.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\IControlCajaMovimientosService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\CSucursal.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\CCantonServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\ICTerminalDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\util\XmlHelper.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\ICTipoDocumentoExoneracionOAutorizacionService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\IFEMensajeReceptorDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\CTipoDeDocumentoReferencia.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\controllers\ProformasController.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\ICSucursalDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\IEmisorCabysDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\CTipoDeCambioServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\IPlanesService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\IClienteDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\ControlCajaMovimientosServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\FEFacturaItem.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\RolesUsuario.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\RolesUsuarioServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\indicadores\economicos\XmlParser.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\IFEFacturasCXCDao.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\CCodigosTarifasIva.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\Usuario.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\controllers\TerminalController.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\Cliente.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\EmisorActividadesServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\IEmisorCabysService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\CTipoDocumentoExoneracionOAutorizacion.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\ICInventarioMovimientoAjusteService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\CActividadEconomicaServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\IMonedaService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\impl\CProductoServiceImpl.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\controllers\TipoCambioController.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\entity\CProvincia.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\service\interfaces\ICProvinciaService.java
-C:\Users\SimpleStudio\OneDrive - simplestudiocr.com\Documents\Progra\Samyx\Samyx\src\main\java\com\samyx\models\dao\IProductoFamiliaDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/ICActividadEconomicaDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/CCodigosTarifasIvaServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/IProductoBodegaDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/controllers/TipoDeCambioController.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/FEFacturaOtrosCargos.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/IFEItemFacturaService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/controllers/ComprobantesElectronicosApiController.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/IFEMensajeReceptorService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/controllers/LocaleController.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/Planes.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/ICProductoImpuestoService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/ICCondicionDeVentaDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/IProductoBodegaService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/CMedioDePagoServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/controllers/HandlerErrorController.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/EmpresaUsuarioAccesoServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/IRoleService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/CActividadEconomicaServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/MyEApplication.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/ICTipoDeCambioDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/ICSucursalService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/controllers/productos/ProductoFamiliaController.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/CTipoDeIdentificacion.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/FEMensajeReceptorItemsImpuestosExoneraciones.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/IFEFacturasCXCDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/Usuario.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/ICTipoDeDocumentoReferenciaService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/RolesUsuario.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/IFEFacturaService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/controllers/inventario/FacturaCompraController.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/IControlCajaMovimientosDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/CMedioDePago.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/FEFacturasCXC.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/controllers/FacturadorController.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/CBarrio.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/FEMensajeReceptorItemsImpuestos.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/IUsuarioService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/controllers/SucursalController.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/CSucursal.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/ICProductoImpuestoDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/CTipoProductoServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/CCodigoReferenciaServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/MonedaServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/controllers/inventario/ProveedoresController.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/CBarrioServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/IControlCajaService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/UsuarioServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/ClienteServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/ICImpuestoDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/CImpuesto.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/util/ConsultaPersonasMH.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/IFEFacturaDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/ICCondicionDeVentaService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/util/XmlHelper.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/FEMensajeReceptorServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/FEFacturaRegistroPagosCXC.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/indicadores/economicos/GetMethod.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/CProvincia.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/IFEItemFacturaDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/IControlCajaDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/controllers/PrefacturasController.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/CTipoDocumentoExoneracionOAutorizacion.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/IComprobantesElectronicosDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/ICTerminalUsuarioService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/CTerminalUsuario.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/CTipoDeIdentificacionServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/FEFacturaItem.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/ICTipoDeIdentificacionDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/EmisorCabys.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/controllers/historicos/HistoricoOtrosSistemasController.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/controllers/EmisorController.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/IUsuarioDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/CProductoImpuestoServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/IPlanesDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/IEmisorActividadesDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/FEFacturaServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/controllers/TerminalUsuarioController.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/controllers/TerminalController.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/ControlCajaMovimientos.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/CInventarioMovimientoServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/ProductoBodegaServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/FEMensajeReceptorItems.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/CTerminalUsuarioServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/CInventarioAjusteItems.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/controllers/UsuarioController.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/CCabys.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/CTerminalServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/ICCodigoReferenciaService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/IFEFacturasCXCServices.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/controllers/HomeController.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/IMonedaDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/IProductoFamiliaDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/IFEMensajeReceptorAutomaticoDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/ICTipoDeCambioService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/IUploadFileService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/HistoricoOtrosSistemas.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/Role.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/ICTipoProductoDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/ControlCaja.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/util/PageItem.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/ICInventarioMovimientoDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/Producto.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/ICMedioDePagoDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/Moneda.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/IClienteDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/CCantonServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/JpaUserDetailsService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/EmisorServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/ICImpuestoService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/CNivel.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/CCondicionDeVenta.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/IProductoFamiliaService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/IHistoricoOtrosSistemasService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/CInventarioMovimiento.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/CTipoDeDocumentoReferenciaServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/ICActividadEconomicaService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/CCanton.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/FEItemFacturaServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/COtrosCargosTipoDocumento.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/EmisorActividades.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/CInventarioMovimientoItems.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/RoleServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/IEmisorCabysService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/controllers/ImpresionController.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/ICProvinciaDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/CDistritoServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/controllers/UbicacionController.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/util/PasswordGenerator.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/IFEBitacoraDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/ProductoBodega.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/controllers/TipoCambioController.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/IEmpresaUsuarioAccesoDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/ICTerminalService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/controllers/productos/ProductoController.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/FEImpuestosItemFactura.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/controllers/FEDocumentosController.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/ServletInitializer.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/IEmisorCabysDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/PlanesServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/ICProductoService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/ICBarrioDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/CDistrito.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/ICInventarioAjusteDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/ICNivelDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/ICTipoDocumentoExoneracionOAutorizacionDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/ICCantonService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/ICProvinciaService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/controllers/LoginController.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/indicadores/economicos/TipoCambio.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/IRoleDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/controllers/ConsultarComprobantesController.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/UnidadDeMedidaServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/CActividadEconomica.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/FEBitacoraServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/IPlanesService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/ICCodigosTarifasIvaDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/MvcConfig.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/IFEFacturaRegistroPagosCXCService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/Emisor.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/CCodigoReferencia.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/controllers/clientes/ClienteController.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/controllers/mr/MensajeReceptorInboxController.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/EmisorCabysServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/IHistoricoOtrosSistemasDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/controllers/inventario/AjusteInventarioController.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/FEMensajeReceptor.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/Cliente.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/RolesUsuarioServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/CTipoProducto.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/FuncionesService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/IComprobantesElectronicosService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/IMonedaService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/HistoricoOtrosSistemasServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/CTipoDeCambioServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/FEFacturaRegistroPagosCXCServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/controllers/ProformasController.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/IUnidadDeMedidaDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/controllers/cxc/CuentasPorCobrarController.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/FEFacturaReferencia.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/FEFacturasCXCServicesImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/IFEBitacoraService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/IClienteService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/ICTipoDocumentoExoneracionOAutorizacionService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/IFEMensajeReceptorAutomaticoService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/IControlCajaMovimientosService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/ICTipoDeIdentificacionService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/CTipoDeDocumentoReferencia.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/FEMensajeReceptorAutomaticoServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/IRoleUsuarioDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/CImpuestoServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/EmisorActividadesServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/CProvinciaServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/ICDistritoService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/ICBarrioService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/UploadFileServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/controllers/ReportesController.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/CTerminal.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/ProductoFamilia.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/EmpresaUsuarioAcceso.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/ProductoFamiliaServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/ICCodigosTarifasIvaService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/IEmpresaUsuarioAccesoService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/IUnidadDeMedidaService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/COtrosCargosTipoDocumentoImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/IFEMensajeReceptorDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/ICTipoDeDocumentoReferenciaDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/CSucursalServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/ICOtrosCargosTipoDocumentoDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/CProductoServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/ICSucursalDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/ICDistritoDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/SpringSecurityConfig.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/auth/handler/LoginSuccessHandler.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/IEmisorService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/FEBitacora.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/ICTerminalUsuarioDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/ICInventarioMovimientoAjusteService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/ICInventarioMovimientoService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/IFEFacturaRegistroPagosCXCDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/controllers/controlcajas/ControlCajasController.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/ICMedioDePagoService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/CInventarioAjuste.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/indicadores/economicos/XmlParser.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/CInventarioAjusteItemsImpuesto.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/ICTerminalDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/CInventarioMovimientoAjusteServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/controllers/inventario/ReportesInventarioController.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/CCondicionDeVentaServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/UnidadDeMedida.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/CProductoImpuesto.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/CCodigosTarifasIva.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/ICProductoDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/ICCodigoReferenciaDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/ComprobantesElectronicosServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/ControlCajaServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/ControlCajaMovimientosServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/ComprobantesElectronicos.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/controllers/mr/MensajeReceptorController.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/IEmisorActividadesService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/CInventarioMovimientoItemsImpuesto.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/impl/CTipoDocumentoExoneracionOAutorizacionServiceImpl.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/ICCantonDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/IRolesUsuarioService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/controllers/cxc/ReportesCXC.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/FEMensajeReceptorAutomatico.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/CTipoDeCambio.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/controllers/DownloadResourceController.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/dao/IEmisorDao.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/service/interfaces/ICTipoProductoService.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/FEExoneracionImpuestoItemFactura.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/models/entity/FEFactura.java
+/Users/app2data/IdeaProjects/Samyx/src/main/java/com/samyx/util/PageRender.java
