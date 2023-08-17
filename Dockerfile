@@ -1,4 +1,4 @@
-FROM openjdk:11-jdk-slim
+FROM openjdk:8-jre-slim
 COPY ./target/API-MH-1.0.0.RELEASE.jar API-MH-1.0.0.RELEASE.jar
 EXPOSE 8080
 RUN ls -l
