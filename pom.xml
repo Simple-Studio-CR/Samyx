@@ -175,7 +175,7 @@
         </plugins>
     </build>
 
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
     <organization>
     	<name>Simple Studio</name>
     	<url>simplestudio.app</url>
