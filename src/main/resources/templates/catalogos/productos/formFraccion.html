@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/layout :: head"></head>
+
+<body class="fix-header card-no-border logo-center">
+
+    <div id="main-wrapper">
+
+        <header th:replace="layout/layout :: header"></header>
+        <aside th:replace="layout/layout :: aside"></aside>
+
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="row page-titles">
+                <div class="col-md-5 align-self-center">
+                    <h3 class="text-themecolor" th:text="#{txt.informacion.del.producto}"></h3>
+                </div>
+                <div class="col-md-7 align-self-center">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="javascript:void(0)" th:href="@{/productos/}" th:text="#{txt.inicio}"></a>
+                        </li>
+                        <li class="breadcrumb-item active" th:text="#{txt.informacion.del.producto}"></li>
+                    </ol>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#producto" role="tab" aria-controls="home" aria-selected="true">Producto</a>
+                                    </li>
+								  	<li th:if="${producto.id > 0}" class="nav-item">
+								    	<a class="nav-link getKardex" id="tab-control-kardex" data-toggle="tab" href="#control-kardex" role="tab" aria-controls="contact" aria-selected="false">Kardex</a>
+								  	</li>
+						  
+						  <!-- 
+						  <li th:if="${producto.id > 0}" class="nav-item">
+						    <a class="nav-link" id="control-inventario" th:attr="data-p=${producto.id}" data-toggle="tab" href="#inventario" role="tab" aria-controls="contact" aria-selected="false">Inventario</a>
+						  </li>
+						   -->
+
+                                </ul>
+                                <div class="tab-content" id="myTabContent">
+
+                                    <div th:if="${response}" class="alert alert-warning alert-dismissible m-t-10 fade show" role="alert">
+                                        Ya existe un producto con el código que asigno, debe revisar y cambiarlo.
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+
+                                    <div class="tab-pane fade show active" id="producto" role="tabpanel" aria-labelledby="home-tab">
+
+                                        <form class="p-t-20" id="formProducto" autocomplete="off" th:action="@{/productos/form/save}" th:object="${producto}" method="post">
+
+                                            <div class="form-body">
+
+                                                <div class="row">
+
+                                                    <div class="col-md-6">
+
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="control-label"> Proveedor</label>
+                                                                    <select class="form-control _select2_" th:field="*{proveedor}">
+                                                                        <option value="" selected="selected" th:text="#{txt.combo.seleccione}"></option>
+                                                                        <option th:each="k : ${listaProveedores}" th:value="${k.id}" th:text="${k.nombreCompleto}"></option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="control-label">Familia producto</label>
+                                                                    <select class="form-control _select2_" th:field="*{productoFamilia}">
+                                                                        <option value="" selected="selected" th:text="#{txt.combo.seleccione}"></option>
+                                                                        <option th:each="k : ${listaFamilias}" th:value="${k.id}" th:text="${k.nombreFamilia}"></option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="control-label">Código de barras</label>
+                                                                    <input type="text" class="form-control" th:field="*{codigoBarras}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="control-label"><i class="fas fa-asterisk color-rojo"></i> [(#{txt.codigo.producto})]</label>
+                                                                    <input type="text" class="form-control" th:field="*{codigo}" required="required">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="control-label"><i class="fas fa-asterisk color-rojo"></i> [(#{txt.tipo.producto})]</label>
+                                                                    <select class="form-control _select2_" th:field="*{tipoProducto}" required="required">
+                                                                        <option value="" selected="selected" th:text="#{txt.combo.seleccione}"></option>
+                                                                        <option th:each="k : ${listaTipoProducto}" th:value="${k.id}" th:text="${k.tipoCodigoProductoServicio}"></option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="control-label"><i class="fas fa-asterisk color-rojo"></i> [(#{txt.unidad.de.medida})]</label>
+                                                                    <select class="form-control _select2_" th:field="*{unidadDeMedida}" required="required">
+                                                                        <option value="" selected="selected" th:text="#{txt.combo.seleccione}"></option>
+                                                                        <option th:each="k : ${listaUnidadDeMedida}" th:value="${k.id}" th:text="${k.simbolo}+' - '+${k.descripcion}"></option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="control-label"><i class="fas fa-asterisk color-rojo"></i> [(#{txt.afecta.inventario})]</label>
+                                                                    <select class="form-control _select2_" th:field="*{afectaInventario}" required="required">
+                                                                        <option th:value="'1'">Si</option>
+                                                                        <option th:value="'2'">No</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="control-label"><i class="fas fa-asterisk color-rojo"></i> Devolución IVA</label>
+                                                                    <select class="form-control _select2_" th:field="*{aplicaDevolucionIva}" required="required">
+                                                                        <option th:value="'N'">No aplica</option>
+                                                                        <option th:value="'S'">Si aplica</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="control-label"><i class="fas fa-asterisk color-rojo"></i> Estado</label>
+                                                                    <select class="form-control _select2_" th:field="*{estadoProducto}" required="required">
+                                                                        <option th:value="'A'">Activo</option>
+                                                                        <option th:value="'D'">Desactivado</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                    <label class="control-label"><i class="fas fa-asterisk color-rojo"></i> [(#{txt.nombre.producto})]</label>
+                                                                    <input type="text" class="form-control" th:field="*{nombreProducto}" required="required">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12">
+										                       	<div class="form-group">
+											                      <label class="control-label">Código CABYS</label>
+											                  	  <select class="form-control _select2_" th:field="*{emisorCabys}">
+				                                                        <option value="" selected="selected" th:text="#{txt.combo.seleccione}"></option>
+				                                                        <option th:each="k : ${listaEmisorCabys}" th:value="${k.id}">Código: [(${k.codigoHacienda})], IVA: [(${k.impuesto})], [(${k.productoServicio})]</option>
+				                                                  </select>
+											                  	
+											                  	</div>	
+										                   	</div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="col-md-6">
+
+                                                        <div class="row">
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="control-label"><i class="fas fa-asterisk color-rojo"></i> [(#{txt.moneda})]</label>
+                                                                    <select class="form-control _select2_" th:field="*{moneda}" required="required">
+                                                                        <option value="" selected="selected" th:text="#{txt.combo.seleccione}"></option>
+                                                                        <option th:each="k : ${listaMonedas}" th:value="${k.id}" th:text="${k.simboloMoneda}+' - '+${k.descripcionMoneda}"></option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                             <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="control-label"><i class="fas fa-asterisk color-rojo"></i> Se vende por</label>
+                                                                    <select th:field="*{tipoVenta}" class="form-control _select2_" required="required">
+                                                                    	<option th:value="U">Unidad</option>
+                                                                    	<option th:value="F">Fracción</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="control-label"> Fracciones por unidad</label>
+                                                                    <input readonly="readonly" type="text" class="venta-por-fraccion form-control number-format-final retorna-cero" onclick="return this.select();" th:field="*{fraccionesPorUnidad}" >
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="control-label"><i class="fas fa-asterisk color-rojo"></i> Precio compra unidad</label>
+                                                                    <input type="text" class="form-control number-format-final retorna-cero" onclick="return this.select();" th:field="*{precioCompra}" required="required">
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="control-label"><i class="fas fa-asterisk color-rojo"></i> % Utilidad por unidad</label>
+                                                                    <input type="text" class="form-control number-format-final calcula-precio-venta retorna-cero" onclick="return this.select();" th:field="*{utilidad}" required="required">
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="control-label"><i class="fas fa-asterisk color-rojo"></i> Precio unidad sin IVA</label>
+                                                                    <input type="text" onclick="return this.select();" class="form-control calcula-utilidad number-format-final" th:field="*{precio}" required="required">
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="control-label"> % Utilidad por fracción</label>
+                                                                    <input readonly="readonly" type="text" class="venta-por-fraccion form-control number-format-final calcula-precio-venta-fraccion retorna-cero" onclick="return this.select();" th:field="*{utilidadFraccion}">
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="control-label">Precio fracción sin IVA</label>
+                                                                    <input readonly="readonly" type="text" onclick="return this.select();" class="venta-por-fraccion form-control calcula-utilidad-fraccion number-format-final" th:field="*{precioFraccion}">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4" th:style="${producto.id != null ? 'display:flex' : 'display:none'}">
+                                                                <div class="form-group">
+                                                                    <label class="control-label">Precio promediado</label>
+                                                                    <input readonly="readonly" type="text" class="form-control number-format-final" th:field="*{precioPromediado}">
+                                                                </div>
+                                                            </div>
+
+                                                            
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="control-label" th:text="#{txt.impuestos}"></label>
+                                                                    <input readonly="readonly" id="impuestos" type="text" class="form-control number-format-final">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="control-label">Precio venta unidad IVAI</label>
+                                                                    <input readonly="readonly" id="precioConImpuestos" type="text" class="form-control number-format-final">
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="control-label">Precio venta fracción IVAI</label>
+                                                                    <input readonly="readonly" id="precioFraccionConImpuestos" type="text" class="form-control number-format-final">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="control-label" th:text="'Existencia mínima'"></label>
+                                                                    <input th:field="*{existenciaMinima}" type="text" class="form-control number-format-final">
+                                                                </div>
+                                                            </div>
+
+                                                            <div th:if="${producto.id > 0}" class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="control-label" th:text="'Inventario actual unidades'"></label>
+                                                                    <input type="hidden" th:value="${producto.inventarioActual}" id="_inventarioActualUnidades_" />
+                                                                    <input readonly="readonly" id="inventarioActualUnidades" type="text" class="form-control number-format-final">
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div th:if="${producto.id > 0}" class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="control-label" th:text="'Inventario actual fracciones'"></label>
+                                                                    <input readonly="readonly" id="inventarioActualFracciones" type="text" class="form-control number-format-final">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <label class="control-label"><i class="fas fa-asterisk color-rojo"></i> [(#{txt.producto.exento.gravado})]</label>
+                                                                    <select class="form-control _select2_" th:field="*{productoExento}" required="required">
+                                                                        <option value="" selected="selected" th:text="#{txt.combo.seleccione}"></option>
+                                                                        <option th:value="'1'">Gravado</option>
+                                                                        <option th:value="'2'">Exento</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="row">
+
+                                                </div>
+
+                                                <hr th:if="${producto.id == null}">
+
+                                                <div class="row" th:if="${producto.id == null}" id="contentImpuestoProducto" style="display: none">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                             <label class="control-label">Seleccione el impuesto que desea asignar al producto, por lo general es: "01 - Impuesto al Valor Agregado".</label>
+                                                            <select style="width: 100%" class="form-control _select2_" id="_impuesto_" name="impuesto" required="required">
+                                                                <option value="" selected="selected" th:text="#{txt.combo.seleccione}"></option>
+                                                                <option th:each="k : ${listaImpuestos}" th:value="${k.id}" th:text="${k.labelImpuesto} + ' - ' +${k.detalleImpuesto}"></option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Tarifa del impuesto, por lo general es: "08 - Tarifa general 13%".</label>
+                                                            <select style="width: 100%" class="form-control _select2_" id="_impuesto_tarifa_iva_" name="codigosTarifasIva" required="required">
+                                                                <option value="" selected="selected" th:text="#{txt.combo.seleccione}"></option>
+                                                                <option th:each="k : ${listaCodigosTarifasIva}" th:attr="data-t=${k.tarifa}" th:value="${k.id}" th:text="${k.labelTarifa}+ ' - ' +${k.detalleTarifaImpuestoIva}"></option>
+                                                            </select>
+
+                                                            <input name="porcentaje" id="porcentaje" type="hidden" class="form-control" />
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="form-actions">
+                                                    <p class="color-rojo"><i class="fas fa-asterisk color-rojo"></i> [(#{txt.campos.requeridos})]</p>
+
+                                                    <button type="submit" class="btn btn-success"> <i class="fas fa-save"></i>&nbsp;<span th:text="#{btn.guardar}"></span></button>
+                                                    <input th:value="${id}" type="hidden" />
+                                                    <input id="fraccionesActuales" th:value="${session.SESSION_PRODUCTO_FRACCIONES_POR_UNIDAD}" type="hidden" />
+                                                    
+                                                    
+                                                    <a th:href="@{/productos/}" class="btn btn-inverse" style="color:#FFF !important">
+                                                        <i class="fas fa-chevron-left"></i>&nbsp; <span th:text="#{txt.btn-regresar}"></span>
+                                                    </a>
+                                                </div>
+
+                                            </div>
+                                        </form>
+
+                                        <hr class="m-t-20" th:if="${producto.id > 0}">
+
+                                        <form th:if="${producto.id > 0}" id="formImpuestos" autocomplete="off" th:action="@{/productos/impuesto/save}" method="post">
+                                            <h4 th:if="${producto.id > 0}">Impuestos del producto</h4>
+
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="control-label">
+                                                        Seleccione el impuesto que desea asignar al producto, por lo general es: "01 - Impuesto al Valor Agregado". 
+                                                        </label>
+                                                        <select style="width: 100%" class="form-control _select2_" id="_impuesto_" name="impuesto" required="required">
+                                                            <option value="" selected="selected" th:text="#{txt.combo.seleccione}"></option>
+                                                            <option th:each="k : ${listaImpuestos}" th:value="${k.id}" th:text="${k.labelImpuesto} + ' - ' +${k.detalleImpuesto}"></option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Tarifa del impuesto, por lo general es: "08 - Tarifa general 13%".</label>
+                                                        <select style="width: 100%" class="form-control _select2_" id="_impuesto_tarifa_iva_" name="codigosTarifasIva" required="required">
+                                                            <option value="" selected="selected" th:text="#{txt.combo.seleccione}"></option>
+                                                            <option th:each="k : ${listaCodigosTarifasIva}" th:attr="data-t=${k.tarifa}" th:value="${k.id}" th:text="${k.labelTarifa}+ ' - ' +${k.detalleTarifaImpuestoIva}"></option>
+                                                        </select>
+                                                        <input name="porcentaje" id="porcentaje" type="hidden" class="form-control"  />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <label>&nbsp;</label>
+                                                        <input type="hidden" name="producto" th:value="${productoId}" />
+                                                        <button style="margin-top: -10px; padding:0; height:29px" type="submit" class="btn btn-success btn-block"> <i class="fas fa-save"></i>&nbsp;<span th:text="#{txt.btn.agregar.impuesto}"></span></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </form>
+
+                                        <div th:if="${producto.id > 0}" class="table-responsive">
+                                            <table class="table color-table muted-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 30%" th:text="#{txt.detalle.impuesto}"></th>
+                                                        <th style="width: 20%" th:text="#{txt.impuestos.tarifa.iva}"></th>
+                                                        <th style="width: 10%" th:text="#{txt.detalle.impuesto.porcentaje}"></th>
+                                                        <th style="width: 10%" class="text-align-center" th:text="#{txt.acciones}"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="loadImpuestos">
+                                                    <tr th:each="k :${producto.productoImpuesto}">
+                                                        <td th:text="${k.impuesto.labelImpuesto} + ' - ' +${k.impuesto.detalleImpuesto}"></td>
+                                                        <td th:text="${k.codigosTarifasIva.labelTarifa}+ ' - ' +${k.codigosTarifasIva.detalleTarifaImpuestoIva}"></td>
+                                                        <td class="porcentajeImpuesto" th:text="${k.porcentaje}"></td>
+                                                        <td class="text-align-center">
+                                                            <button class="btn-delete-impuesto" type="button" th:attr="data-id=${k.id},data-p=${k.producto.id}"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="tab-pane fade" id="control-kardex" role="tabpanel">
+                                    	<br>
+                                    	<table class="table color-table table-hover muted-table">
+                                    		<thead>                                    			
+                                    			<tr>
+                                    				<th>Tipo movimiento</th>
+                                    				<th>Documento</th>
+                                    				<th>Fecha</th>
+                                    				<th>Cantidad</th>
+                                    				<th>Fracciones</th>
+                                    				<th>Descuento</th>
+                                    				<th>Total</th>
+                                    			</tr>
+                                    		</thead>
+                                    		<tbody id="loadKardex"></tbody>
+                                    	</table>
+                                    </div>
+                                    <div class="tab-pane fade" id="inventario" role="tabpanel" aria-labelledby="control-inventario">
+                                        <div id="loadInventario"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+            <footer th:replace="layout/layout :: footer"></footer>
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+            <input id="csrfToken" type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+
+    </div>
+    <div th:replace="layout/layout :: scripts"></div>
+    <span th:if="${param.exito}">
+							<script>
+								swal("Éxito","Registro guardado con éxito","success");
+							</script>
+						</span>
+    <script type="text/javascript">
+        var token = $('#csrfToken').val();
+
+        $(document).on("change", "#productoExento", function() {
+
+            var v = $(this).val();
+            if (parseInt(v) == 1) {
+            	
+            	//Campos requeridos
+            	$("#_impuesto_").prop("required", true);
+                $("#_impuesto_tarifa_iva_").prop("required", true);
+
+                $("#contentImpuestoProducto").show();
+
+                $("#_impuesto_").val("1");
+                $("#_impuesto_tarifa_iva_").val("8");
+                $("#porcentaje").val("13");
+
+            } else {
+
+            	//Campos requeridos no
+            	$("#_impuesto_").prop("required", false);
+                $("#_impuesto_tarifa_iva_").prop("required", false);
+                
+                $("#contentImpuestoProducto").hide();
+
+                $("#_impuesto_").val("");
+                $("#_impuesto_tarifa_iva_").val("");
+                $("#porcentaje").val("");
+            }
+
+            $("#_impuesto_, #_impuesto_tarifa_iva_").select2();
+
+        });
+
+        $(document).on("change", "#_impuesto_tarifa_iva_", function() {
+            var v = $(this).find(':selected').data('t');
+            $("#porcentaje").val(v);
+        });
+
+        function calculaImpuestos() {
+
+            var precio = $("#precio").val();;
+            var totalImpuestos = 0;
+            var impuestos = 0;
+            var precioConImpuestos = 0;
+
+            $('.porcentajeImpuesto').each(function() {
+                totalImpuestos += parseFloat($(this).html());
+            });
+
+            $("#impuestos").val((precio / 100) * totalImpuestos);
+            $("#precioConImpuestos").val(parseFloat($("#impuestos").val()) + parseFloat(precio));
+        }
+
+        $(document).on("keyup", "#precio", function() {
+            calculaImpuestos();
+        });
+
+        calculaImpuestos();
+        
+        function calculaImpuestosFraccion() {
+
+        	var v  = $("#tipoVenta").val();	
+            var precio = $("#precioFraccion").val();
+            var totalImpuestos = 0;
+            var impuestos = 0;
+            var precioConImpuestos = 0;
+
+            $('.porcentajeImpuesto').each(function() {
+                totalImpuestos += parseFloat($(this).html());
+            });
+            
+            $("#precioFraccionConImpuestos").val( parseFloat(precio) + (totalImpuestos * parseFloat(precio)) / 100 );
+
+            var v  = $("#tipoVenta").val();				
+			if(v == "F"){
+				$(".venta-por-fraccion").prop("readonly", false);
+				$(".venta-por-fraccion").prop("required", true);				
+			}else{
+				$(".venta-por-fraccion").prop("readonly", true);
+				$(".venta-por-fraccion").prop("required", false);
+			}
+
+        }calculaImpuestosFraccion();
+
+        function getImpuestos(j) {
+            $.ajax({
+                type: "POST",
+                cache: false,
+                beforeSend: function() {},
+                url: "[(@{/productos/impuesto/get-all})]",
+                data: {
+                    id: j,
+                    _csrf: token
+                },
+                success: function(data) {
+                    $("#loadImpuestos").html(data);
+                    calculaImpuestos();
+
+                },
+                complete: function() {
+                    //loading_hide();
+                },
+                error: function(x, t, m) {
+                    if (t === "timeout") {
+
+                    } else {
+
+                    }
+                }
+            });
+        }
+
+        $("#formProducto").submit(function(event) {
+            $.ajax({
+                type: "POST",
+                cache: false,
+                beforeSend: function() {
+                    loadingShow();
+                },
+                url: "[(@{/productos/form/save})]",
+                data: $(this).serialize(),
+                success: function(data) {
+
+                    if (parseInt(data.response) === 200 && data.registro === "N") {
+
+                        notificacion("El registro se guardo con éxito.");
+                        setTimeout(function() {
+                            location.href = "[(@{/productos/edit/})]" + data.id;
+                        }, 2500);
+
+                    } else if (parseInt(data.response) === 200 && parseInt(data.response) > 0) {
+                        notificacion("El registro se guardo con éxito.");
+                    }else{
+                    	swal("Notificación!!!", "Ya existe un producto con el código: " + $("#codigo").val() + ", verifique y asigne un nuevo código.", "warning");
+                    }
+
+                },
+                complete: function() {
+                    loadingHide();
+                },
+                error: function(x, t, m) {
+                    if (t === "timeout") {
+
+                    } else {
+
+                    }
+                }
+            });
+
+            return false;
+        });
+
+        $("#formImpuestos").submit(function(event) {
+            $.ajax({
+                type: "POST",
+                cache: false,
+                beforeSend: function() {
+                    loadingShow();
+                },
+                url: "[(@{/productos/impuesto/save})]",
+                data: $(this).serialize(),
+                success: function(data) {
+                    if (parseInt(data.response) === 200) {
+
+                        getImpuestos(data.id);
+
+                        $("#porcentaje, #_impuesto_, #_impuesto_tarifa_iva_").val("");
+
+                        $("#_impuesto_").select2();
+                        $("#_impuesto_tarifa_iva_").select2();
+
+                        notificacion("El registro se guardo con éxito.");
+                    } else {
+                        swal("!Notificación¡", "El producto ya tiene asignado el impuesto seleccionado.", "warning");
+                    }
+
+                },
+                complete: function() {
+                    loadingHide();
+                },
+                error: function(x, t, m) {
+                    if (t === "timeout") {
+
+                    } else {
+
+                    }
+                }
+            });
+
+            return false;
+        });
+
+        $(document).on("click", ".btn-delete-impuesto", function() {
+
+            swal({
+                    title: "Atención",
+                    text: "Confirme la eliminación del registro, no se podrá recuperar!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+
+                        $.ajax({
+                            type: "POST",
+                            cache: false,
+                            beforeSend: function() {},
+                            url: "[(@{/productos/impuesto/delete})]",
+                            data: {
+                                _csrf: token,
+                                id: $(this).attr("data-id"),
+                                productoId: $(this).attr("data-p")
+                            },
+                            success: function(data) {
+                                if (parseInt(data.response) === 200) {
+                                    $("#_impuesto").val("");
+                                    getImpuestos(data.id);
+                                    calculaImpuestos();
+
+                                    notificacion("El registro eliminado con éxito.");
+
+                                } else {
+                                    swal("", "Ocurrió un error contacte al administrador del sistema", "warning");
+                                }
+
+                            },
+                            complete: function() {
+                                //loading_hide();
+                            },
+                            error: function(x, t, m) {
+                                if (t === "timeout") {
+
+                                } else {
+
+                                }
+                            }
+                        });
+
+                    }
+                });
+
+            return false;
+        });
+        
+        $(document).on("input", ".calcula-precio-venta", function(){
+        	
+        	var v = parseFloat( $("#precioCompra").val() );
+        	var b = $(this).val();
+        	
+        	if(parseFloat(v) === 0){
+        		swal("", "Debe ingresar el precio de compra primero para hacer el calculo!!!", "warning");
+        		return false;
+        	}
+        	
+        	var f = parseFloat( v + ((v * b) / 100) );
+
+        	$("#precio").val( f );
+        	
+        	calculaImpuestos();
+        	
+        	var tv = $("#tipoVenta").val();			
+    		if(tv == "F"){
+    			calculaPrecioVentaFraccion();
+            	calculaImpuestosFraccion();
+    		}
+
+        });
+        
+        function calculaPrecioVentaFraccion(){
+        	
+        	var fr = $("#fraccionesPorUnidad").val();
+        	var v = parseFloat( $("#precio").val() );
+        	var b = $(".calcula-precio-venta-fraccion").val();
+        	var j = 0;
+        	
+        	try {
+       		  	j = parseFloat(v) / parseFloat(fr);       		  	
+       		}catch(error) {
+       			
+       			console.log(error);
+       			
+       			j = v;
+       		}
+        	
+        	if(parseFloat(v) === 0){
+        		swal("", "Debe ingresar el precio de compra primero para hacer el calculo!!!", "warning");
+        		return false;
+        	}
+        	
+        	var f = parseFloat( j ) + parseFloat( (j * b) / 100 );
+
+        	$("#precioFraccion").val( f );
+        }
+        
+		$(document).on("input", ".calcula-precio-venta-fraccion", function(){
+
+			calculaPrecioVentaFraccion();
+        	calculaImpuestosFraccion();
+
+        });
+
+		$(document).on("input", ".calcula-utilidad", function(){
+        	
+			var compra = parseFloat( $("#precioCompra").val() );
+        	var venta  = parseFloat( $(this).val() );
+        	
+        	if(parseFloat(compra) === 0){
+        		swal("", "Debe ingresar el precio de compra primero para hacer el calculo!!!", "warning");
+        		return false;
+        	}
+        	
+        	var f = parseFloat( ( (venta - compra) / compra) * 100 );
+
+        	$("#utilidad").val( f );
+        	calculaImpuestos();
+        	
+        	var tv = $("#tipoVenta").val();			
+    		if(tv == "F"){
+    			calculaPrecioVentaFraccion();
+            	calculaImpuestosFraccion();
+    		}			
+        });
+		
+		
+		$(document).on("input", ".calcula-utilidad-fraccion", function(){
+        	
+			var pc = parseFloat( $("#precio").val() ) / parseFloat( $("#fraccionesPorUnidad").val() );
+			var pv  = parseFloat( $(this).val() );
+			
+			if(parseFloat(pc) === 0){
+        		swal("", "Debe ingresar el precio de compra primero para hacer el calculo!!!", "warning");
+        		return false;
+        	}
+
+        	var f = parseFloat( ( (pv - pc) / pc) * 100 );
+
+        	$("#utilidadFraccion").val( f );
+        	calculaImpuestos();
+        	
+        	var tv = $("#tipoVenta").val();			
+    		if(tv == "F"){
+    			//calculaPrecioVentaFraccion();
+            	//calculaImpuestosFraccion();
+    		}
+			
+        });
+		
+		
+		function ventaPorFraccion(){			
+			var v  = $("#tipoVenta").val();	
+			var ia = $("#_inventarioActualUnidades_").val();
+			var fa = $("#fraccionesActuales").val(); // Fracciones actuales
+			var fr = $("#fraccionesPorUnidad").val();
+			
+			if(v == "F"){
+				$("#inventarioActualFracciones").val( parseFloat(ia) );
+				$("#inventarioActualUnidades").val( parseFloat(ia) / parseFloat(fr) );
+				
+			}else{
+				$("#inventarioActualFracciones").val( 0 );
+				$("#inventarioActualUnidades").val( parseFloat(ia) );
+			}	
+			
+			
+		}ventaPorFraccion();
+		
+		$(document).on("input", "#fraccionesPorUnidad", function(){
+			
+			var v  = $("#tipoVenta").val();	
+			var ia = $("#_inventarioActualUnidades_").val();
+			var fr = $("#fraccionesPorUnidad").val();
+			var fa = $("#fraccionesActuales").val(); // Fracciones actuales
+			
+			if(v == "F"){
+				$("#inventarioActualUnidades").val( parseFloat(ia) );
+				$("#inventarioActualFracciones").val( parseFloat(ia) * parseFloat(fr) );
+				
+			}else{
+				$("#inventarioActualUnidades").val( parseFloat(ia) );
+				$("#inventarioActualFracciones").val( 0 );
+				$("#fraccionesPorUnidad").val( 0 );
+			}	
+			
+		});
+		
+		$(document).on("change", "#tipoVenta", function(){
+			var v  = $("#tipoVenta").val();	
+			var ia = $("#_inventarioActualUnidades_").val();
+			var fr = $("#fraccionesPorUnidad").val();
+			var fa = $("#fraccionesActuales").val(); // Fracciones actuales
+			
+			if(v == "F"){
+				$(".venta-por-fraccion").prop("readonly", false);
+				$(".venta-por-fraccion").prop("required", true);
+				
+				$("#inventarioActualUnidades").val( parseFloat(ia) / parseFloat(fr) );
+				$("#inventarioActualFracciones").val( parseFloat(ia) );
+				
+			}else{
+				$(".venta-por-fraccion").prop("readonly", true);
+				$(".venta-por-fraccion").prop("required", false);
+				
+				//$("#inventarioActualUnidades").val(ia);
+				$("#inventarioActualUnidades").val( parseFloat(ia) / parseFloat(fa) );
+				$("#inventarioActualFracciones").val( 0 );
+				
+				$("#fraccionesPorUnidad").val( 0 );
+			}
+		});
+		
+		$(document).on("click", ".getKardex", function(e){	
+			
+			
+			$.ajax({
+			      type: "POST",
+			      cache: false,
+			      beforeSend: function () {
+			    	  loadingShow();
+			      },
+			      url: "[(@{/productos/kardex})]",
+			      data: { _csrf:token },
+			      success: function (data)
+			      {
+			      	
+			    	  $("#loadKardex").html(data);
+			          
+			      }, complete: function () {
+			          loadingHide();
+			      }, error: function (x, t, m) {
+			          if (t === "timeout") {
+			              
+			          } else {
+			              
+			          }
+			      }
+			  });
+			
+			return false;
+			
+		});
+        
+    </script>
+
+</body>
+
+</html>

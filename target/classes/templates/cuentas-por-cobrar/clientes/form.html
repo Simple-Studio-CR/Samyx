@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body class="fix-header card-no-border logo-center">
+
+<div id="main-wrapper">
+
+<header th:replace="layout/layout :: header"></header>
+<aside th:replace="layout/layout :: aside"></aside>
+
+
+
+<!-- ============================================================== -->
+<!-- Page wrapper  -->
+<!-- ============================================================== -->
+<div class="page-wrapper">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h3 class="text-themecolor" th:text="#{txt.datos.del.cliente}"></h3>
+        </div>
+        <div class="col-md-7 align-self-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)" th:href="@{/cxc/}" th:text="#{txt.inicio}"></a></li>
+                <li class="breadcrumb-item active" th:text="#{txt.datos.del.cliente}"></li>
+            </ol>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                    
+                    	<form id="formAddCliente" th:object="${cliente}">
+                           <div class="form-body">
+
+								 <div class="row">
+		                             <div class="col-md-2">
+		                                <div class="form-group">
+		                                    <label class="control-label">[(#{txt.tipo.identificacion})]</label>
+		                                    <select disabled="disabled" class="form-control _select2_" th:field="*{tipoDeIdentificacion}" required="required">
+		                                    	<option value="" selected="selected" th:text="#{txt.combo.seleccione}"></option>
+		                                    	<option th:each="k : ${listaTipoDeIdentificacion}" th:value="${k.id}" th:text="${k.tipoDeIdentificacion}"></option>
+		                                    </select>
+		                              	</div>
+		                             </div>	
+		                             <div class="col-md-1">
+		                                <div class="form-group">
+		                                    <label class="control-label">[(#{txt.identificacion})]</label>
+		                                    
+		                                  	<input disabled="disabled" type="text" th:attr="maxlength=9" class="form-control num-integer" th:field="*{identificacion}" required="required"> 
+		                                    
+		                              	</div>
+		                             </div>
+		                             <div class="col-md-3">
+		                                <div class="form-group">
+		                                    <label class="control-label">[(#{txt.nombre.completo})]</label>
+		                                    <input disabled="disabled" type="text" maxlength="80" class="form-control" th:field="*{nombreCompleto}" required="required">
+		                              	</div>
+		                             </div>
+		                             <div class="col-md-1">
+		                                <div class="form-group">
+		                                    <label class="control-label" th:text="#{txt.telefono1}"></label>
+		                                    <input disabled="disabled" type="text" class="form-control num-integer" th:value="'+'+${cliente.codigoPais} +' '+ ${cliente.telefono1}">
+		                              	</div>
+		                             </div>
+		                             <div class="col-md-1">
+		                                <div class="form-group">
+		                                    <label class="control-label" th:text="#{txt.telefono2}"></label>
+		                                    <input disabled="disabled" type="text" class="form-control num-integer" th:field="*{telefono2}">
+		                              	</div>
+		                             </div>
+		                             
+		                             <div class="col-md-2">
+		                                <div class="form-group">
+		                                    <label class="control-label" >[(#{txt.correo1})]</label>
+		                                    <input disabled="disabled" type="email" maxlength="150" class="form-control" th:field="*{correo1}" required="required">
+		                              	</div>
+		                             </div>
+
+		                             <div class="col-md-2">
+		                                <div class="form-group">
+		                                    <label class="control-label" th:text="#{txt.correo2}"></label>
+		                                    <input disabled="disabled" type="email" maxlength="150" class="form-control" th:field="*{correo2}">
+		                              	</div>
+		                             </div>
+
+		                             <input type="hidden" th:value="${cliente.id}" id="clienteId" />
+		                             
+		                             </div>
+
+                             </div>
+                         </form>  
+	
+						 <hr>
+    					 <div class="row m-b-10">
+    					 	<div class="col-md-2">
+    					 		<span class="prefactura-movil btn-block btn btn-info btn-sm"><i class="fas fa-coins"></i> Total deuda: <span id="deudaActualCXC"></span></span>
+    					 	</div>
+    					 	<div class="col-md-2">
+    					 		<button type="button" class="prefactura-movil btn-block btn btn-success btn-sm btn-cargar-factura"><i class="fas fa-credit-card"></i> Abonar / Pagar facturas</button>
+    					 	</div>
+    					 	<div class="col-md-2">
+    							<a class="btn btn-success btn-block btn-sm color-blanco btn-imprimir-estado-cuenta-canceladas" href="#" th:attr="title='Estado de cuenta del cliente (canceladas)', data-link=${cliente.id}+'?j=v'" data-toggle="tooltip">
+                               		<i class="fas fa-file-pdf"></i> Estado de cuenta (canceladas)
+                               	</a>					 		
+    					 	</div>
+    					 	<div class="col-md-2">
+    							<a class="btn btn-success btn-block btn-sm color-blanco btn-imprimir-estado-cuenta" href="#" th:attr="title='Estado de cuenta del cliente (vencidas)', data-link=${cliente.id}+'?j=v'" data-toggle="tooltip">
+                               		<i class="fas fa-file-pdf"></i> Estado de cuenta (vencidas)
+                               	</a>					 		
+    					 	</div>
+    					 	<div class="col-md-2">
+    					 		<a class="btn btn-success btn-block btn-sm color-blanco btn-imprimir-estado-cuenta" href="#" th:attr="title='Estado de cuenta del cliente', data-link=${cliente.id}" data-toggle="tooltip">
+                               		<i class="fas fa-file-pdf"></i> Estado de cuenta
+                               	</a>					 		
+    					 	</div>
+    					 	<div class="col-md-2">
+    					 		 <select id="_filtroFacturas" class="form-control _select2_">
+		    					 	<option value="A">Facturas pendientes</option>
+		    					 	<option value="C">Facturas canceladas</option>
+		    					 	<option value="N">Facturas anuladas</option>
+		    					 </select>
+    					 	</div>
+    					 </div>
+
+    					 <div class="table-responsive table-responsive tableFixHead table-scroll">
+                         <table class="table color-table table-hover muted-table">
+                         	<thead>
+                         		<tr>
+                         			<th>Número de factura</th>
+                         			<th>Consecutivo electronico</th>
+                         			<th>Fecha emision</th>
+                         			<th>Fecha vencimiento</th>
+                         			<th class="text-align-center">Estado</th>
+                         			<th>Monto original</th>
+                         			<th>Movimientos</th>
+                         			<th>Deuda actual</th>
+                         			<th>Estado</th>
+                         			<th>En tramite</th>
+                         			<th>Acciones</th>
+                         		</tr>
+                         	</thead>
+                         	<tbody id="_facturasPendientes"></tbody>
+                         	<tfoot>
+                         		<tr>
+                         			<td></td>
+                         			<td></td>
+                         			<td></td>
+                         			<td></td>
+                         			<td></td>
+                         			<td></td>
+                         			<td></td>
+                         			<td></td>
+                         			<td></td>
+                         			<td></td>
+                         			<td></td>
+                         		</tr>
+                         	</tfoot>
+                         </table>
+                         </div>
+                         
+                         <hr>
+                         <h2>Registro de abonos</h2>
+                         
+                         <div class="table-responsive">
+					        <table class="table color-table table-hover muted-table">
+					        	<thead>
+					        		<tr>
+					        			<th style="text-align: right; width: 10%;">N° recibo</th>
+					        			<th style="text-align: right; width: 10%;">N° factura</th>
+						        		<th style="text-align: right; width: 20%;">Fecha registro</th>
+						        		<th style="text-align: right; width: 10%;">Fecha pago</th>
+						        		<th style="text-align: right; width: 10%;">Monto abono</th>
+						        		<th style="text-align: right; width: 10%;">Saldo actual</th>
+						        		<th style="width: 20%;" class="m-l-20">Medio de pago</th>
+						        		<th style="width: 10%;">Acciones</th>
+						        	</tr>
+					        	</thead>
+					        	<tbody id="detallePagos"></tbody>
+					        	<tfoot id="footerPagos"></tfoot>
+					        </table>
+					        </div>
+                         
+                         <div class="modal fade modalFactura" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
+							  <div class="modal-dialog modal-lg modal-elg" role="document">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <h5 class="modal-title" id="exampleModalLabel">Modal cuentas por cobrar</h5>
+							        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							          <span aria-hidden="true">&times;</span>
+							        </button>
+							      </div>
+							      <div class="modal-body">
+							      	<h2 id="clienteCXC"></h2>
+							        <div id="loadCuentaPorCobrar"></div>
+							        <input type="hidden" id="cxcPrintMasivo" />
+							      </div>
+							      <div class="modal-footer">
+						           <button type="button" class="btn btn-inverse" data-dismiss="modal"><i class="fas fa-window-close"></i> Cerrar</button>
+							      </div>
+							    </div>
+							  </div>
+							</div>  
+                         
+                         <div data-backdrop="static" data-keyboard="false" class="modal fade crear-abono" tabindex="-1" role="dialog" aria-hidden="true">
+						  <div class="modal-dialog modal-medium modal-dialog-scrollable" role="document">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <h5 class="modal-title">Registrar abono a la factura # <span id="numeroFactura"></span></h5>
+						        <button type="button" class="close" onclick="return clearForm()" data-dismiss="modal" aria-label="Close">
+						          <span aria-hidden="true">&times;</span>
+						        </button>
+						      </div>
+						      <div class="modal-body">
+						      
+						      	<h3>Saldo de la factura: <span class="badge badge-secondary">
+						      								<span id="monedaSaldoFactura" class="number-format"></span>
+						      								<span id="saldoFactura" class="number-format"></span>
+						      							  </span></h3>
+						        
+						        <form id="formNewAbono" th:action="@{/cxc/abonar-factura}" autocomplete="off" method="post">
+							        <div class="row">
+					        	
+							        	<div class="col-md-3">
+			                                <div style="margin-bottom: 5px !important;" class="form-group">
+			                                    <label class="control-label"><i class="fas fa-asterisk color-rojo"></i> Monto del abono</label>
+			                                    <input type="text" placeholder="0.0" onkeypress="return validateFloatKeyPress(this,event);" class="form-control" required="required" id="montoAbono" name="montoAbono">
+			                              	</div>
+			                             </div>
+			                             
+			                             <div class="col-md-3">
+			                             <div class="form-group">
+							                <label class="control-label">Fecha pago</label>
+							                <div class="input-group">
+							                	<input type="text" name="fechaPagoAbondo" id="_fechaPagoAbondo" th:value="${#dates.format(standardDate, 'dd/MM/yyyy')}" class="form-control align-right dd-mm-yyyy" placeholder="dd/mm/yyyy" required="required">
+							                	<span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+							                </div>
+							             </div>
+							             </div>
+			                             
+			                             <div class="col-md-3">
+		                                    <div style="margin-bottom: 5px !important;" class="form-group">
+		                                       <label class="control-label" th:text="#{txt.medio.de.pago}"></label>
+		                                       <select style="width: 100%" class="form-control _select2_" name="medioDePago" id="medioDePago" required="required">
+		                                          <option th:each="k : ${listaMedioDePago}" th:value="${k.id}" th:text="${k.medioDePago}"></option>
+		                                       </select>
+		                                    </div>
+		                                 </div>		                                 
+			                             <div style="display: none;"  class="col-md-3 medio-pago-tarjeta">
+		                                    <div style="margin-bottom: 5px !important;" class="form-group">
+		                                       <label class="control-label" th:text="#{txt.ultimos.4.digitos.tarjeta}"></label>
+		                                       <input name="numeroTarjeta" maxlength="4" onclick="return this.select();" type="text" class="input-medio-pago-tarjeta form-control num-integer">
+		                                    </div>
+		                                 </div>
+		                                 <div style="display: none;"  class="col-md-3 medio-pago-tarjeta">
+		                                    <div style="margin-bottom: 5px !important;" class="form-group">
+		                                       <label class="control-label" th:text="#{txt.numero.autorizacion}"></label>
+		                                       <input name="numeroAutorizacion" maxlength="50" onclick="return this.select();" type="text" class="input-medio-pago-tarjeta form-control ">
+		                                    </div>
+		                                 </div>  
+		                                 <div style="display: none;" class="col-md-3 numero-documento">
+		                                    <div style="margin-bottom: 5px !important;" class="form-group">
+		                                       <label class="control-label" th:text="'Número documento'"></label>
+		                                       <input name="numDocumento" id="numDocumento" maxlength="100" onclick="return this.select();" type="text" class="form-control " >
+		                                    </div>
+		                                 </div>  
+			                             <div class="col-md-3">
+			                                <div style="margin-bottom: 5px !important;" class="form-group">
+			                                    <label class="control-label">&nbsp;</label>
+			                                    
+			                                    <input type="hidden" name="facturaCXC" id="_factura" />
+			                                    <input type="hidden" name="cliente" id="_cliente" />
+			                                    <input type="hidden" id="_facOriginal" />
+			                                    <input type="hidden" id="_montoActual" name="montoActual" />
+			                                    
+			                                    <button class="btn btn-success btn-sm btn-block" id="btnAplicarAbondo" type="submit">
+				                              		<i class="fas fa-plus"></i>&nbsp; Aplicar abono
+				                              	</button>
+			                                    
+			                              	</div>
+			                             </div>
+							        </div>
+						        </form>
+						        
+						        <div class="table-responsive">
+						        <table class="table color-table table-hover muted-table">
+						        	<thead>
+						        		<tr>
+						        			<th style="text-align: right; width: 10%;">N° recibo</th>
+						        			<th style="text-align: right; width: 10%;">N° factura</th>
+							        		<th style="text-align: right; width: 20%;">Fecha registro</th>
+							        		<th style="text-align: right; width: 10%;">Fecha pago</th>
+							        		<th style="text-align: right; width: 10%;">Monto abono</th>
+							        		<th style="text-align: right; width: 10%;">Saldo actual</th>
+							        		<th style="width: 20%;" class="m-l-20">Medio de pago</th>
+							        		<th style="width: 10%;">Acciones</th>
+							        	</tr>
+						        	</thead>
+						        	<tbody id="detallePagos"></tbody>
+						        	<tfoot id="footerPagos"></tfoot>
+						        </table>
+						        </div>
+						        
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-secondary" onclick="return clearForm()" data-dismiss="modal">Cerrar</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+                         
+                         
+                         
+                    </div>
+                </div>
+            </div>
+            
+            
+        <!-- ============================================================== -->
+        <!-- End PAge Content -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Container fluid  -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- footer -->
+    <!-- ============================================================== -->
+    <footer th:replace="layout/layout :: footer"></footer>
+    <!-- ============================================================== -->
+    <!-- End footer -->
+    <!-- ============================================================== -->
+    <input id="csrfToken" type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+</div>
+<!-- ============================================================== -->
+<!-- End Page wrapper  -->
+<!-- ============================================================== -->
+
+</div>
+
+<div class="modal fade" id="mostrarPdfParaImprimir" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Factura</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <iframe style="width: 100%; height: 500px" id="loadPdfParaImprimir" src=""></iframe>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-inverse" data-dismiss="modal"><i class="fas fa-window-close"></i> Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div th:replace="layout/layout :: scripts"></div>
+<div th:replace="cuentas-por-cobrar/clientes/scriptCXC :: scriptCXCConfig"></div>
+
+
+
+</body>
+</html>

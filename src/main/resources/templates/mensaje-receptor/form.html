@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body class="fix-header card-no-border logo-center">
+
+<div id="main-wrapper">
+
+<header th:replace="layout/layout :: header"></header>
+<aside th:replace="layout/layout :: aside"></aside>
+
+<!-- ============================================================== -->
+<!-- Page wrapper  -->
+<!-- ============================================================== -->
+<div class="page-wrapper">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h3 class="text-themecolor" th:text="#{txt.mensaje.receptor}"></h3>
+        </div>
+        <div class="col-md-7 align-self-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)" th:href="@{/mensaje-receptor/}" th:text="#{txt.inicio}"></a></li>
+                <li class="breadcrumb-item active" th:text="#{txt.mensaje.receptor}"></li>
+            </ol>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+
+                    	<form method="post" id="formAddMensajeReceptor" autocomplete="off" th:object="${mensajeReceptor}" th:action="@{/mensaje-receptor/recepcion}">
+                    	<input type="hidden" name="form" value="manual" />
+                           <div class="row">
+                                 <div class="col-md-12">
+		                           <div class="form-group">
+		                               <h4 class="card-title">[(#{txt.adjuntar.factura})]</h4>
+		                               <input type='file' accept="text/xml" onchange='readXml(event, "resumen")' class='form-control-file' required="required"/>
+		                           </div>
+		                          </div> 
+		                          <div class="col-md-3">
+                                    <div class="form-group" style="position: relative;">
+                                       <label class="control-label" th:text="'Actividades económicas'"></label>
+                                       <select class="form-control _select2_" th:field="*{codigoActividadEmisor}" required="required">
+                                       		<option th:each="k : ${listaActividades}" th:value="${k.codigoActividadEmisor}" th:text="${k.detalleActividad}"></option>
+                                       </select>   
+                                    </div>
+                                 </div>
+		                          <div class="col-md-2 ">
+		                           <div class="form-group">
+		                               <label class="control-label">[(#{txt.mr.mensaje})]</label>
+		                               <select th:field="*{tipoDocumento}" class="form-control _select2_" required="required">
+		                               	   <option value="" selected="selected" th:text="#{txt.combo.seleccione}"></option>
+		                                   <option value="CCE" selected>[(#{txt.mr.aceptacion})]</option> 
+		                                   <option value="CPCE">[(#{txt.mr.cpce})]</option>
+		                                   <option value="RCE">[(#{txt.mr.rce})]</option>
+		                               </select>
+		                           </div>
+		                          </div> 
+		                          <div class="col-md-3 ">
+		                           <div class="form-group">
+		                               <label class="control-label">[(#{txt.mr.condicion.de.impuesto})]</label>
+		                               <select th:field="*{condicionImpuesto}" class="form-control _select2_" required="required">
+		                               	   <option value="" selected="selected" th:text="#{txt.combo.seleccione}"></option>
+		                                   <option value="01">Genera crédito IVA </option> 
+		                                   <option value="02">Genera Crédito parcial del IVA</option>
+		                                   <option value="03">Bienes de Capital</option>
+		                                   <option value="04">Gasto corriente no genera crédito</option>
+		                                   <option value="05">Proporcionalidad</option>
+		                               </select>
+		                           </div>
+		                          </div> 
+		                          
+		                          <div class="col-md-2">
+		                           <div class="form-group">
+		                               <label class="control-label">[(#{txt.mr.monto.de.impuesto.a.acreditar})]</label>
+		                               <input type="text" readonly="readonly" th:field="*{montoTotalImpuestoAcreditar}" class="form-control" onkeypress="return validateFloatKeyPress(this,event);" value="0.00">
+		                           </div>
+		                          </div> 
+		                          
+		                          <div class="col-md-2">
+		                           <div class="form-group">
+		                               <label class="control-label">[(#{txt.mr.monto.total.de.gasto.a.aplicar})]</label>
+		                               <input type="text" readonly="readonly" th:field="*{montoTotalDeGastoAplicable}" class="form-control" onkeypress="return validateFloatKeyPress(this,event);" value="0.00">
+		                           </div>
+		                          </div> 
+		
+								  <div class="col-md-12">
+		                           <div class="form-group">
+		                               <label class="control-label">[(#{txt.mr.detalle})]</label>
+		                               <input type="text" th:field="*{detalleMensaje}" class="form-control"  th:attr="placeholder=#{txt.mr.detalle.placeholder}" required="required">
+		                           </div>
+		                          </div> 
+		                          
+		                          
+		                          
+		                         </div>  
+		                          
+		                          <h4 class="card-title">[(#{txt.mr.resumen.emisor})]</h4>
+		                          <hr>
+		                               
+		                          <div class="row">
+		                          		<div class="col-md-4">
+		                          			<div class="form-group">
+		                                           <label class="control-label">[(#{txt.mr.nombre.emisor})]</label>
+		                                           <input readonly="readonly" th:field="*{emisorMr}" class="form-control">
+		                                       </div>
+		                          		</div>
+		                          		<div class="col-md-4">
+		                          			<div class="form-group">
+		                                           <label class="control-label">[(#{txt.mr.nombre.comercial.emisor})]</label>
+		                                           <input readonly="readonly" th:field="*{nombreComercialEmisorMr}" class="form-control">
+		                                       </div>
+		                          		</div>
+		                          		<div class="col-md-4">
+		                          			<div class="form-group">
+		                                           <label class="control-label">[(#{txt.mr.correo})]</label>
+		                                           <input readonly="readonly" th:field="*{correoEmisorMr}" class="form-control">
+		                                       </div>
+		                          		</div>
+		                          		<div class="col-md-4">
+		                          			<div class="form-group">
+		                                           <label class="control-label">[(#{txt.mr.tipo.cedula.emisor})]</label>
+		                                           <input readonly="readonly" th:field="*{tipoIdentificacionEmisorMr}" class="form-control">
+		                                       </div>
+		                          		</div>
+		                          		<div class="col-md-4">
+		                          			<div class="form-group">
+		                                           <label class="control-label">[(#{txt.mr.cedula.emisor})]</label>
+		                                           <input readonly="readonly" th:field="*{identificacionEmisorMr}" class="form-control">
+		                                       </div>
+		                          		</div>
+		                          		
+		                          </div> 
+		                          
+		                          <h4 class="card-title">[(#{txt.mr.resumen.receptor})]</h4>
+		                          <hr>    
+		                          
+		                          <div class="row">
+		                          		<div class="col-md-4">
+		                          			<div class="form-group">
+		                                           <label class="control-label">[(#{txt.mr.nombre.receptor})]</label>
+		                                           <input readonly="readonly" th:field="*{nombreReceptorMr}" class="form-control">
+		                                       </div>
+		                          		</div>
+		                          		<div class="col-md-4">
+		                          			<div class="form-group">
+		                                           <label class="control-label">[(#{txt.mr.nombre.comercial.receptor})]</label>
+		                                           <input readonly="readonly" th:field="*{nombreComercialReceptorMr}" class="form-control">
+		                                       </div>
+		                          		</div>
+		                          		<div class="col-md-4">
+		                          			<div class="form-group">
+		                                           <label class="control-label">[(#{txt.mr.tipo.cedula.receptor})]</label>
+		                                           <input readonly="readonly" th:field="*{tipoIdentificacionReceptorMr}" class="form-control">
+		                                       </div>
+		                          		</div>
+		                          		<div class="col-md-4">
+		                          			<div class="form-group">
+		                                           <label class="control-label">[(#{txt.mr.cedula.receptor})]</label>
+		                                           <input readonly="readonly" th:field="*{identificacionReceptorMr}" class="form-control">
+		                                       </div>
+		                          		</div>
+		                          		
+		                          </div>
+		                          
+		                          <h4 class="card-title">Lineas de la factura</h4>
+		                          <hr>
+		                          
+		                          <div class="table-responsive">
+		                          <table class="table color-table table-hover muted-table">
+		                          	<thead>
+		                          		<tr>
+		                          			<th>Número linea</th>
+		                          			<th>Código</th>
+		                          			<th>Cantidad</th>
+		                          			<th>Unidad de médida</th>
+		                          			<th style="width: 20%">Detalle</th>
+		                          			<th>Precio unitario</th>
+		                          			<th>Monto total</th>
+		                          			<th>Subtotal</th>
+		                          			<th>Descuento</th>
+		                          			<th>IVA</th>
+		                          			<th>Impuesto neto</th>
+		                          			<th>Monto total linea</th>
+		                          		</tr>
+		                          	</thead>
+		                          	<tbody id="lineasFactura"></tbody>
+		                          </table>
+		                          </div>
+		                          
+		                          <h4 class="card-title">Condición de la venta</h4>
+		                          <hr>
+		                          
+		                          <div class="row">
+		                          	<div class="col-md-2">
+	                          			<div class="form-group">
+	                                           <label class="control-label">Condión venta</label>
+	                                           <input readonly="readonly" th:field="*{condicionVenta}" class="form-control">
+	                                       </div>
+	                          		</div>
+	                          		<div class="col-md-2">
+	                          			<div class="form-group">
+	                                           <label class="control-label">Plazo crédito</label>
+	                                           <input readonly="readonly" th:field="*{plazoCredito}" class="form-control">
+	                                       </div>
+	                          		</div>
+	                          		<div class="col-md-2">
+	                          			<div class="form-group">
+                                           <label class="control-label">Medio de pago</label>
+                                           <input readonly="readonly" th:field="*{medioPago}" class="form-control">
+                                        </div>
+	                          		</div>
+		                          </div>
+		                          
+		                          <h4 class="card-title">[(#{txt.mr.resumen.factura})]</h4>
+		                          <hr>
+		
+		  						<div class="row">
+		  							<div class="col-md-2">
+		                          		<div class="form-group">
+                                           <label class="control-label">[(#{txt.codigo.actividad})]</label>
+                                           <input readonly="readonly" th:field="*{codigoActividad}" class="form-control">
+                                        </div>
+	                          		</div>
+		  							<div class="col-md-4">
+		                          		<div class="form-group">
+                                           <label class="control-label">[(#{txt.clave})]</label>
+                                           <input readonly="readonly" th:field="*{clave}" class="form-control">
+                                        </div>
+	                          		</div>
+	                          		<div class="col-md-2">
+	                          			<div class="form-group">
+                                           <label class="control-label">[(#{txt.moneda})]</label>
+                                           <input readonly="readonly" th:field="*{moneda}" class="form-control">
+                                        </div>
+	                          		</div>
+	                          		<div class="col-md-2">
+	                          			<div class="form-group">
+                                           <label class="control-label">Tipo cambio</label>
+                                           <input readonly="readonly" th:field="*{tipoCambio}" class="form-control">
+                                        </div>
+	                          		</div>
+	                          		<div class="col-md-2">
+	                          			<div class="form-group">
+                                           <label class="control-label">[(#{txt.fecha.de.emision})]</label>
+                                           <input readonly="readonly" th:field="*{fechaEmision}" class="form-control">
+                                        </div>
+	                          		</div>
+	                          		
+	                          		
+	                          		<div class="col-md-2">
+	                          			 <div class="form-group">
+                                           <label class="control-label">Total serv gravados</label>
+                                           <input readonly="readonly" th:field="*{totalServGravados}" class="datepicker-disabled form-control">
+                                         </div>
+	                          		</div>
+	                          		<div class="col-md-2">
+	                          			 <div class="form-group">
+                                           <label class="control-label">Total serv exentos</label>
+                                           <input readonly="readonly" th:field="*{totalServExentos}" class="datepicker-disabled form-control">
+                                         </div>
+	                          		</div>
+	                          		<div class="col-md-2">
+	                          			 <div class="form-group">
+                                           <label class="control-label">Total serv exonerado</label>
+                                           <input readonly="readonly" th:field="*{totalServExonerado}" class="datepicker-disabled form-control">
+                                         </div>
+	                          		</div>
+	                          		<div class="col-md-2">
+	                          			 <div class="form-group">
+                                           <label class="control-label">Total merc gravadas</label>
+                                           <input readonly="readonly" th:field="*{totalMercGravadas}" class="datepicker-disabled form-control">
+                                         </div>
+	                          		</div>
+	                          		<div class="col-md-2">
+	                          			 <div class="form-group">
+                                           <label class="control-label">Total merc exentas</label>
+                                           <input readonly="readonly" th:field="*{totalMercExentas}" class="datepicker-disabled form-control">
+                                         </div>
+	                          		</div>
+	                          		<div class="col-md-2">
+	                          			 <div class="form-group">
+                                           <label class="control-label">Total merc exonerada</label>
+                                           <input readonly="readonly" th:field="*{totalMercExonerada}" class="datepicker-disabled form-control">
+                                         </div>
+	                          		</div>
+	                          		<div class="col-md-2">
+	                          			 <div class="form-group">
+                                           <label class="control-label">Total gravado</label>
+                                           <input readonly="readonly" th:field="*{totalGravados}" class="datepicker-disabled form-control">
+                                         </div>
+	                          		</div>
+	                          		
+	                          		<div class="col-md-2">
+	                          			 <div class="form-group">
+                                           <label class="control-label">Total exento</label>
+                                           <input readonly="readonly" th:field="*{totalExentos}" class="datepicker-disabled form-control">
+                                         </div>
+	                          		</div>
+	                          		
+	                          		<div class="col-md-2">
+	                          			 <div class="form-group">
+                                           <label class="control-label">Total exonerado</label>
+                                           <input readonly="readonly" th:field="*{totalExonerado}" class="datepicker-disabled form-control">
+                                         </div>
+	                          		</div>
+	                          		
+	                          		<div class="col-md-2">
+	                          			 <div class="form-group">
+                                           <label class="control-label">Total venta</label>
+                                           <input readonly="readonly" th:field="*{totalVentas}" class="datepicker-disabled form-control">
+                                         </div>
+	                          		</div>
+	                          		
+	                          		<div class="col-md-2">
+	                          			 <div class="form-group">
+                                           <label class="control-label">Total descuentos</label>
+                                           <input readonly="readonly" th:field="*{totalDescuentos}" class="datepicker-disabled form-control">
+                                         </div>
+	                          		</div>
+	                          		
+	                          		<div class="col-md-2">
+	                          			 <div class="form-group">
+                                           <label class="control-label">Total venta neta</label>
+                                           <input readonly="readonly" th:field="*{totalVentaNeta}" class="datepicker-disabled form-control">
+                                         </div>
+	                          		</div>
+	                          		
+	                          		<div class="col-md-2">
+	                          			 <div class="form-group">
+                                           <label class="control-label">[(#{txt.impuestos})]</label>
+                                           <input readonly="readonly" th:field="*{impuestos}" class="datepicker-disabled form-control">
+                                         </div>
+	                          		</div>
+	                          		
+	                          		<div class="col-md-2">
+	                          			 <div class="form-group">
+                                           <label class="control-label">Total IVA devuelto</label>
+                                           <input readonly="readonly" th:field="*{totalIVADevuelto}" class="datepicker-disabled form-control">
+                                         </div>
+	                          		</div>
+	                          		
+	                          		<div class="col-md-2">
+	                          			 <div class="form-group">
+                                           <label class="control-label">Total otros cargos</label>
+                                           <input readonly="readonly" th:field="*{totalOtrosCargos}" class="datepicker-disabled form-control">
+                                         </div>
+	                          		</div>	                          		
+	                          		
+	                          		<div class="col-md-2">
+		                          		<div class="form-group">
+                                           <label class="control-label">[(#{txt.total.comprobante})]</label>
+                                           <input readonly="readonly" th:field="*{totalFactura}" class="form-control">
+                                        </div>
+	                          		</div>
+		  						</div>
+		      
+	
+	                           <div class="form-group">
+	                           	   <input type="hidden" id="ivaTotal" class="form-control">
+	                           	   <input type="hidden" id="restarAIvaTotal" class="form-control">
+	                               <button type="submit" class="btn btn-success" id="btn-procesar-mr">
+	                               		<i class="fas fa-save m-r-10"></i>[(#{txt.aceptar.factura})]
+	                               </button>
+	                           </div>
+
+                           </form>
+                    	
+
+                         
+                    </div>
+                </div>
+            </div>
+            
+            
+        <!-- ============================================================== -->
+        <!-- End PAge Content -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Container fluid  -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- footer -->
+    <!-- ============================================================== -->
+    <footer th:replace="layout/layout :: footer"></footer>
+    <!-- ============================================================== -->
+    <!-- End footer -->
+    <!-- ============================================================== -->
+    <input id="csrfToken" type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+</div>
+<!-- ============================================================== -->
+<!-- End Page wrapper  -->
+<!-- ============================================================== -->
+
+</div>
+<div th:replace="layout/layout :: scripts"></div>
+<script type="text/javascript">
+var token = $('#csrfToken').val();
+
+$(document).on("change", "#condicionImpuesto", function () {
+	
+	sumarIva();
+	restarAIva();
+
+    var v = $(this).val();
+
+    setTimeout(function(){
+
+    	if(v == '01'){
+            //No hago nada, dejo los nodos en readonly
+    		if( parseFloat($("#restarAIvaTotal").val()) > 0 ){
+        		$("#montoTotalImpuestoAcreditar").val( $("#ivaTotal").val() );
+        	}else{
+        		$("#montoTotalImpuestoAcreditar").val( $("#impuestos").val() );
+        	}
+        }
+    
+    	if(v == '04'){
+    		$("#montoTotalImpuestoAcreditar").val( "" );
+            $("#montoTotalDeGastoAplicable").val( "" );
+        }
+    	
+    	if(v == '05'){
+    		$("#montoTotalImpuestoAcreditar").val( "" );
+            $("#montoTotalDeGastoAplicable").val( "" );
+        }
+
+        if(v == '02'){
+            //Habilito para escribir
+            $("#montoTotalImpuestoAcreditar").val( "" );
+            $("#montoTotalDeGastoAplicable").val( "" );
+            
+            $("#montoTotalImpuestoAcreditar").prop("readonly", false);
+            $("#montoTotalDeGastoAplicable").prop("readonly", false);
+        }else{
+            //Los dejo 
+            $("#montoTotalImpuestoAcreditar").prop("readonly", true);
+            $("#montoTotalDeGastoAplicable").prop("readonly", true);
+        }
+
+        if(v == '03'){
+            //Asigno el valor del total de impuestos a montoTotalImpuestoAcreditar
+            if( parseFloat($("#restarAIvaTotal").val()) > 0 ){
+        		$("#montoTotalImpuestoAcreditar").val( $("#ivaTotal").val() );
+        	}else{
+        		$("#montoTotalImpuestoAcreditar").val( $("#impuestos").val() );
+        	}
+        }
+        
+   	}, 200);
+   
+});
+
+$("#formAddMensajeReceptor").submit(function( event ) {
+	
+	  var m1 = $("#montoTotalImpuestoAcreditar").val();
+	  var iva = $("#impuestos").val();
+	  
+	  if(parseFloat(m1) > parseFloat(iva)){
+		  
+		  swal("","El Monto del impuesto a acreditar NO puede ser mayor que los impuesto de la factura","warning");
+		  return false;
+		  
+	  }
+	  
+	  var m2 = $("#montoTotalDeGastoAplicable").val();
+	  var t  = $("#totalFactura").val();
+	  
+	  var m3 = parseFloat(m1) + parseFloat(m2);
+	  
+	  if(m3 > t){
+		  swal("","La suma del Monto del impuesto a acreditar + Monto total de gasto a aplicar no puede ser mayor que el total de la factura.","warning");
+		  return false;
+	  }
+	  
+	  $.ajax({
+        type: "POST",
+        cache: false,
+        beforeSend: function () {
+        	$("#btn-procesar-mr").prop('disabled', true);
+        	$("#btn-procesar-mr").text('[(#{txt.btn.procesando})]');
+        	loadingShow();
+        },
+        url: "[(@{/mensaje-receptor/recepcion})]",
+        data: $(this).serialize(),
+        success: function (data)
+        {
+        	
+        	if(parseInt(data.response) === 200){
+        		
+        		$("#formAddMensajeReceptor").trigger("reset");
+        		
+        		$('#tipoDocumento, #condicionImpuesto').select2();
+        		
+        		swal("", "[(#{txt.mr.alerta.exito1})] "+data.clave+", [(#{txt.mr.alerta.exito2})] "+data.consecutivo+".", "success");
+        		
+        		$("#lineasFactura").html("");
+        		
+        	}else if(parseInt(data.response) === 401){
+        		swal("", data.msj, "warning");
+        	}else if(parseInt(data.response) === 0){
+        		location.href="[(@{/})]"	
+        	}else{
+        		swal("[(#{txt.mr.alerta})]","[(#{txt.mr.alerta.msj})]","warning");
+        	}   
+        	
+        }, complete: function () {
+        	$("#btn-procesar-mr").prop('disabled', false);
+        	$("#btn-procesar-mr").text('[(#{txt.aceptar.factura})]');
+            loadingHide();
+        }, error: function (x, t, m) {
+            if (t === "timeout") {
+                
+            } else {
+                
+            }
+        }
+    });
+	  
+	return false;  
+});
+
+
+function cleanForm(){
+    $("#codigoActividad").val("0.00");
+    $("#clave").val("0.00");
+    $("#fechaEmision").val("0.00");
+    $("#moneda").val("0.00");
+    $("#condicionVenta").val("0.00");	    
+    $("#plazoCredito").val("0.00");	 
+    $("#medioPago").val("0.00");	 
+    
+    $("#tipoCambio").val("0.00");
+    $("#emisorMr").val("0.00");
+    $("#identificacionEmisorMr").val("0.00");
+    $("#nombreComercialEmisorMr").val("0.00");
+    $("#correoEmisorMr").val("0.00");
+    $("#tipoIdentificacionEmisorMr").val("0.00");
+    $("#nombreReceptorMr").val("0.00");
+    $("#nombreComercialReceptorMr").val("0.00");
+    $("#tipoIdentificacionReceptorMr").val("0.00");
+    $("#identificacionReceptorMr").val("0.00");
+    $("#totalServGravados").val("0.00");
+    $("#totalServExentos").val("0.00");
+    $("#totalServExonerado").val("0.00");
+    $("#totalMercGravadas").val("0.00");
+    $("#totalMercExentas").val("0.00");
+    $("#totalMercExonerada").val("0.00");
+    $("#totalGravados").val("0.00");
+    $("#totalExentos").val("0.00");
+    $("#totalExonerado").val("0.00");
+    $("#totalVentas").val("0.00");
+    $("#totalDescuentos").val("0.00");
+    $("#totalVentaNeta").val("0.00");
+    $("#impuestos").val("");
+    $("#totalIVADevuelto").val("0.00");
+    $("#totalOtrosCargos").val("0.00");	    
+    $("#totalFactura").val("0.00");	    
+    $("#lineasFactura").html("0.00"); //Limpio la tabla
+}
+
+function readXml(event, out) {
+	
+	//Limipo el formulario
+	cleanForm();
+	
+	var input = event.target;
+	var reader = new FileReader();
+	reader.onload = function () {
+	    var text = reader.result;
+	    var node = document.getElementById(out);
+	    //node.innerText = text;
+	    var $xml;
+	    var xml = text,
+	    xmlDoc = $.parseXML(xml),
+	    $xml = $(xmlDoc);
+	    var codigoActividad = $xml.find("CodigoActividad");
+	    var Clave = $xml.find("Clave");
+	    
+	    $xml.find("TotalServGravados").text() === "" ? "0.00" : $xml.find("TotalServGravados").text();
+	    
+	    var FechaEmision = $xml.find("FechaEmision").first();
+	    var CodigoMoneda = $xml.find("CodigoMoneda").text() === "" ? "CRC" : $xml.find("CodigoMoneda").text();
+	    var TipoCambio = $xml.find("TipoCambio").text() === "" ? "1.00" : $xml.find("TipoCambio").text();
+	    var emisorNombre = $xml.find("Emisor Nombre");
+	    var emisorNumero = $xml.find("Emisor Numero");
+	    var tipoCedulaEmisor = $xml.find("Emisor Identificacion Tipo");
+	    var emisorNombreComercial = $xml.find("Emisor NombreComercial");
+	    var existeImpuesto = $xml.find("TotalImpuesto");
+	    var CorreoElectronico = $xml.find("Emisor CorreoElectronico");
+	    var nombreReceptor = $xml.find("Receptor Nombre");
+	    var nombreComercialReceptor = $xml.find("Receptor NombreComercial");
+	    var tipoCedulaReceptor = $xml.find("Receptor Identificacion Tipo");
+	    var cedulaReceptor = $xml.find("Receptor Identificacion Numero");
+	    
+	    var condicionVenta = $xml.find("CondicionVenta");
+	    var plazoCredito = $xml.find("PlazoCredito");
+	    var medioPago = $xml.find("MedioPago");
+	    var lineas = $xml.find("LineaDetalle");
+	    var linea = '';
+
+	    $(xml).find("LineaDetalle").each(function () {	 
+	    	
+	    	linea += '<tr>';
+	    	
+		    	var NumeroLinea = $(this).find('NumeroLinea').text();		    	
+		    	//var Codigo = $(this).find('Codigo').first().text();		    	
+		    	var CodigoComercial = "";		    	
+		    	$(this).find("CodigoComercial").each(function () {	
+			        CodigoComercial = $(this).find('Codigo').first().text();
+	    		});
+		    	
+		    	var Cantidad = $(this).find('Cantidad').text();
+		    	var UnidadMedida = $(this).find('UnidadMedida').text();
+		    	var Detalle = $(this).find('Detalle').text();	    	
+		    	
+		        var PrecioUnitario = $(this).find('PrecioUnitario').text();
+		        var MontoTotal = $(this).find('MontoTotal').text();
+		        var SubTotal = $(this).find('SubTotal').text();	        
+		        
+		        var ImpuestoNeto = $(this).find('ImpuestoNeto').text();	        
+		        var MontoTotalLinea = $(this).find('MontoTotalLinea').text();
+		        
+		        var MontoDescuento = 0;
+		        var NaturalezaDescuento = 0;
+		        $(this).find("Descuento").each(function () {	
+			        MontoDescuento = parseFloat(MontoDescuento) + parseFloat($(this).find('MontoDescuento').text());	        
+			        NaturalezaDescuento = $(this).find('NaturalezaDescuento').text();
+	    		});
+	        	
+	        	linea += '<td><input class="form-control" type="text" readonly="readonly" name="NumeroLinea[]" value="' + NumeroLinea + '" /></td>';
+	        	linea += '<td><input class="form-control" type="text" readonly="readonly" name="Codigo[]" value="' + CodigoComercial + '" /></td>';
+	        	linea += '<td><input class="form-control" type="text" readonly="readonly" name="Cantidad[]" value="' + Cantidad + '" /></td>';
+	        	linea += '<td><input class="form-control" type="text" readonly="readonly" name="UnidadMedida[]" value="' + UnidadMedida + '" /></td>';
+	        	linea += '<td><input class="form-control" type="text" readonly="readonly" name="Detalle[]" value="' + Detalle + '" /></td>';
+	        	linea += '<td><input class="form-control" type="text" readonly="readonly" name="PrecioUnitario[]" value="' + PrecioUnitario + '" /></td>';
+	        	linea += '<td><input class="form-control" type="text" readonly="readonly" name="MontoTotal[]" value="' + MontoTotal + '" /></td>';
+	        	linea += '<td><input class="form-control" type="text" readonly="readonly" name="SubTotal[]" value="' + SubTotal + '" /></td>';
+	        	linea += '<td><input class="form-control" type="text" readonly="readonly" name="MontoDescuento[]" value="' + MontoDescuento + '" /><input class="form-control" type="hidden" readonly="readonly" name="NaturalezaDescuento[]" value="' + NaturalezaDescuento + '" /></td>';
+	        	linea += '<td>';
+	        	
+	        	$(this).find("Impuesto").each(function () {	
+	        		
+	        		 var Codigo = $(this).find('Codigo').text();	
+	        		 var CodigoTarifa = $(this).find('CodigoTarifa').text();	
+	        		 var Tarifa = $(this).find('Tarifa').text();	
+	        		 var Monto = $(this).find('Monto').text();	
+	        		 
+	        		 if(Codigo === "01"){
+	        			 linea += '<input class="form-control" type="hidden" readonly="readonly" name="iCodigo'+NumeroLinea+'[]" value="' + Codigo + '" />';
+		        		 linea += '<input class="form-control" type="hidden" readonly="readonly" name="iCodigoTarifa'+NumeroLinea+'[]" value="' + CodigoTarifa + '" />';
+		        		 linea += '<input class="form-control" type="hidden" readonly="readonly" name="iTarifa'+NumeroLinea+'[]" value="' + Tarifa + '" />';
+		        		 linea += '<input class="form-control sumarIva" type="text" readonly="readonly" name="iMonto'+NumeroLinea+'[]" value="' + Monto + '" />';
+	        		 }else{
+	        			 linea += '<input class="form-control" type="hidden" readonly="readonly" name="iCodigo'+NumeroLinea+'[]" value="' + Codigo + '" />';
+		        		 linea += '<input class="form-control" type="hidden" readonly="readonly" name="iCodigoTarifa'+NumeroLinea+'[]" value="' + CodigoTarifa + '" />';
+		        		 linea += '<input class="form-control" type="hidden" readonly="readonly" name="iTarifa'+NumeroLinea+'[]" value="' + Tarifa + '" />';
+		        		 linea += '<input class="form-control restarIva" type="hidden" readonly="readonly" name="iMonto'+NumeroLinea+'[]" value="' + Monto + '" />';
+	        		 }
+	        		 
+	        		 $(this).find("Exoneracion").each(function (){
+	        			 
+	        			 var TipoDocumento = $(this).find('TipoDocumento').text();	
+		        		 var NumeroDocumento = $(this).find('NumeroDocumento').text();	
+		        		 var NombreInstitucion = $(this).find('NombreInstitucion').text();	
+		        		 var FechaEmision = $(this).find('FechaEmision').text();	
+		        		 var PorcentajeExoneracion = $(this).find('PorcentajeExoneracion').text();	
+		        		 var MontoExoneracion = $(this).find('MontoExoneracion').text();	
+							
+		        		 linea += '<input class="form-control" type="hidden" readonly="readonly" name="TipoDocumento'+NumeroLinea+'[]" value="' + TipoDocumento + '" />';
+		        		 linea += '<input class="form-control" type="hidden" readonly="readonly" name="NumeroDocumento'+NumeroLinea+'[]" value="' + NumeroDocumento + '" />';
+		        		 linea += '<input class="form-control" type="hidden" readonly="readonly" name="NombreInstitucion'+NumeroLinea+'[]" value="' + NombreInstitucion + '" />';
+		        		 linea += '<input class="form-control" type="hidden" readonly="readonly" name="FechaEmision'+NumeroLinea+'[]" value="' + FechaEmision + '" />';
+		        		 linea += '<input class="form-control" type="hidden" readonly="readonly" name="PorcentajeExoneracion'+NumeroLinea+'[]" value="' + PorcentajeExoneracion + '" />';
+		        		 linea += '<input class="form-control" type="hidden" readonly="readonly" name="MontoExoneracion'+NumeroLinea+'[]" value="' + MontoExoneracion + '" />';
+	        			 
+	        		 });
+	        		 
+	        	});
+	        	
+	        	linea += '</td>';
+	        	linea += '<td><input class="form-control" type="text" readonly="readonly" name="ImpuestoNeto[]" value="' + ImpuestoNeto + '" /></td>';
+	        	linea += '<td><input class="form-control" type="text" readonly="readonly" name="MontoTotalLinea[]" value="' + MontoTotalLinea + '" /></td>';
+
+	        
+	        linea += '</tr>';
+	     });
+	    
+	    $("#lineasFactura").html(""); //Limpio la tabla
+	    $("#lineasFactura").append(linea);
+	    $("#codigoActividad").val(codigoActividad.text());
+	    $("#clave").val(Clave.text());
+	    $("#fechaEmision").val(FechaEmision.text());
+	    $("#moneda").val(CodigoMoneda);
+	    $("#tipoCambio").val(TipoCambio);
+	    $("#emisorMr").val(emisorNombre.text());
+	    $("#identificacionEmisorMr").val(emisorNumero.text());
+	    $("#nombreComercialEmisorMr").val(emisorNombreComercial.text());
+	    $("#correoEmisorMr").val(CorreoElectronico.text());
+	    $("#tipoIdentificacionEmisorMr").val(tipoCedulaEmisor.text());
+	    $("#nombreReceptorMr").val(nombreReceptor.text());
+	    $("#nombreComercialReceptorMr").val(nombreComercialReceptor.text());
+	    $("#tipoIdentificacionReceptorMr").val(tipoCedulaReceptor.text());
+	    $("#identificacionReceptorMr").val(cedulaReceptor.text());
+	    $("#condicionVenta").val(condicionVenta.text());
+	    $("#plazoCredito").val(plazoCredito.text());
+	    $("#medioPago").val(medioPago.text());
+	    
+	    //Totales
+	    var TotalServGravados = $xml.find("TotalServGravados").text() === "" ? "0.00" : $xml.find("TotalServGravados").text();
+	    var TotalServExentos = $xml.find("TotalServExentos").text() === "" ? "0.00" : $xml.find("TotalServExentos").text();
+	    var TotalServExonerado = $xml.find("TotalServExonerado").text() === "" ? "0.00" : $xml.find("TotalServExonerado").text();
+	    var TotalMercanciasGravadas = $xml.find("TotalMercanciasGravadas").text() === "" ? "0.00" : $xml.find("TotalMercanciasGravadas").text();
+	    var TotalMercanciasExentas = $xml.find("TotalMercanciasExentas").text() === "" ? "0.00" : $xml.find("TotalMercanciasExentas").text();
+	    var TotalMercExonerada = $xml.find("TotalMercExonerada").text() === "" ? "0.00" : $xml.find("TotalMercExonerada").text();
+	    var TotalGravado = $xml.find("TotalGravado").text() === "" ? "0.00" : $xml.find("TotalGravado").text();
+	    var TotalExento = $xml.find("TotalExento").text() === "" ? "0.00" : $xml.find("TotalExento").text();
+	    var TotalExonerado = $xml.find("TotalExonerado").text() === "" ? "0.00" : $xml.find("TotalExonerado").text();
+	    var TotalVenta = $xml.find("TotalVenta").text() === "" ? "0.00" : $xml.find("TotalVenta").text();
+	    var TotalDescuentos = $xml.find("TotalDescuentos").text() === "" ? "0.00" : $xml.find("TotalDescuentos").text();
+	    var TotalVentaNeta = $xml.find("TotalVentaNeta").text() === "" ? "0.00" : $xml.find("TotalVentaNeta").text();    
+	    var TotalImpuesto = $xml.find("TotalImpuesto").text() === "" ? "0.00" : $xml.find("TotalImpuesto").text();
+	    var TotalIVADevuelto = $xml.find("TotalIVADevuelto").text() === "" ? "0.00" : $xml.find("TotalIVADevuelto").text();
+	    var TotalOtrosCargos = $xml.find("TotalOtrosCargos").text() === "" ? "0.00" : $xml.find("TotalOtrosCargos").text();
+	    var TotalComprobante = $xml.find("TotalComprobante").text() === "" ? "0.00" : $xml.find("TotalComprobante").text();
+	    
+	    $("#totalServGravados").val(TotalServGravados);
+	    $("#totalServExentos").val(TotalServExentos);
+	    $("#totalServExonerado").val(TotalServExonerado);
+	    $("#totalMercGravadas").val(TotalMercanciasGravadas);
+	    $("#totalMercExentas").val(TotalMercanciasExentas);
+	    $("#totalMercExonerada").val(TotalMercExonerada);
+	    $("#totalGravados").val(TotalGravado);
+	    $("#totalExentos").val(TotalExento);
+	    $("#totalExonerado").val(TotalExonerado);
+	    $("#totalVentas").val(TotalVenta);
+	    $("#totalDescuentos").val(TotalDescuentos);
+	    $("#totalVentaNeta").val(TotalVentaNeta);
+	    $("#impuestos").val(TotalImpuesto);
+	    $("#totalIVADevuelto").val(TotalIVADevuelto);
+	    $("#totalOtrosCargos").val(TotalOtrosCargos);	    
+	    $("#totalFactura").val(TotalComprobante);	
+	    
+	    
+	};
+	reader.readAsText(input.files[0]);
+	
+	
+}
+
+function sumarIva(){
+	var v = parseFloat("0.00");
+	$('.sumarIva').each(function(){        			 
+		v = v + parseFloat($(this).val()); 	
+	});
+	$("#ivaTotal").val(v.toFixed(5));
+}
+
+function restarAIva(){
+	var v = parseFloat("0.00");
+	$('.restarIva').each(function(){        			 
+		v = v + parseFloat($(this).val()); 	
+	});
+	$("#restarAIvaTotal").val(v.toFixed(5));
+}
+</script>
+</body>
+</html>

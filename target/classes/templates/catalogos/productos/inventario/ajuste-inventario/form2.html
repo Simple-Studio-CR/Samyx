@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body class="fix-header card-no-border logo-center">
+
+<div id="main-wrapper">
+
+<header th:replace="layout/layout :: header"></header>
+<aside th:replace="layout/layout :: aside"></aside>
+
+
+
+<!-- ============================================================== -->
+<!-- Page wrapper  -->
+<!-- ============================================================== -->
+<div class="page-wrapper">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h3 class="text-themecolor" th:text="#{txt.ajuste.inventario}"></h3>
+        </div>
+        <div class="col-md-7 align-self-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)" th:href="@{/inventario/ajuste/}" th:text="#{txt.inicio}"></a></li>
+                <li class="breadcrumb-item active" th:text="#{txt.ajuste.inventario}"></li>
+            </ol>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                    
+                    	<form id="formEmitirFactura" autocomplete="off" th:action="@{/inventario/ajuste/save}" th:object="${inventario}" method="post">
+                           <div class="form-body">
+                           
+                           
+								<h4 class="card-title p-t-10">Información ajuste inventario</h4>
+		                              <hr>
+								 <div class="row p-t-20">
+								 
+		                             <div class="col-sm-2 col-md-2">
+		                                <div class="form-group">
+
+		                                   <label class="control-label"><i class="fas fa-asterisk color-rojo"></i> Condición</label>
+	                                       <select name="tipoMovimiento" class="form-control _select2_" required="required">
+	                                       		<option value="S">Salida de producto</option>
+	                                       		<option value="E">Entrada de producto</option>
+	                                       </select>
+		                              	</div>
+		                             </div>
+		                             
+		                             <div class="col-sm-2 col-md-1">
+	                                    <div class="form-group">
+	                                       <label class="control-label" th:text="#{txt.moneda}"></label>
+	                                       <select class="form-control _select2_" name="moneda" id="moneda" required="required">
+	                                          <option th:each="k : ${listaMonedas}" th:value="${k.id}" th:text="${k.simboloMoneda}"></option>
+	                                       </select>
+	                                    </div>
+	                                 </div>
+	                                 <div class="col-md-2">
+		                                <div class="form-group">
+		                                    <label class="control-label"><i class="fas fa-asterisk color-rojo"></i> Tipo cambio</label>
+		                                    <input type="text" maxlength="20" value="1" class="form-control num-integer" name="tipoCambio" required="required">
+		                              	</div>
+		                             </div>
+		                             <div class="col-sm-2 col-md-2">
+									    <div class="form-group">
+										<label class="control-label"><i class="fas fa-asterisk color-rojo"></i> Fecha del ajuste</label>
+										        <div class="input-group">
+										            <input type="text" name="fechaEmisionFe" id="fechaEmisionFe" class="form-control align-right dd-mm-yyyy"
+										                placeholder="dd/mm/yyyy" required="required">
+										                <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i>
+										                </span>
+										 		</div>
+										 </div>
+									 </div>
+		                             
+		                             
+
+								    </div>
+								    
+								    
+								    <h4 class="card-title p-t-10" th:text="#{txt.lineas.factura}"></h4>
+		                              <hr>
+		                              <div class="row">
+		                                 <div class="col-md-12">
+		                                    <div class="form-group">
+		                                       <input style="padding-left: 5px !important;" type="search" id="inputBuscarProductos" onclick="return this.select();" class="form-control" th:attr="placeholder=#{txt.buscar.productos}">
+		                                    </div>
+		                                 </div>
+		                              </div>
+								    <div class="table-responsive">
+								     <table id="cargarItemProductos" class="table color-bordered-table muted-bordered-table">
+								        <thead>
+								           <tr>
+								              <th style="width: 5%" th:text="#{txt.factura.form.item.codigo}"></th>
+								              <th style="width: 20%" th:text="#{txt.factura.form.item.producto}+' - '+#{txt.factura.form.item.unidad.de.medida}"></th>
+								              <th style="width: 7%" th:text="#{txt.factura.form.item.cantidad}"></th>
+								              <th style="width: 7%">Fracciones</th>
+								              <th class="align-right" style="width: 6%" th:text="'Precio venta'"></th>
+								              <th style="width: 10%" th:text="#{txt.factura.form.item.descuento}"></th>
+								              <th class="align-right" style="width: 8%" th:text="#{txt.factura.form.item.subtotal}"></th>
+								              <th style="width: 15%" th:text="#{txt.factura.form.item.impuesto}"></th>
+								              <th class="align-right" style="width: 8%" th:text="#{txt.factura.form.item.total}"></th>
+								              <th style="width: 2%"></th>
+								           </tr>
+								        </thead>
+								        <tbody id="loadLineasFactura">
+								        </tbody>
+								     </table>
+								     </div>
+								    
+								    
+								    
+								    <div class="row">
+		                                 <div class="col-md-4">
+		                                    <h4 class="card-title p-t-10" th:text="#{txt.observaciones}"></h4>
+		                                    <hr>
+		                                    <div class="row">
+		                                       <div class="col-md-12">
+		                                          <div class="form-group">
+		                                             <textarea rows="8" cols="" th:field="*{observaciones}" class="form-control" maxlength="255" placeholder="Digite alguna observación del ajuste" required="required"></textarea>
+		                                          </div>
+		                                       </div>
+		                                    </div>
+		                                 </div>
+		                                 <div class="col-md-8">
+		                                    <h4 class="card-title p-t-10" th:text="#{txt.resumen.de.la.factura}"></h4>
+		                                    <hr>
+		                                    
+		                                    <input readonly="readonly" type="hidden" class="form-control align-right resumen-factura number-format" value="0" name="totalServiciosGravados" id="totalServiciosGravados">
+		                                    <input readonly="readonly" type="hidden" class="form-control align-right resumen-factura number-format" value="0" name="totalServiciosExentos" id="totalServiciosExentos">
+		                                    <input readonly="readonly" type="hidden" class="form-control align-right resumen-factura number-format" value="0" name="totalServiciosExonerado" id="totalServiciosExonerado">
+		                                    <input readonly="readonly" type="hidden" class="form-control align-right resumen-factura number-format" value="0" name="totalMercanciaGravadas" id="totalMercanciaGravadas">
+		                                    <input readonly="readonly" type="hidden" class="form-control align-right resumen-factura number-format" value="0" name="totalMercanciasExentas" id="totalMercanciasExentas">
+		                                    <input readonly="readonly" type="hidden" class="form-control align-right resumen-factura number-format" value="0" name="totalMercanciasExonerada" id="totalMercanciasExonerada">
+		                                    
+		                                    <div class="row">
+		                                       
+		                                       <div class="col-md-4">
+		                                          <div class="form-group sumary-factura">
+		                                             <label class="control-label" th:text="#{txt.total.gravados}"></label>
+		                                             <div class="input-group"> 
+		        									 	<span class="input-group-addon simbolo-moneda"></span>
+		                                             	<input  readonly="readonly" type="text" class="form-control align-right resumen-factura number-format" value="0" name="totalGravados" id="totalGravados">
+		                                          </div>
+		                                          </div>
+		                                       </div>
+		                                       <div class="col-md-4">
+		                                          <div class="form-group sumary-factura">
+		                                             <label class="control-label" th:text="#{txt.total.exentos}"></label>
+		                                             <div class="input-group"> 
+		        									 	<span class="input-group-addon simbolo-moneda"></span>
+			                                             <input readonly="readonly" type="text" class="form-control align-right resumen-factura number-format" value="0" name="totalExentos" id="totalExentos">
+			                                          </div>
+		                                          </div>
+		                                       </div>
+		                                       
+		                                       <div class="col-md-4">
+		                                          <div class="form-group sumary-factura">
+		                                             <label class="control-label" th:text="#{txt.total.exonerado}"></label>
+		                                             <div class="input-group"> 
+		        									 	<span class="input-group-addon simbolo-moneda"></span>
+			                                             <input readonly="readonly" type="text" class="form-control align-right resumen-factura number-format" value="0" name="totalExonerado" id="totalExonerado">
+			                                          </div>
+		                                          </div>
+		                                       </div>
+		                                       
+		                                       <div class="col-md-4">
+		                                          <div class="form-group sumary-factura">
+		                                             <label class="control-label" th:text="#{txt.total.venta}"></label>
+		                                             <div class="input-group"> 
+		        									 	<span class="input-group-addon simbolo-moneda"></span>
+		                                             <input readonly="readonly" type="text" class="form-control align-right resumen-factura number-format" value="0" name="totalVenta" id="totalVenta">
+		                                          </div>
+		                                          </div>
+		                                       </div>
+		
+		                                       <div class="col-md-4">
+		                                          <div class="form-group sumary-factura">
+		                                             <label class="control-label" th:text="#{txt.descuentos}"></label>
+		                                             <div class="input-group"> 
+		        									 	<span class="input-group-addon simbolo-moneda"></span>
+			                                            <input readonly="readonly" type="text" class="form-control align-right resumen-factura number-format" value="0" name="descuentos" id="descuentos">
+			                                          </div>
+		                                          </div>
+		                                       </div>
+		                                       
+		                                       <div class="col-md-4">
+		                                          <div class="form-group sumary-factura">
+		                                             <label class="control-label" th:text="#{txt.total.venta.neta}"></label>
+		                                             <div class="input-group"> 
+		        									 	<span class="input-group-addon simbolo-moneda"></span>
+		                                             	<input readonly="readonly" type="text" class="form-control align-right resumen-factura number-format" value="0" name="totalVentaNeta" id="totalVentaNeta">
+		                                          	</div>
+		                                          </div>
+		                                       </div>
+		                                      
+		                                       <div class="col-md-4">
+		                                          <div class="form-group sumary-factura">
+		                                             <label class="control-label" th:text="#{txt.total.impuestos}"></label>
+		                                             <div class="input-group"> 
+		        									 	<span class="input-group-addon simbolo-moneda"></span>
+		                                             <input readonly="readonly" type="text" class="form-control align-right resumen-factura number-format" value="0" name="totalImpuestos" id="totalImpuestos">
+		                                          </div>
+		                                          </div>
+		                                       </div>
+		                                       
+		                                       <div class="col-md-4">
+		                                          <div class="form-group sumary-factura">
+		                                             <label class="control-label" th:text="#{txt.total.iva.devuelto}"></label>
+		                                             <div class="input-group"> 
+		        									 	<span class="input-group-addon simbolo-moneda"></span>
+		                                             <input readonly="readonly" type="text" class="form-control align-right resumen-factura number-format" value="0" name="totalIVADevuelto" id="totalIVADevuelto">
+		                                          </div>
+		                                          </div>
+		                                       </div>
+		                                       
+		                                       <div class="col-md-4">
+		                                          <div class="form-group sumary-factura">
+			                                             <label class="control-label" th:text="#{txt.total.otros.cargos}"></label>
+			                                             <div class="input-group"> 
+			        									 	<span class="input-group-addon simbolo-moneda"></span>
+			                                             <input readonly="readonly" type="text" class="form-control align-right resumen-factura number-format" value="0" name="totalOtrosCargos" id="totalOtrosCargos">
+			                                          </div>
+			                                       </div>
+		                                       
+		                                      
+		                                          <div class="form-group sumary-factura">
+		                                             	<label  style="border-top:2px solid gray; width: 100%;" class="control-label p-t-10" th:text="#{txt.total.comprobante}"></label>
+		                                             	<div class="input-group"> 
+		        									 	<span class="input-group-addon simbolo-moneda"></span>
+			                                             <input readonly="readonly" type="text" class="form-control align-right resumen-factura number-format" value="0" name="totalFactura" id="totalFactura">
+			                                          </div>
+		                                          </div>
+		                                       </div>
+		                                    </div>
+		                                 </div>
+		                              </div>
+								    
+								    
+								    <div  class="form-actions">
+								    	
+								    	<p class="color-rojo"><i class="fas fa-asterisk color-rojo"></i> [(#{txt.campos.requeridos})]</p>
+								    	
+		                                 <button id="btnEmitirFactura" type="submit" class="btn btn-success"> 
+		                                 	<i class="fas fa-save"></i>&nbsp;<span th:text="'Procesar ajuste y actualizar inventarios'"></span>
+		                                 </button>
+		                                 <a th:href="@{/inventario/ajuste/}" class="btn btn-inverse" style="color:#FFF !important">
+		                                 	<i class="fas fa-chevron-left"></i>&nbsp; <span th:text="#{txt.btn-regresar}"></span>
+		                                 </a>
+		                            </div>
+
+
+                             </div>
+                         </form>  
+                         
+                         
+                         
+                         
+                         
+                         
+                         
+                    </div>
+                </div>
+            </div>
+            
+            
+            
+            
+            
+        <!-- ============================================================== -->
+        <!-- End PAge Content -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Container fluid  -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- footer -->
+    <!-- ============================================================== -->
+    <footer th:replace="layout/layout :: footer"></footer>
+    <!-- ============================================================== -->
+    <!-- End footer -->
+    <!-- ============================================================== -->
+    <input id="csrfToken" type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+</div>
+<!-- ============================================================== -->
+<!-- End Page wrapper  -->
+<!-- ============================================================== -->
+
+ <table th:replace="catalogos/productos/inventario/ajuste-inventario/plantilla-items :: itemsFactura"></table>
+
+</div>
+<div th:replace="layout/layout :: scripts"></div>
+
+<script type="text/javascript">
+var token = $('#csrfToken').val();
+var ArrayUnidadesMedida = ["Al", "Alc", "Cm", "I", "Os", "Sp", "Spe", "St", "d"];
+
+$(window).keydown(function(e){
+   if(e.keyCode == 13) {
+     e.preventDefault();
+     return false;
+   }
+});
+
+$("#inputBuscarProveedor").autocomplete({
+ 	source : function(request, response) {
+ 		$.ajax({
+ 			url : "[(@{/inventario/factura-compra/proveedor})]", 
+ 			dataType : "json",
+ 			beforeSend: function () {
+              	 loadingShow();
+            },
+            data : {
+ 				term : request.term, _csrf:token 
+ 			},
+ 			success : function(data) {
+ 				response($.map(data, function(item) {
+ 					return { 
+ 						value              : 'Identificación: ' + item.identificacion + ', proveedor: ' + item.nombreCompleto,
+ 						valuePrincipal     : item.id,
+ 						tipoIdentificacion : item.tipoDeIdentificacion.id,
+ 						label              : 'Identificación: ' + item.identificacion + ', proveedor: ' + item.nombreCompleto,
+ 					};
+ 				}));
+ 			},
+ 			complete: function () {
+           	 loadingHide();
+            }
+ 		});
+ 	},
+ 	//autoFocus:true,
+ 	delay:250,
+ 	focus : function(event, ui) {
+ 		event.preventDefault();
+ 		$("#inputBuscarProveedor").val(ui.item.value);
+ 		$("#inputProveedorHidden").val(ui.item.valuePrincipal);
+ 		$("#inputClientesTipoIdentificacionHidden").val(ui.item.tipoIdentificacion);
+ 	}
+ 	
+ });
+ 
+$("#inputBuscarProductos").autocomplete({
+ 	source : function(request, response) {
+ 		$.ajax({
+ 			url : "[(@{/proformas/buscar-productos/})]" + request.term, 
+ 			beforeSend: function () {
+           	 loadingShow();
+            },
+ 			dataType : "json",
+ 			data : {
+ 				term : request.term
+ 			},
+ 			success : function(data) {
+ 				
+ 				response($.map(data, function(item) {
+ 					
+ 					var monedaProducto = parseInt(item.moneda.id);
+ 					var codMoneda = parseInt($("#moneda").val());
+ 					var tipoCambio = $("#tipoCambio").val();
+ 					var precio = parseFloat(0.00);
+ 					
+ 					if(monedaProducto === codMoneda){
+ 						precio =  parseFloat(item.precio);
+ 					}else{
+ 						if(item.moneda.simboloMoneda === "CRC"){
+ 							console.log("COLONES____")
+ 							precio = parseFloat(item.precio) / parseFloat( $("#moneda2").val() );
+ 						}else if(item.moneda.simboloMoneda === "USD"){
+ 							console.log("DOLARES____")
+ 							precio = parseFloat(item.precio) * parseFloat( $("#moneda2").val() );
+ 						}        						
+ 					}
+ 					
+ 					return { 
+ 						value                    : 'Código: ' + item.codigo + ', Producto: ' + item.nombreProducto + ', Precio: ' + item.moneda.simboloMoneda +' '+ item.precio,
+ 						valuePrincipal           : item.id,
+ 						codigo                   : item.codigo,
+ 						label                    : 'Código: ' + item.codigo + ', Producto: ' + item.nombreProducto + ', Precio: ' + item.moneda.simboloMoneda +' '+ item.precio,
+ 						codigo1                  : item.tipoProducto.id,
+ 						codigo2                  : item.codigo,
+ 						producto                 : item.nombreProducto,
+ 						precio                   : item.precio.toFixed(2),
+ 						impuesto                 : item.impuestoTotal,
+ 						impuestoTarifaIva        : item.productoImpuesto,
+ 						unidadDeMedida           : item.unidadDeMedida.simbolo,
+ 						impuestosExoneracion     : item.productoImpuesto,
+ 						productoExento           : item.productoExento,
+ 					};
+ 					
+ 				}));
+ 			},complete: function () {
+           	 loadingHide();
+            }
+ 		});
+ 	},
+ 	autoFocus:true,
+ 	delay:250,
+ 	select : function(event, ui) {
+ 		
+ 		event.preventDefault();
+
+ 		if(itemsHelper.hasProducto(ui.item.valuePrincipal)){
+ 			var precio = $("#precio_"+ui.item.valuePrincipal).val();
+ 			itemsHelper.incrementaCantidad(ui.item.valuePrincipal, precio, ui.item.impuesto, ui.item.productoExento, 1, 0, ui.item.unidadDeMedida);
+ 			$("#inputBuscarProductos").val("");
+ 			return false;
+ 		}
+ 		
+ 		var linea = $("#plantillaItemsFactura").html();
+ 		
+ 		var imp = ui.item.impuestoTotal;
+ 		if(typeof imp !== 'undefined'){
+ 			imp = ui.item.impuestoTotal;
+ 		}else{
+ 			imp = 0;
+ 		}
+ 		
+ 		linea = linea.replace(/{ID}/g, ui.item.valuePrincipal);
+ 		linea = linea.replace(/{CODIGO}/g, ui.item.codigo);
+ 		linea = linea.replace(/{CODIGO_PRODUCTO1}/g, ui.item.codigo1);
+ 		linea = linea.replace(/{CODIGO_PRODUCTO2}/g, ui.item.codigo2);
+ 		linea = linea.replace(/{NOMBRE_PRODUCTO}/g, ui.item.producto);
+ 		linea = linea.replace(/{PRECIO}/g, ui.item.precio);
+ 		linea = linea.replace(/{IMPUESTO}/g, imp);
+ 		linea = linea.replace(/{CONDICION_PRODUCTO}/g, ui.item.productoExento);
+ 		linea = linea.replace(/{UNIDAD_DE_MEDIDA}/g, ui.item.unidadDeMedida);
+ 		linea = linea.replace(/{DESC_ID}/g, $("#descuento_"+ui.item.valuePrincipal).val());
+ 		
+ 		$("#cargarItemProductos #loadLineasFactura").prepend(linea);
+ 		
+ 		var filasImpuestos = "";
+ 		
+ 		//Si el producto es exento no debe incluir impuestos
+ 		if(parseInt(ui.item.productoExento) === 2){
+ 			
+ 		}else{
+     		$( ui.item.impuestosExoneracion ).each(function (key, value) {
+     			
+     			filasImpuestos += '<tr>';
+         			filasImpuestos += '<td><input name="impuestoTarifaIva[]" type="hidden" value="0'+ value.codigosTarifasIva.id +'" /><input readonly="readonly" class="form-control" type="text" name="impuestosDetalle[]" value="'+ value.impuesto.detalleImpuesto +'" readonly="readonly" /></td>';
+         			filasImpuestos += '<td><input type="hidden" name="impuestosId'+ui.item.valuePrincipal+'[]" value="'+value.impuesto.id+'" /><input readonly="readonly" id="exonera1'+ ui.item.valuePrincipal + value.impuesto.id + '" type="text" name="Impuestoimpuestos'+ui.item.valuePrincipal+'[]" value="'+ value.porcentaje +'" data-i="'+value.porcentaje+'" class="form-control align-right" /></td>';
+         			filasImpuestos += '<td><input readonly="readonly" name="impuestosMonto'+ui.item.valuePrincipal+'[]" id="exonera2' + ui.item.valuePrincipal + value.impuesto.id +'" type="text" value="0" class="form-control align-right number-format exonera2'+ui.item.valuePrincipal+' " data-tarifa="'+value.porcentaje+'"  /></td>';
+         			filasImpuestos += '<td><input name="exoneraCheckBox'+ui.item.valuePrincipal+'[]" id="checkBoxExonera' + ui.item.valuePrincipal + value.impuesto.id + '" class="form-control" type="checkbox" onChange="exoneraChange('+value.impuesto.id+','+ value.porcentaje +','+ui.item.productoExento+','+ui.item.valuePrincipal+')" class="align-center" /></td>';
+         			filasImpuestos += '<td><input onclick="return this.select();" value="0" maxlength="3" name="exoneraPorcentajeExoneracion'+ui.item.valuePrincipal+'[]" data-iva-id="'+value.impuesto.id+'" id="exonera3' + ui.item.valuePrincipal + value.impuesto.id + '" onKeyup="exoneraKeyUp('+value.impuesto.id+','+ value.porcentaje +','+ui.item.valuePrincipal+',this.value)" type="text" class="form-control align-right num-integer" /></td>';
+         			filasImpuestos += '<td><input value="0" name="montoExoneracion'+ui.item.valuePrincipal+'[]" readonly="readonly" id="exonera4' + ui.item.valuePrincipal + value.impuesto.id + '" type="text" class="form-control number-format align-right" /></td>';
+     			filasImpuestos += '</tr>';
+     			
+            });
+
+     		$("#gridImpuestos"+ui.item.valuePrincipal).append(filasImpuestos);
+ 		}
+ 		
+ 		itemsHelper.calcularImporte(ui.item.valuePrincipal, ui.item.precio, ui.item.impuesto, ui.item.productoExento, 1, 0, ui.item.unidadDeMedida);
+ 		
+ 		$("#inputBuscarProductos").val("");
+ 		
+ 		return false;
+
+ 	}
+ });
+ 
+ 
+var itemsHelper = {
+		calcularImporte: function(id, precio, iva, productoExento, cantidad, desc, udm){
+			
+			var totalServiciosGravados = 0;
+			var totalServiciosExentos = 0;
+			var totalServExonerado = 0;
+			
+			var totalMercanciasGravadas = 0;
+			var totalMercanciasExentas = 0;
+			var totalMercExonerada = 0;
+			
+			var totalGravados  = 0;
+			var totalExentos  = 0;
+			var totalExonerado = 0
+			
+			var totalIVADevuelto = 0;
+			var totalOtrosCargos = 0;
+			
+			var totalVenta = 0;
+			var descuento = 0;   
+			var totalImpuestos = 0;
+			
+			var totalLinea = 0;        				        
+	        var impuestoVenta = 0;
+	        
+	        var montoTotal = 0;
+	        var subtotal = 0;
+	        var impuestosMenosIv = 0;
+	        
+	        var totalVentaNeta = 0;
+	        var totalFactura = 0;
+	        
+	        var impuestoNeto = parseFloat( $("#impuesto_neto_" + id).val() );
+	        
+	      	//Productos gravados
+	      	montoTotal =  precio * cantidad;
+	      	
+	      	//Descuentos
+	        if(desc > 0){
+				descuento = ( montoTotal / 100 ) * desc;
+			}else{
+				descuento = 0;
+			}
+	      
+	      	// 1 = Gravado
+	      	var totalSerMerExonerados = 0;
+	      	
+	      	var porcentajeExoneradoIva = 0;
+			if(parseInt(productoExento) === 1){
+				
+				totalGravados = montoTotal;
+				
+				if(ArrayUnidadesMedida.includes(udm.trim())){
+					totalServiciosGravados = montoTotal;
+					$('input[id^="exonera3'+id+'"]').each(function(){	        						
+						//Solo el IVA se envia a Total serv exonerado
+						if( parseInt($(this).attr("data-iva-id")) === 1 ){
+							
+							porcentajeExoneradoIva = $(this).val();
+							
+							totalServExonerado += (parseFloat($(this).val()) * totalServiciosGravados) / 100;   
+							$('#totalServExonerado_' + id ).val(totalServExonerado);	
+							
+						}	        					
+					});
+        			
+				}else{
+					totalMercanciasGravadas = montoTotal;
+					$('input[id^="exonera3'+id+'"]').each(function(){
+						//Solo el IVA se envia a Total merc exonerada
+						if( parseInt($(this).attr("data-iva-id")) === 1 ){
+							
+							porcentajeExoneradoIva = $(this).val();
+							
+							totalMercExonerada += (parseFloat($(this).val()) * totalMercanciasGravadas) / 100;
+							$('#totalMercExonerada_' + id ).val(totalMercExonerada);
+						}        						
+        			});			
+        			
+				}
+				
+				totalExonerado = totalMercExonerada + totalServExonerado;
+
+				//Obtengo el valor de los impuestos
+				var z = 0;
+				var impuestoTable = "";
+				$('input[id^="exonera2'+id+'"]').each(function(){
+					z++;
+    				$(this).val(( (precio * cantidad - descuento) / 100) * $(this).attr("data-tarifa"));
+    				
+    				//z=1 esto indica que 1 es IVA
+    				if(z==1){
+    					iv = $(this).attr("data-tarifa");
+    					
+    					//Asigno el valor del IVA en la linea correspondiente
+    					$('#impuesto_' + id).val( $(this).attr("data-tarifa") );
+    					
+    					//Obtengo el selector para actualizar el impuesto
+    					impuestoTable = 'exonera2'+id + z;
+    					
+    					//Obtengo el impuesto de venta
+    					impuestoVenta = impuestoVenta += ( (precio * cantidad - descuento) / 100) * $(this).attr("data-tarifa"); 
+    					
+    				}else{
+    					impuestosMenosIv = impuestosMenosIv + ( (precio * cantidad - descuento) / 100) * $(this).attr("data-tarifa");
+    				}
+    				
+    				//Impuesto de venta por linea //         ( ( montoTotal / 100 ) - descuento ) + impuestosMenosIv
+    				impuestoVenta = (( (montoTotal + impuestosMenosIv) - descuento) / 100) * iv;
+    				
+					//Impuesto total por linea
+        			$("#impuesto_total_"+id).val( impuestoVenta );
+					
+        			//Actualizo el impuesto de venta de la tabla de impuestos        					
+					$('#'+impuestoTable).val( impuestoVenta );
+					
+    			});
+				
+				
+			}else{
+				totalExentos = montoTotal;
+				
+				console.log("unidad de medida " + udm);
+				
+				if(ArrayUnidadesMedida.includes(udm.trim())){
+					totalServiciosExentos = montoTotal;
+				}else{
+					totalMercanciasExentas = montoTotal;
+				}
+				impuestosMenosIv = 0;        				
+				impuestoVenta = 0;
+			}
+			
+			//Sub total por linea
+			subtotal = parseFloat(montoTotal) - parseFloat(descuento);
+			
+			impuestoNeto = $("#impuesto_neto_" + id).val();
+		 	
+		 	 var totalImpuestoExonerado = 0;
+       	 	 $('input[id^="exonera4'+ id+'"]').each(function(){
+       		   totalImpuestoExonerado += parseFloat($(this).val());
+			 });
+
+			//Total de la linea
+			totalLinea = (parseFloat(subtotal) + parseFloat(impuestoVenta) + parseFloat(impuestosMenosIv)) - parseFloat(totalImpuestoExonerado);
+			
+			//Subtotal por linea
+			$("#subtotal_" + id).val( subtotal );
+			
+			//Monto total de descuento por linea 
+			$("#monto_descuento_" + id).val( descuento );
+			
+			//Monto total por linea 
+			$("#total_importe_" + id).val( totalLinea );
+			
+			//Resumen Factura
+			//Total Servicios Gravados
+			$("#totalServiciosGravados_" + id).val( totalServiciosGravados - totalServExonerado);
+			
+			//Total Gravado
+			totalGravados = (totalServiciosGravados + totalMercanciasGravadas) - totalExonerado;        			
+			$("#totalGravados_" + id).val( totalGravados );
+			
+			//Total mercancias Gravadas
+			$("#totalMercanciaGravadas_" + id).val( totalMercanciasGravadas - totalMercExonerada );
+			
+			//Total Exento
+			totalExentos = totalServiciosExentos + totalMercanciasExentas;
+			$("#totalExentos_" + id).val( totalExentos );
+			
+			//Total servicios exentos
+			$("#totalServiciosExentos_" + id).val( totalServiciosExentos );
+			
+			//Total mercancias Exentas
+			$("#totalMercanciasExentas_" + id).val( totalMercanciasExentas );
+			
+			
+			$("#totalExonerado_" + id).val( totalExonerado );       			
+			
+			//Monto total descuento
+			$("#monto_descuento_" + id).val( descuento );
+			
+			//Total de la Venta
+			totalVenta =  totalGravados + totalExentos + totalExonerado;
+			$("#totalVenta_" + id).val( totalVenta );
+			
+			//Si impuesto neto es mayor a 0 es exonerado en algún porcentaje
+			if(impuestoNeto > 0){
+				totalFactura = parseFloat(totalVentaNeta) + parseFloat(impuestoNeto) + impuestosMenosIv;
+			}
+			
+			$("#totalFactura_" + id).val( totalFactura + impuestosMenosIv);
+			
+			this.totalServiciosGravados();
+			this.totalServiciosExentos();
+			this.totalServiciosExonerados();
+			this.totalImpuestos();
+			this.totalMercanciaGravadas();
+			this.totalMercanciasExentas();
+			this.totalMercanciasExoneradas();
+			this.totalVenta();
+			this.totalGravados();
+			this.totalExentos();
+			this.totalExonerado();
+			this.descuentos();
+			this.totalVentaNeta();
+			this.totalOtrosCargos();
+			this.totalFactura();
+			
+			$('.dd-mm-yyyy').datepicker({
+	               autoclose: true,
+	               format: 'dd/mm/yyyy',
+	               todayHighlight: true
+	            });
+			
+			$('.number-format').number( true, [(${ session.SESSION_DECIMALES })], '.', ' ' );
+			
+			$('._select2_').select2({
+			  placeholder: 'Seleccione un elemento'
+			});
+			
+		},
+		hasProducto: function(id){
+			var resultado = false;
+			$('input[name="item_id[]"]').each(function(){
+				if(parseInt(id) == parseInt($(this).val()) ){
+					resultado = true;
+				}
+			});
+			return resultado;
+		},
+		incrementaCantidad: function(id, precio, iva, productoExento, cantidad, desc, udm){
+			var cantidad = $("#cantidad_" + id).val() ? $("#cantidad_" + id).val() : 0;
+			$("#cantidad_" + id).val(++cantidad);
+			this.calcularImporte(id, precio, iva, productoExento, cantidad, desc, udm);
+		},
+		eliminarLineaFactura: function(id){
+			$("#row_" + id).remove();
+			this.totalFactura();
+			this.calcularImporte(id, 0, 0, '', 0, 0, '');
+		},
+		totalServiciosGravados: function(){
+			var total = 0;			
+			$('input[id^="totalServiciosGravados_"]').each(function(){
+				total += parseFloat($(this).val());
+			});			
+			$('#totalServiciosGravados').val(total);
+		},
+		totalServiciosExentos: function(){
+			var total = 0;			
+			$('input[id^="totalServiciosExentos_"]').each(function(){
+				total += parseFloat($(this).val());
+			});
+			$('#totalServiciosExentos').val(total);
+		},
+		totalServiciosExonerados: function(){
+			var total = 0;			
+			$('input[id^="totalServExonerado_"]').each(function(){
+				total += parseFloat($(this).val());
+			});
+			$('#totalServiciosExonerado').val(total);
+		},
+		
+		totalMercanciaGravadas: function(){
+			var total = 0;			
+			$('input[id^="totalMercanciaGravadas_"]').each(function(){
+				total += parseFloat($(this).val());
+			});
+			$('#totalMercanciaGravadas').val(total);
+		},
+		totalMercanciasExentas: function(){
+			var total = 0;			
+			$('input[id^="totalMercanciasExentas_"]').each(function(){
+				total += parseFloat($(this).val());
+			});
+			$('#totalMercanciasExentas').val(total);
+		}, 
+		totalMercanciasExoneradas: function(){
+			var total = 0;			
+			$('input[id^="totalMercExonerada_"]').each(function(){
+				total += parseFloat($(this).val());
+			});
+			$('#totalMercanciasExonerada').val(total);
+		}, 
+		totalVenta: function(){
+			var total = 0;			
+			$('input[id^="totalVenta_"]').each(function(){
+				total += parseFloat($(this).val());
+			});
+			$('#totalVenta').val(total);
+		},
+		totalGravados: function(){
+			var totalGravados = parseFloat($("#totalServiciosGravados").val()) + parseFloat($("#totalMercanciaGravadas").val());
+			$('#totalGravados').val(totalGravados);
+		},
+		totalExentos: function(){
+			var totalExentos = parseFloat($("#totalServiciosExentos").val()) + parseFloat($("#totalMercanciasExentas").val());
+			$('#totalExentos').val(totalExentos);
+		},
+		totalExonerado: function(){
+			var totalExonerado = parseFloat($("#totalServiciosExonerado").val()) + parseFloat($("#totalMercanciasExonerada").val())
+			$('#totalExonerado').val(totalExonerado);
+		},
+		descuentos: function(){
+			var total = 0;			
+			$('input[id^="monto_descuento_"]').each(function(){
+				total += parseFloat($(this).val());
+			});
+			$('#descuentos').val(total);
+		}, 
+		totalImpuestos: function(){
+			var total = 0;	
+			var impNeto = 0;
+			
+			$('input[id^="exonera2"]').each(function(){
+				total += parseFloat($(this).val());
+			});	
+			$('input[id^="exonera4"]').each(function(){
+				impNeto += parseFloat($(this).val());
+			});			
+			$('#totalImpuestos').val(total - impNeto);
+		},
+		totalVentaNeta: function(){
+			var totalVenta = parseFloat($("#totalVenta").val()) - parseFloat($("#descuentos").val());
+			$('#totalVentaNeta').val(totalVenta);
+		}, 
+		totalOtrosCargos: function(){
+			var total = 0;			
+			$('input[id^="otrosCargosMontoCargo"]').each(function(){
+				if( $.isNumeric( $(this).val() ) ){
+					total += parseFloat($(this).val());
+				}
+			});
+
+			$('#totalOtrosCargos').val(total);
+		}, 
+		totalFactura: function(){
+			
+			var totalComprobante = 0;
+			var totalImpuestos   = $("#totalImpuestos").val();
+			var totalOtrosCargos = $("#totalOtrosCargos").val();
+			var totalVentaNeta   = $("#totalVentaNeta").val();
+			var totalIVADevuelto = $("#totalIVADevuelto").val();
+			
+			totalComprobante = (parseFloat(totalImpuestos) + parseFloat(totalOtrosCargos) + parseFloat(totalVentaNeta)) - parseFloat(totalIVADevuelto);
+			
+			$('#totalFactura, #totalAPagar').val( totalComprobante );
+		},
+		
+	}
+	
+	function CalcularTotalComprobante(){
+		
+		//Primero refresco los otros cargos
+		var total = 0;			
+		$('input[id^="otrosCargosMontoCargo"]').each(function(){
+			if( $.isNumeric( $(this).val() ) ){
+				total += parseFloat($(this).val());
+			}
+		});
+
+		$('#totalOtrosCargos').val(total);
+		
+		//Luego calculo el total del documento
+		var totalComprobante = 0;
+		var totalImpuestos   = $("#totalImpuestos").val();
+		var totalOtrosCargos = $("#totalOtrosCargos").val();
+		var totalVentaNeta   = $("#totalVentaNeta").val();
+		var totalIVADevuelto = $("#totalIVADevuelto").val();
+		
+		totalComprobante = (parseFloat(totalImpuestos) + parseFloat(totalOtrosCargos) + parseFloat(totalVentaNeta)) - parseFloat(totalIVADevuelto);
+		
+		$('#totalFactura, #totalAPagar').val( totalComprobante );
+	}
+	
+	//Por defecto en colones
+	$(".simbolo-moneda").text("¢");
+	$(document).on("change", "#moneda", function( e ) {
+		e.preventDefault();
+		$("#tipoCambio").val( $("#moneda"+ $(this).val() ).val() );
+		
+		if(parseInt($(this).val()) === 1){
+			$(".simbolo-moneda").text("¢");
+		}else{
+			$(".simbolo-moneda").text("$");
+		}
+		
+	 });
+	
+	function reloadPage(){
+	  location.reload();
+	}
+	
+	$("#formEmitirFactura").submit(function( event ) {
+   	 
+	    if($("#cargarItemProductos tbody tr").length === 0){
+	        swal("","Debe seleccionar almenos un producto.", "warning");
+	        $("#inputBuscarProductos").focus();
+	        return false;
+	    }
+
+	    $.ajax({
+	        type: "POST",
+	        cache: false,
+	        beforeSend: function () {
+	            loadingShow();
+	            $("#btnEmitirFactura").prop("disabled", true);
+	        },
+	        url: "[(@{/inventario/ajuste/save})]",
+	        data: $(this).serialize(),
+	        success: function (data)
+	        {
+
+	        if(parseInt(data.response) === 200){
+	            
+	            swal({
+	                title: 'Notificación',
+	                text: 'Ajuste aplicado con éxito, refrescando...',
+	                icon: 'success',
+	                timer: 3500,
+	                buttons: false,
+	            })
+	            .then(() => {
+	                location.reload();
+	            })
+	            
+	        }else{
+	            swal("Notificación", "¡Ocurrió un error, la venta no se aplico contacte al desarrollador!", "warning");
+	        }
+	            
+	        }, complete: function () {
+	            loadingHide();
+	        }, error: function (x, t, m) {
+	            if (t === "timeout") {
+	                
+	            } else {
+	                
+	            }
+	        }
+	    });
+		return false;  
+	});
+
+</script>
+</div>
+</body>
+</html>

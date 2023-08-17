@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body class="fix-header card-no-border logo-center">
+
+<div id="main-wrapper">
+
+<header th:replace="layout/layout :: header"></header>
+<aside th:replace="layout/layout :: aside"></aside>
+
+
+
+<!-- ============================================================== -->
+<!-- Page wrapper  -->
+<!-- ============================================================== -->
+<div class="page-wrapper">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+        	<h3 class="text-themecolor" th:text="#{txt.mensaje.receptor}"></h3>
+        </div>
+        <div class="col-md-7 align-self-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)" th:href="@{/mensaje-receptor/}" th:text="#{txt.inicio}"></a></li>
+                <li class="breadcrumb-item active" th:text="#{txt.mensaje.receptor}"></li>
+            </ol>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                    <div th:with="cuencaId=${param.c}">
+                    
+                    <div class="text-align-right row">
+                    	<div class="col-md-3"></div>
+                    	
+                    	<div class="col-md-3">
+                        	<button style="padding: 3px !important;" type="button" class="btn btn-info btn-sm btn-sm btn-block" id="btnConsultarEstados"><i class="fas fa-sync-alt m-r-10"></i>Consultar el estado de los documentos</button>
+                        </div>
+                       
+                        <div class="col-md-2">
+                    		<a style="padding: 3px !important;" th:href="@{/mensaje-receptor/form}" class="btn btn-success btn-sm btn-block color-blanco">
+                    			<i class="fa fa-plus" aria-hidden="true"></i>&nbsp;<span th:text="#{btn.nuevo.registro}"></span>
+                    		</a>
+                        </div>
+                        
+                        <div class="col-md-4">
+                    		<form autocomplete="off" th:action="@{/mensaje-receptor/}" method="get">
+                    			<div class="align-right m-b-10">
+
+			                    	<div class="input-group">
+									    <input th:value="${param.q}" type="search" name="q" class="form-control input" placeholder="Buscar por emisor de factura, identificación o clave.">
+									    <div class="input-group-append">
+										      <button class="btn btn-success btn-sm btn-block"  type="submit">
+										        <i class="fa fa-search"></i>
+										      </button>
+									    </div>
+								  	</div>
+			                    	
+			                    </div>
+		                    </form>
+                        </div>
+                        
+                    </div>
+                    
+                    <p style="text-align: center;width: 100%;" class="m-t-10" th:if="*{param.q!=null and #strings.length(param.q)>0}">
+	                    	Criterio de búsqueda: <span class="font-weight-bold" th:text="${param.q}"></span> <a style="height: 20px" class="btn btn-danger btn-xs color-blanco" th:href="@{/mensaje-receptor/}"><i class="fas fa-window-close"></i> Cerrar búsqueda</a>
+	                 </p>
+                    
+                    <br>
+                    	<div class="table-responsive">
+                             <table class="table color-table table-hover muted-table">
+                                 <thead>
+                                     <tr>
+                                         <th style="width: 15%" th:text="#{txt.emisorMr}"></th>
+                                         <th style="width: 8%" th:text="#{txt.identificacionEmisorMr}"></th>
+                                         <th style="width: 10%" th:text="#{txt.clave}"></th>
+                                         <th style="width: 15%" th:text="#{txt.fechaEmision}"></th>
+                                         <th style="width: 10%" th:text="#{txt.impuestos}"></th>
+                                         <th style="width: 10%" th:text="#{txt.totalFactura}"></th>
+                                         <th style="width: 10%" th:text="#{txt.estado.hacienda}"></th>
+                                         <th style="width: 5%" class="text-align-center" th:text="#{txt.acciones}"></th>
+                                     </tr>
+                                 </thead>
+                                 <tbody>
+                                     <tr th:each="k: ${listaDocumentos}" th:classappend="|${#strings.equals(k.estadoInventario,'A') ? 'table-success' : ''} ${#strings.substring(k.clave,30,31) == '3' ? 'table-warning' : ''}|">
+                                         <td th:text="${k.emisorMr}"></td>
+                                         <td th:text="${k.identificacionEmisorMr}"></td>
+                                         <td th:text="${k.clave}"></td>
+                                         <td th:text="${k.fechaEmision}"></td>         
+                                         <td th:text="${k.moneda}+' '+${#numbers.formatDecimal(k.impuestos, 0, 'POINT', 2, 'COMMA')}"></td> 
+                                         <td th:text="${k.moneda}+' '+${#numbers.formatDecimal(k.totalFactura, 0, 'POINT', 2, 'COMMA')}"></td>       
+                                         <td th:text="${k.estadoHacienda}"></td>                         
+                                         <td class="text-align-center" >
+                                         
+                                         	<a class="btn btn-success btn-xs" th:href="@{/mensaje-receptor/view/}+${k.id}" th:attr="title=#{btn.ver.documento}" data-toggle="tooltip">
+                                         		<i class="fas fa-search-plus" style="color:#FFF"></i>
+                                         	</a>										
+											                           	
+                                         </td>
+                                     </tr>
+                                 </tbody>
+                             </table>
+                             <nav th:replace="paginator-nav :: paginator"></nav>
+                         </div>    
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End PAge Content -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Container fluid  -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- footer -->
+    <!-- ============================================================== -->
+    <footer th:replace="layout/layout :: footer"></footer>
+    <!-- ============================================================== -->
+    <!-- End footer -->
+    <!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- End Page wrapper  -->
+<!-- ============================================================== -->
+
+
+
+
+</div>
+<input id="csrfToken" type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+<div th:replace="layout/layout :: scripts"></div>
+
+<script type="text/javascript">
+
+var token = $('#csrfToken').val();
+$(document).on("click", "#btnConsultarEstados", function(e){	
+	e.preventDefault();
+	
+	$.ajax({
+        type: "POST",
+        cache: false,
+        beforeSend: function () {
+        	loadingShow();
+        },
+        url: "[(@{/mensaje-receptor/consultar-documentos})]",
+        data: {_csrf:token},
+        success: function (data)
+        {
+        	
+        	if(parseInt(data.response) === 200){
+
+        		swal({
+				    text: "Se han consultado: "+data.docsConsultados+" documentos, pendientes por enviar al Ministerio de Hacienda: "+data.docsPendientes+".",
+				    button: {
+				        text: "Aceptar",
+				      },
+				      icon: "success",
+				    closeModal: false
+				}).then(function() {
+				        swal.close();
+				        location.reload();
+				});
+        		
+        	}else{
+        		swal("","Algo no salio bien, contácte al administrador del sistema.","warning");
+        	}
+            
+        }, complete: function () {
+            loadingHide();
+        }, error: function (x, t, m) {
+            if (t === "timeout") {
+                
+            } else {
+                
+            }
+        }
+    });
+});
+</script>
+
+</div>
+</body>
+</html>

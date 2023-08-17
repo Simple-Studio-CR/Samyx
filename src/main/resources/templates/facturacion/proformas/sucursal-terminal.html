@@ -1,0 +1,4 @@
+<html xmlns:th="http://www.thymeleaf.org" th:remove="tag">
+<option value="" selected="selected" th:text="#{txt.combo.seleccione}"></option>
+<option th:each="k : ${listaTerminales}" th:value="${k.terminal.id}" th:text="${k.terminal.nombreTerminal}"></option>
+</html>

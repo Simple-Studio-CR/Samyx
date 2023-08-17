@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="API-MH:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>API-MH</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="API-MH-1.0.0.RELEASE.war">
+      <element id="artifact" artifact-name="API-MH:war exploded" />
+    </root>
+  </artifact>
+</component>

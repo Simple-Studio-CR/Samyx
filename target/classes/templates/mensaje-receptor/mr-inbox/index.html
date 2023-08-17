@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body class="fix-header card-no-border logo-center">
+
+<div id="main-wrapper">
+
+<header th:replace="layout/layout :: header"></header>
+<aside th:replace="layout/layout :: aside"></aside>
+
+
+
+<!-- ============================================================== -->
+<!-- Page wrapper  -->
+<!-- ============================================================== -->
+<div class="page-wrapper">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+        	<h3 class="text-themecolor" th:text="'Mensaje receptor, bandeja de entrada'"></h3>
+        </div>
+        <div class="col-md-7 align-self-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)" th:href="@{/mensaje-receptor-inbox/}" th:text="#{txt.inicio}"></a></li>
+                <li class="breadcrumb-item active" th:text="'Mensaje receptor, bandeja de entrada'"></li>
+            </ol>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        
+        
+        
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                	
+                	
+                    <div class="card-body">
+                    
+                    <h5>Envíe las facturas de sus compras al correo: <strong>recepcion@simplestudio.app</strong></h5>
+                    
+                    <div>
+                    
+                    <div class="text-align-right row">
+                    	<div class="col-md-3"></div>
+                    	
+                    	<div class="col-md-3 m-t-10">
+                        	<a th:href="@{/mensaje-receptor-inbox/}" style="padding: 5px !important;" class="btn btn-info btn-block btn-xs color-blanco">
+                    			<i class="fas fa-sync-alt"></i>&nbsp;<span th:text="'Refrescar bandeja de entrada'"></span>
+                    		</a>
+                        </div>
+                       
+                        <div class="col-md-6 ">
+                    		<form autocomplete="off" th:action="@{/mensaje-receptor-inbox/}" method="get">
+                    			<div class="row">
+                    				<div class="col-md-4 m-t-10">
+			                    		<select class="form-control input-sm _select2_" name="e" onchange="this.form.submit()">
+			                    			<option th:selected="${#strings.equals('P', #strings.toString(param.e))}" value="P">Pendientes de aceptadas</option>
+			                    			<option th:selected="${#strings.equals('A', #strings.toString(param.e))}" value="A">Facturas procesadas</option>
+			                    		</select>
+			                    	</div>
+			                    	<div class="col-md-8 m-t-10">
+				                    	<div class="align-right m-b-10">
+
+					                    	<div class="input-group">
+											    <input th:value="${param.q}" type="search" name="q" class="form-control input" placeholder="Buscar por emisor de factura, identificación o clave.">
+											    <div class="input-group-append">
+												      <button class="btn btn-success btn-sm btn-block"  type="submit">
+												        <i class="fa fa-search"></i>
+												      </button>
+											    </div>
+										  	</div>
+					                    	
+					                    </div>
+				                    </div>
+                    			</div>
+		                    </form>
+                        </div>
+                        
+                    </div>
+                    
+                    <p style="text-align: center;width: 100%;" class="m-t-10" th:if="*{param.q!=null and #strings.length(param.q)>0}">
+	                    	Criterio de búsqueda: <span class="font-weight-bold" th:text="${param.q}"></span> <a style="height: 20px" class="btn btn-danger btn-xs color-blanco" th:href="@{/mensaje-receptor-inbox/}"><i class="fas fa-window-close"></i> Cerrar búsqueda</a>
+	                 </p>
+                    
+                    <br>
+                    	<div class="table-responsive">
+                             <table class="table color-table table-hover muted-table">
+                                 <thead>
+                                     <tr>
+                                         <th style="width: 15%" th:text="#{txt.emisorMr}"></th>
+                                         <th style="width: 8%" th:text="#{txt.identificacionEmisorMr}"></th>
+                                         <th style="width: 10%" th:text="#{txt.clave}"></th>
+                                         <th style="width: 15%" th:text="#{txt.fechaEmision}"></th>
+                                         <th style="width: 10%" th:text="#{txt.impuestos}"></th>
+                                         <th style="width: 10%" th:text="#{txt.totalFactura}"></th>
+                                         
+                                         <th style="width: 10%" th:text="'Factura XML'"></th>
+                                         <th style="width: 10%" th:text="'Factura PDF'"></th>
+                                         <th style="width: 10%" th:text="#{txt.estado.hacienda}"></th>
+                                         <th style="width: 5%" class="text-align-center" th:text="#{txt.acciones}"></th>
+                                     </tr>
+                                 </thead>
+                                 <tbody>
+                                     <tr th:each="k: ${listaDocumentos}">
+                                         <td th:text="${k.emisorFactura}"></td>
+                                         <td th:text="${k.emisorIdentificacion}"></td>
+                                         <td th:text="${k.clave}"></td>
+
+                                         <td>
+                                         	<span th:remove="tag" th:if="${k.fechaEmision != null and #strings.length(k.fechaEmision)>8}">
+                                         		<th:block th:with="sdf = ${new java.text.SimpleDateFormat('yyyy-MM-dd''T''HH:mm:ss')}">
+												    <p th:remove="tag" th:if="${k.fechaEmision != null and #strings.length(k.fechaEmision)>0}" th:text="${#dates.format(sdf.parse(k.fechaEmision), 'dd/MM/yyyy hh:mm:ss a')}" />
+												 </th:block>
+                                         	</span>
+                                         </td>  
+                                                
+                                         <td th:text="${k.moneda}+' '+${#numbers.formatDecimal(k.totalImpuestos, 0, 'POINT', 2, 'COMMA')}"></td> 
+                                         <td th:text="${k.moneda}+' '+${#numbers.formatDecimal(k.totalComprobante, 0, 'POINT', 2, 'COMMA')}"></td>       
+                                         <td style="text-align: center;"><a th:href="@{'/mr-inbox/' + ${k.facturaXml}}" target="_blank"> XML <i class="fas fa-file"></i> </a></td>    
+                                         <td style="text-align: center;"><a th:href="@{'/mr-inbox/' + ${k.facturaPdf}}" target="_blank"> PDF <i class="fas fa-file-pdf"></i> </a></td>          
+                                         <td th:text="${k.estado == 'P' ? 'Pendiente' : 'Aplicado'}"></td>            
+                                         <td class="text-align-center" >
+                                         
+                                         	<a class="btn btn-success btn-xs" th:href="@{/mensaje-receptor-inbox/form/}+${k.id}" th:attr="title=#{btn.ver.documento}" data-toggle="tooltip">
+                                         		<i class="fas fa-search-plus" style="color:#FFF"></i>
+                                         	</a>										
+											                           	
+                                         </td>
+                                     </tr>
+                                 </tbody>
+                             </table>
+                             <nav th:replace="paginator-nav :: paginator"></nav>
+                         </div>    
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End PAge Content -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Container fluid  -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- footer -->
+    <!-- ============================================================== -->
+    <footer th:replace="layout/layout :: footer"></footer>
+    <!-- ============================================================== -->
+    <!-- End footer -->
+    <!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- End Page wrapper  -->
+<!-- ============================================================== -->
+
+
+
+
+</div>
+<input id="csrfToken" type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+<div th:replace="layout/layout :: scripts"></div>
+
+<script type="text/javascript">
+
+var token = $('#csrfToken').val();
+$(document).on("click", "#btnConsultarEstados", function(e){	
+	e.preventDefault();
+	
+	$.ajax({
+        type: "POST",
+        cache: false,
+        beforeSend: function () {
+        	loadingShow();
+        },
+        url: "[(@{/mensaje-receptor-inbox/consultar-documentos})]",
+        data: {_csrf:token},
+        success: function (data)
+        {
+        	
+        	if(parseInt(data.response) === 200){
+
+        		swal({
+				    text: "Se han consultado: "+data.docsConsultados+" documentos, pendientes por enviar al Ministerio de Hacienda: "+data.docsPendientes+".",
+				    button: {
+				        text: "Aceptar",
+				      },
+				      icon: "success",
+				    closeModal: false
+				}).then(function() {
+				        swal.close();
+				        location.reload();
+				});
+        		
+        	}else{
+        		swal("","Algo no salio bien, contácte al administrador del sistema.","warning");
+        	}
+            
+        }, complete: function () {
+            loadingHide();
+        }, error: function (x, t, m) {
+            if (t === "timeout") {
+                
+            } else {
+                
+            }
+        }
+    });
+});
+</script>
+
+</div>
+</body>
+</html>
