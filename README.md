@@ -1,2 +1,0 @@
-# Samyx
-WebApp Samyx Facturador
